@@ -1,0 +1,47 @@
+<section id="registerPage" class="h-screen bg-gray-800">
+  <div class="regBody flex flex-col justify-center items-center">
+    <h3 class="text-6xl mt-15 mb-6">Register</h3>
+    <form>
+      <div class="mt-2 mb-3">
+        <label>Username</label>
+        <input type="text" required />
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" required />
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" required />
+      </div>
+      <div class="ageInput mb-3">
+        <label>Age</label>
+        <!--may switch for datepicker-->
+        <input
+          type="number"
+          required
+          min="14"
+          max="120"
+        /><!--somewhat random min age-->
+      </div>
+      <div class="mb-3">
+        <label>Country</label>
+        <input type="text" /><!---optional-->
+      </div>
+      <div class="mb-3">
+        <label>Gender</label>
+        <select>
+          <!--optional-->
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+          <option>Prefer not to say</option>
+        </select>
+      </div>
+      <input
+        class="submitBtn"
+        type="submit"
+      /><!---May need changing - needs functionality-->
+    </form>
+  </div>
+</section>

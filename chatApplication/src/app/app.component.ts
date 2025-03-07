@@ -3,7 +3,9 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
