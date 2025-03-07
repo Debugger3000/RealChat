@@ -1,0 +1,26 @@
+<div class="bg-gray-800 h-screen">
+    <div class="rounded-xl mx-72 flex flex-col items-center gap-5">
+        <h1 class="text-white text-center text-4xl">Profile Form</h1>
+        <form methods="POST" class="text-white" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <fieldset class="flex flex-col gap-3">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required class="border rounded" formControlName="name">
+            </fieldset>
+            <fieldset class="flex flex-col gap-3">
+                <label for="age">Age</label>
+                <input type="number" name="age" id="age" required class="border rounded" formControlName="age">
+            </fieldset>
+            <fieldset class="flex flex-col gap-3 mb-5">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required class="border rounded" formControlName="email">
+            </fieldset>
+            <div class="flex justify-center">
+                <button type="submit" class="p-2 bg-gray-300 text-gray-800 rounded hover:cursor-pointer">Submit</button>
+            </div>
+        </form>
+
+    </div>
+    @for (todo of todoItems(); track todo.id) {
+        <p>{{todo.title}}</p>
+    } 
+</div>
