@@ -2,25 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { User } from '../Types/todo.type';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
+export class RegisterService {
 
-// This service will perform API operations for user 
-// GET - self (grab own user data, to display over the page...)
-// POST - when a new user creates an account...
-export class ProfileService {
 
-  // This code was a template for how to API request from front end....
-  // -----
+  // HTTP client to create requests to server....
   http = inject(HttpClient);
     postNewUser(e: any) {
       // const url = 'https://jsonplaceholder.typicode.com/todos';
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<User>('/api/user', e).subscribe(e => {
+      // POST to '/api/user/new' to create a new user in database
+      this.http.post<User>('/api/user/new', e).subscribe(e => {
         console.log('User created:', e);
       });
     }
+
+
+
+
+
+  constructor() { }
 }

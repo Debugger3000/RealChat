@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { TodoService } from '../../services/todo.service';
-import { catchError } from 'rxjs';
-import { type Todo } from '../../model/todo.type';
+import { type Todo } from '../../Types/todo.type';
 import { ProfileService } from '../../services/profile.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,7 +10,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit{
-  todoService = inject(TodoService);
   profileService = inject(ProfileService);
   todoItems = signal<Array<Todo>>([]);
 
@@ -21,6 +17,9 @@ export class ProfileComponent implements OnInit{
     name: new FormControl(''),
     email: new FormControl(''),
     age: new FormControl(),
+    password: new FormControl(),
+
+    // be blank on register and user can fill in on profile page later...
     bio: new FormControl('')
   });
 

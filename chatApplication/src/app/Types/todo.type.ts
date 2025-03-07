@@ -12,3 +12,8 @@ export type Todo = {
     name:string;
     email:string;
   }
+
+  export type loginUser = {
+    name:string;
+    password:string;
+  }
