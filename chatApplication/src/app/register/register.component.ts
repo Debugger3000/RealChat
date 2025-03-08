@@ -17,13 +17,12 @@ registerService = inject(RegisterService);
   // todoItems = signal<Array<Todo>>([]);
 
   userRegisterForm = new FormGroup({
-    name: new FormControl(''),
+    username: new FormControl(''),
     email: new FormControl(''),
     age: new FormControl(),
     password: new FormControl(),
     country: new FormControl(),
     gender: new FormControl(),
-    
     // be blank on register and user can fill in on profile page later...
     bio: new FormControl('')
   })

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { User } from '../Types/todo.type';
+import { UserRegister } from '../Types/todo.type';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ProfileService {
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<User>('/api/user', e).subscribe(e => {
+      this.http.post<UserRegister>('/api/user', e).subscribe(e => {
         console.log('User created:', e);
       });
     }
