@@ -21,10 +21,35 @@ const Schema = mongoose.Schema;
 // ) 
 
 const userSchemaObject = {
-    name: {type: String, required: true},
-    age: {type: Number, required: true},
-    bio: {type: String, default:"Add a bio here..."},
-    email: {type: String, required: true}
+    username: {
+        type: String,
+        required: true,
+        unique: true
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true
+      },
+      password: {
+        type: String,
+        required: true
+      },
+      age: {
+        type: Number,
+        required: true,
+        min: 14,
+        max: 120
+      },
+      country: {
+        type: String,
+        required: false
+      },
+      gender: {
+        type: String,
+        required: false,
+        enum: ['Male', 'Female', 'Other', 'Prefer not to say']
+      }
 }
 
 const mongooseSchema = mongoose.Schema(userSchemaObject);
