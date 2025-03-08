@@ -26,6 +26,11 @@ const userSchemaObject = {
         required: true,
         unique: true
       },
+      // bio on default, will be created on its own when a User object is initialized
+      bio: {
+        String,
+        default: "Add your bio here !"
+      },
       email: {
         type: String,
         required: true,

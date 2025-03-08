@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { type Todo } from '../../Types/todo.type';
 import { ProfileService } from '../../services/profile.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,7 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit{
   profileService = inject(ProfileService);
-  todoItems = signal<Array<Todo>>([]);
+  // todoItems = signal<Array<Todo>>([]);
 
   userForm = new FormGroup({
     name: new FormControl(''),

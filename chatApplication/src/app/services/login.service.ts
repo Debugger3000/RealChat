@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { loginUser } from '../Types/todo.type';
+import { LoginUser } from '../Types/todo.type';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class LoginService {
         // return this.http.get<Array<Todo>>(url);
   
         // POST to '/api/user/' to log a user in. 
-        this.http.post<loginUser>('/api/user/', e).subscribe(e => {
+        this.http.post<LoginUser>('/api/user/login', e).subscribe(e => {
           console.log('User created:', e);
         });
       }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { User } from '../Types/todo.type';
+import { UserRegister } from '../Types/todo.type';
 
 
 
@@ -18,7 +18,7 @@ export class RegisterService {
       // return this.http.get<Array<Todo>>(url);
 
       // POST to '/api/user/new' to create a new user in database
-      this.http.post<User>('/api/user/new', e).subscribe(e => {
+      this.http.post<UserRegister>('/api/user/new', e).subscribe(e => {
         console.log('User created:', e);
       });
     }
