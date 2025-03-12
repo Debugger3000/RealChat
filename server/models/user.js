@@ -28,7 +28,7 @@ const userSchemaObject = {
       },
       // bio on default, will be created on its own when a User object is initialized
       bio: {
-        String,
+        type: String,
         default: "Add your bio here !"
       },
       email: {
