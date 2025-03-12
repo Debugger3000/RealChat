@@ -1,6 +1,6 @@
 
-const User = require("../models/user");
-
+const User = require('../models/user');
+const passport = require('passport');
 const express = require('express');
 //main router to 
 const userRoutes = express.Router();
@@ -48,7 +48,7 @@ userRoutes.post("/new", async (req,res,next) => {
         gender: req.body.gender
     });
     console.log('hehehe inside post USER...');
-
+    res.redirect('/login');
     await newUser.save();
     res.end();
 
@@ -60,7 +60,18 @@ userRoutes.post("/new", async (req,res,next) => {
 //POST - for logging in an existing user...
 // path is just '/api/user'
 
-userRoutes.post('/login', async (req, res) => {
+//new post route added for login commented out previous
+//but this route is currently not working not sure why
+
+userRoutes.post('/login', passport.authenticate('local', {
+    successRedirect:'/profile',
+    failureRedirect: '/profile',
+    failureFlash: true,
+    failureMessage: true
+}));
+
+
+/* userRoutes.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -80,7 +91,13 @@ userRoutes.post('/login', async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-});
+
+,(req, res) =>{
+
+    res.redirect('/');
+
+
+}); */
 
 
 
