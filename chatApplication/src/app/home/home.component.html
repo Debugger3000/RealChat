@@ -8,14 +8,26 @@
 <div class="loginPopup flex" [class.closed]="loginClosed">
   <!--this may be temporary - may want a better way of handling-->
 
-  <div class="loginBody flex flex-col">
+  <div class="loginContent flex flex-col">
     <button (click)="closeLogin()" class="exitLogin absolute right-1">X</button>
-    <h3 class="text-4xl mt-3 mb-2">Login</h3>
+    <h3 class="text-4xl mb-2">Login</h3>
     <form methods="POST" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
       <label>Email</label>
-      <input type="email" name="email" id="email" formControlName="email" required />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        formControlName="email"
+        required
+      />
       <label>Password</label>
-      <input type="password" name="password" id="password" formControlName="password"  required />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        formControlName="password"
+        required
+      />
       <input
         class="submitBtn"
         type="submit"
