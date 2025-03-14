@@ -6,11 +6,8 @@
     <div>
       <h4 class="text-white font-bold">RealChat</h4>
     </div>
-    <div>
-      <a class="text-white" href="/home">Home</a>
-    </div>
   </div>
-  <nav class="text-white font-lg">
+  <nav class="text-white font-lg flex gap-5">
     <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page"
       >Home</a
     >
@@ -20,5 +17,11 @@
       ariaCurrentWhenActive="page"
       >Profile</a
     >
+    <button class="hover:cursor-pointer" (click)="isAuth()">Check Auth</button>
   </nav>
+  <div class="float-right">
+    <button class="p-1 bg-red-500 rounded hover:cursor-pointer text-white" (click)="logout()">Logout</button>
+
+
+  </div>
 </section>
