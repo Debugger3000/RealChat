@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { UserRegister } from '../Types/todo.type';
+import { RegisterResponse, UserRegister } from '../Types/todo.type';
+import { Observable } from 'rxjs';
 
 
 
@@ -9,18 +10,20 @@ import { UserRegister } from '../Types/todo.type';
 })
 export class RegisterService {
 
-
   // HTTP client to create requests to server....
   http = inject(HttpClient);
-    postNewUser(e: any) {
+    postNewUser(e: any): Observable<any> {
       // const url = 'https://jsonplaceholder.typicode.com/todos';
       
       // return this.http.get<Array<Todo>>(url);
+      // let response2: RegisterResponse = {message:"",success:false,url:"",id:"",code:""};
+      let response:any;
 
+      // return this.http.post<UserRegister>('/api/user/new', e);
       // POST to '/api/user/new' to create a new user in database
-      this.http.post<UserRegister>('/api/user/new', e).subscribe(e => {
-        console.log('User created:', e);
-      });
+      return this.http.post<UserRegister>('/api/user/new', e);
+      
+      
     }
 
 

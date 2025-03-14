@@ -1,0 +1,28 @@
+<section id="homePage" class="h-screen bg-gray-800">
+    <div class="flex flex-col justify-center items-center">
+      <h3 class="text-7xl mt-25 mb-6">Welcome</h3>
+      <button (click)="showLogin()" class="custBtn py-3 px-10">Login</button>
+    </div>
+  </section>
+  
+  <div class="loginPopup flex" [class.closed]="loginClosed">
+    <!--this may be temporary - may want a better way of handling-->
+  
+    <div class="loginBody flex flex-col">
+      <button (click)="closeLogin()" class="exitLogin absolute right-1">X</button>
+      <h3 class="text-4xl mt-3 mb-2">Login</h3>
+      <form methods="POST" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+        <label>Email</label>
+        <input type="email" name="email" id="email" formControlName="email" required />
+        <label>Password</label>
+        <input type="password" name="password" id="password" formControlName="password"  required />
+        <input
+          class="submitBtn"
+          type="submit"
+        /><!---May need changing - needs functionality-->
+      </form>
+      <a class="toRegLink" href="/register">Don't have an account?</a>
+      <!--will go to the register page-->
+    </div>
+  </div>
+  

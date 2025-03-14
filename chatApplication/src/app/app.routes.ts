@@ -4,10 +4,12 @@ import { NotFoundComponent } from './routes/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 
 export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent},
     { path: 'profile', component: ProfileComponent},
     // {
     //     path: '',
@@ -23,8 +25,8 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-            path: '',
-            redirectTo: '/home',
-            pathMatch: 'full'
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
     },
 ];
