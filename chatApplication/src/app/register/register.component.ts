@@ -2,6 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
+import { Router } from '@angular/router';
+import { RegisterResponse } from '../Types/todo.type';
 
 
 @Component({
@@ -11,6 +13,8 @@ import { RegisterService } from '../services/register.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  constructor(private router: Router) {}
 registerService = inject(RegisterService);
 
  
@@ -27,16 +31,34 @@ registerService = inject(RegisterService);
     bio: new FormControl('')
   })
 
+  public response:any;
+
   //on form submit callback...
   onSubmit() {
     //Check database for users with same name or email...
 
     //POST data if information is good 
-    this.registerService.postNewUser(this.userRegisterForm.value);
+    const response = this.registerService.postNewUser(this.userRegisterForm.value).subscribe(e => {
+      this.response = e;
+      //route to certain page on good response
+    // console.log("response from register: ", e);
+    console.log("printing response after subscribe received response...:",this.response);
+    this.router.navigate([`${e.url}`]);
+    });
+
+    // this.router.navigate([`${response.url}`]);
     
+    
+    //route to certain page on good response
+    // console.log("response from register: ", response);
+    // this.router.navigate([`${response}`]);
+
     // TODO: Use EventEmitter with form value
+    console.log(this.response);
     console.warn(this.userRegisterForm.value);
   }
+
+
 
 
 

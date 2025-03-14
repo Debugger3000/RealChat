@@ -1,17 +1,21 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { inject } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-login',
   imports: [ReactiveFormsModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class HomeComponent {
-  constructor(private router: Router) {}
+export class LoginComponent {
+
+
+
+constructor(private router: Router) {}
   loginService= inject(LoginService);
 
   public responseLogin:any;
@@ -41,23 +45,13 @@ export class HomeComponent {
       //route to certain page on good response
     // console.log("response from register: ", e);
     console.log("printing response after subscribe received response...:",this.responseLogin);
+    // change route once response is received and is good
     this.router.navigate([`${this.responseLogin.url}`]);
-    });;
-
-    // .subscribe({
-    //   next: (response) => {
-    //     // if response is good, then redirect user...
-    //     // this.router.navigate(['/profile'])
-    //     console.log("successful LOGIN POST from component...");
-    //   },
-    //   error: (error) => {
-    //     // Error is handled here
-    //     console.error('An error occurred during the LOGIN POST request:', error);
-    //   },
-    // });
+    });
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);
   }
+
 
 }
