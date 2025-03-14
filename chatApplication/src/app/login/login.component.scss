@@ -1,7 +1,7 @@
-#homePage {
+#loginPage {
 
     color: white;    
-
+    align-items: center;
 
 }
 
@@ -23,41 +23,48 @@
     justify-content: center;
     align-items: center;
     border: 2px solid grey;
-    background-color: #979797;
+    background-color: #363A3F;
     opacity: 1;
     z-index: 20;
     border-radius: 5px;
     position: relative;
-    width: 14rem;
+    width: 30rem;
+    height: 22rem;
 
     a {
         color: rgb(0, 110, 255);
     }
 
-    form {
-        padding: 0.4rem;
-        input:not(.submitBtn) {
-            background-color: white;
-            display: block;
-            width: 12rem;
-            margin-bottom: 1rem;
-        }
+    
+
+    label {
+        align-self: start;
     }
 
-    .exitLogin {
-        box-sizing: border-box;
-        box-shadow: 0 0 5px rgb(104, 240, 255); 
-        top: 0;
-        padding: 0 6px;
-        color: rgb(31, 233, 255);
-        margin-top: 0.5rem;
-        border: 1px solid rgb(116, 246, 255);
-        border-radius: 4px;
-        background-color:  rgb(121 205 233 / 87%);
-        transition: background-color 0.2s, box-shadow 0.2s;
+    
+
+}
+
+.loginBody form {
+    position: relative;
+    width: 20rem;
+    padding: 0.4rem;
+    display: block;
+    
+    input:not(.submitBtn) {
+        background-color: #2F3338;
+        display: block;
+        width: 80%;
+        margin-bottom: 1rem;
     }
 
-    form > input.submitBtn { //temp - will change
+    input.submitBtn:active {
+        border: 1px solid rgb(184, 250, 255);
+        background:  rgba(11, 210, 245, 0.868);
+        box-shadow: 0 0 8px rgb(104, 240, 255); 
+    }
+
+    input.submitBtn { //temp - will change
         box-sizing: border-box;
         background-color:  rgb(121 205 233 / 87%);
         box-shadow: 0 0 5px rgb(104, 240, 255); 
@@ -70,14 +77,16 @@
         border-radius: 4px;
         transition: background-color 0.2s, box-shadow 0.2s;
 
-        margin-left: 3.3rem;
+        // margin-left: 3.3rem;
     }
     
-    form > input.submitBtn:active {
-        border: 1px solid rgb(184, 250, 255);
-        background:  rgba(11, 210, 245, 0.868);
-        box-shadow: 0 0 8px rgb(104, 240, 255); 
-    }
+}
+
+.loginContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .closed {

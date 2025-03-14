@@ -1,100 +1,40 @@
+
 #homePage {
-
-    color: white;    
-
-
-}
-
-
-.loginPopup {
-    // opacity: 0.5;
-    visibility: visible;
-    transition: 0.25s ease-in;
-    position: fixed;
-    // background-color: rgb(76, 76, 76);
-    // top: 15rem;
-    inset: 0;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.loginContent {
-    justify-content: center;
-    align-items: center;
-    border: 1.8px solid rgba(0, 234, 255, 0.785);
-    box-shadow: rgb(36 135 146) 0px 0px 14px 1px;
-    background-color: #575757fd;
-    opacity: 1;
-    z-index: 20;
-    border-radius: 5px;
     position: relative;
-    width: 18rem;
-    padding: 2rem 3rem;
-    border-radius: 8px;
-    color: white;
-
-    a {
-        color: rgb(0, 110, 255);
-    }
-
-    form {
-        padding: 0.4rem;
-        display: flex;
-        flex-direction: column;
-        input:not(.submitBtn) {
-            background-color: white;
-            display: block;
-            width: 13rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            margin-top: 0.3rem;
-            padding: 0.3rem;
-            height: 2rem;
-            color: black;
-        }
-    }
-
-    .exitLogin {
-        box-sizing: border-box;
-        box-shadow: 0 0 5px rgb(104, 240, 255); 
-        top: 0;
-        padding: 0 6px;
-        color: rgb(31, 233, 255);
-        margin-top: 0.5rem;
-        border: 1px solid rgb(116, 246, 255);
-        border-radius: 4px;
-        background-color:  rgb(121 205 233 / 87%);
-        transition: background-color 0.2s, box-shadow 0.2s;
-        cursor: pointer;
-    }
-
-    form > input.submitBtn { //temp - will change
-        box-sizing: border-box;
-        background-color:  rgb(121 205 233 / 87%);
-        box-shadow: 0 0 5px rgb(104, 240, 255); 
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: rgb(31, 233, 255);
-        margin-top: 0.4rem;
-        padding: 2px 12px;
-        border: 1px solid rgb(116, 246, 255);
-        border-radius: 4px;
-        transition: background-color 0.2s, box-shadow 0.2s;
-        align-self: center;
-        cursor: pointer;
-        // margin-left: 3.3rem;
-    }
+    color: white;    
+    height: 100vh; //want to change since it causes scrolling 
     
-    form > input.submitBtn:active {
-        border: 1px solid rgb(184, 250, 255);
-        background:  rgba(11, 210, 245, 0.868);
-        box-shadow: 0 0 8px rgb(104, 240, 255); 
-    }
 }
 
 .closed {
     // display: none;
     opacity: 0;
     visibility: hidden;
+}
+
+app-profile {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    // display: flex;
+}
+
+.chatMain {
+    background-color: #2c2c2c;
+}
+
+.profilePanel {
+    position: absolute;
+    right: 0;
+    width: 20%;
+    height: 100vh; //may want to change - should match the homepage/home component height
+    background-color: #36393e;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.profileContent {
+    height: fit-content;//may need to change
 }
