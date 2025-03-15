@@ -146,7 +146,7 @@ mongoose
 .connect('mongodb+srv://carmacford:tW9UQ3bmwbRSZV3i@therealchat.koaj5.mongodb.net/')
 .then(() => { console.log('connected to mongo DB YEYEYEYEYE');
 })
-.catch((err) => {console.log('Error:',err);s
+.catch((err) => {console.log('Error:',err);//s <- I'd assume it wasn't unintentional
 });
 
 
