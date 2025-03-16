@@ -215,6 +215,104 @@ userRoutes.post('/isGood', (req,res,next) => {
    
 });
 
+// send friend request
+router.post('/friend/request/send/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const friend = await User.findById(req.params.id);
+
+        if (!friend) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        if (user.friendRequests.includes(friend.id)) {
+            return res.status(400).json({ msg: 'Friend request already sent' });
+        }
+
+        user.friendRequests.push(friend.id);
+        await user.save();
+
+        res.status(200).json({ msg: 'Friend request sent' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// accept friend request
+router.post('/friend/request/accept/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const friend = await User.findById(req.params.id);
+
+        if (!friend) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        if (!user.friendRequests.includes(friend.id)) {
+            return res.status(400).json({ msg: 'No friend request from this user' });
+        }
+
+        user.friends.push(friend.id);
+        user.friendRequests = user.friendRequests.filter(id => id.toString() !== friend.id.toString());
+        await user.save();
+
+        friend.friends.push(user.id);
+        await friend.save();
+
+        res.status(200).json({ msg: 'Friend request accepted' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// get friends list
+router.get('/friend/getList', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).populate('friends', 'username');
+        res.status(200).json(user.friends);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// get friend requests
+router.get('/friend/request', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).populate('friendRequests', 'username');
+        res.status(200).json(user.friendRequests);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// reject friend request
+userRoutes.post('/friend/request/reject/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const friend = await User.findById(req.params.id);
+
+        if (!friend) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        if (!user.friendRequests.includes(friend.id)) {
+            return res.status(400).json({ msg: 'No friend request from this user' });
+        }
+
+        user.friendRequests = user.friendRequests.filter(id => id.toString() !== friend.id.toString());
+        await user.save();
+
+        res.status(200).json({ msg: 'Friend request rejected' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 
 module.exports = userRoutes;
 

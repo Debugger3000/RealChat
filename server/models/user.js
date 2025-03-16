@@ -37,7 +37,15 @@ const userSchemaObject = {
         type: String,
         required: false,
         enum: ['Male', 'Female', 'Other', 'Prefer not to say']
-      }
+      },
+      friends: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' // reference to the User model
+      }],
+      friendRequests: [{
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User' // reference to the User model
+      }]
 }
 
 const mongooseSchema = mongoose.Schema(userSchemaObject);
