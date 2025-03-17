@@ -36,6 +36,10 @@
         align-self: start;
     }
 
+    h3 {
+        margin-top: -1rem;
+    }
+
 }
 
 .loginBody form {
@@ -86,4 +90,10 @@
     // display: none;
     opacity: 0;
     visibility: hidden;
+}
+
+.incorrectNamePass {
+    color: red;
+    font-size: 14px;
+    margin: -4px 0 -9px 0;
 }
