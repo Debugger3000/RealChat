@@ -3,10 +3,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { ProfileComponent } from '../components/profile/profile.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ProfileComponent], //profile component on the right of home 
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
