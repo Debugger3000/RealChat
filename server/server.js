@@ -20,6 +20,8 @@ var cookieParser = require('cookie-parser')
 
 const encrypt = require('bcryptjs');
 const User = require("./models/user");
+const Chatroom = require("./models/chatroom");
+const Message = require("./models/message");
 
 
 // const initializePassport = require('./passport-config');
@@ -171,6 +173,8 @@ mongoose
 
 // Routes
 app.use("/api/user", require('./routes/user'));
+app.use("/api/chatroom", require('./routes/chatroom'));
+app.use("/api/message", require('./routes/message'));
 
 app.listen(8080, () => {
     console.log(`Example app listening on port 8080`)
