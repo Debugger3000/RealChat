@@ -1,7 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-.custBtn { //temp custom button
+
+.toRegLink, .toLoginLink {
+  color: rgb(0, 110, 255);
+}
+
+.toRegLink:hover, .toLoginLink:hover {
+  color: rgb(0, 132, 255);
+}
+
+.toRegLink:active, .toLoginLink:active {
+  color: rgb(43, 153, 255);
+}
+
+.custBtn { //temp custom button  - currently NOT in use - will later try using a global style for buttons
     box-sizing: border-box;
     box-shadow: 0 0 5px rgb(104, 240, 255); 
   
