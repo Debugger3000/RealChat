@@ -1,7 +1,6 @@
 // Require the mongoose module 
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema;
-const plm = require('passport-local-mongoose');
 
 const userSchemaObject = {
     username: {
@@ -49,10 +48,5 @@ const userSchemaObject = {
 }
 
 const mongooseSchema = mongoose.Schema(userSchemaObject);
-//inject passport-local-mongoose plugin into user schema
-mongooseSchema.plugin(plm);
 
 module.exports = mongoose.model('User',mongooseSchema);
-  
-// Defining User model 
-// export const User = mongoose.model('User', userSchema);

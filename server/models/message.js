@@ -1,3 +1,6 @@
+const mongoose = require('mongoose'); 
+const Schema = mongoose.Schema;
+
 const messageSchemaObject = {
     chatroomId: {
         type: mongoose.Schema.Types.ObjectId, 
