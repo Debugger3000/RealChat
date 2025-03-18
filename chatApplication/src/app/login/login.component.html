@@ -2,6 +2,10 @@
   <div class="loginBody flex flex-col">
     <h3 class="text-4xl mt-3 mb-2">Login</h3>
     <div class="loginContent">
+      <p class="incorrectNamePass notVisible">
+        Username or password is incorrect
+      </p>
+      <!--Needs to only shown on incorrect authentication - notVisible used to hidden when not needed -->
       <form methods="POST" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
         <label>Email</label>
         <input

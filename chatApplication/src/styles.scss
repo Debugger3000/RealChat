@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+.notVisible { //different than doing display: none since it doesn't shift (it hides rather than not displaying)
+  opacity: 0;
+  visibility: hidden;
+}
 
 .toRegLink, .toLoginLink {
   color: rgb(0, 110, 255);
