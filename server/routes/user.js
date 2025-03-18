@@ -216,7 +216,7 @@ userRoutes.post('/isGood', (req,res,next) => {
 });
 
 // send friend request
-router.post('/friend/request/send/:id', async (req, res) => {
+userRoutes.post('/friend/request/send/:id', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         const friend = await User.findById(req.params.id);
@@ -240,7 +240,7 @@ router.post('/friend/request/send/:id', async (req, res) => {
 });
 
 // accept friend request
-router.post('/friend/request/accept/:id', async (req, res) => {
+userRoutes.post('/friend/request/accept/:id', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         const friend = await User.findById(req.params.id);
@@ -268,7 +268,7 @@ router.post('/friend/request/accept/:id', async (req, res) => {
 });
 
 // get friends list
-router.get('/friend/getList', async (req, res) => {
+userRoutes.get('/friend/getList', async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate('friends', 'username');
         res.status(200).json(user.friends);
@@ -279,7 +279,7 @@ router.get('/friend/getList', async (req, res) => {
 });
 
 // get friend requests
-router.get('/friend/request', async (req, res) => {
+userRoutes.get('/friend/request', async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate('friendRequests', 'username');
         res.status(200).json(user.friendRequests);
