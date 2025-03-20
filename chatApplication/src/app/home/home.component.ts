@@ -4,16 +4,21 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { ChatRoomComponent } from '../components/chat-room/chat-room.component';
+import { FriendsComponent } from '../components/friends/friends.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ReactiveFormsModule, ProfileComponent], //profile component on the right of home 
+  imports: [ReactiveFormsModule, ProfileComponent, FriendsComponent, ProfileComponent, ChatRoomComponent], //profile component on the right of home 
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   constructor(private router: Router) {}
   loginService= inject(LoginService);
+
+  //chatroomState
+  public chatRoomStatePass = signal('home');
 
   public responseLogin:any;
 
@@ -45,17 +50,6 @@ export class HomeComponent {
     this.router.navigate([`${this.responseLogin.url}`]);
     });;
 
-    // .subscribe({
-    //   next: (response) => {
-    //     // if response is good, then redirect user...
-    //     // this.router.navigate(['/profile'])
-    //     console.log("successful LOGIN POST from component...");
-    //   },
-    //   error: (error) => {
-    //     // Error is handled here
-    //     console.error('An error occurred during the LOGIN POST request:', error);
-    //   },
-    // });
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);

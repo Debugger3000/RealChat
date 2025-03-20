@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { userData } from '../../Types/user';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit{
   profileService = inject(ProfileService);
-  // todoItems = signal<Array<Todo>>([]);
+
+  public userData = signal<userData>(null);
 
   editing = false; //if the user is in the edit(form) view - by default it's not in edit, so false
 
@@ -37,8 +39,8 @@ export class ProfileComponent implements OnInit{
   onSubmit() {
     //Check database for users with same name or email...
 
-    //POST data if information is good 
-    this.profileService.postNewUser(this.userForm.value);
+    //This should be patching or updating data for profile user....
+    // this.profileService.postNewUser(this.userForm.value);
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userForm.value);
@@ -52,13 +54,11 @@ export class ProfileComponent implements OnInit{
 
   //run when component is initiated...
   ngOnInit(): void {
-    // this.todoService.getToDoApi().pipe(catchError((err) => {
-    //   console.log('Error Caught:',err);
-    //   throw err;
-    // }))
-    // .subscribe((todos) => {
-    //   this.todoItems.set(todos);
-    // });
+    this.profileService.getMe().subscribe((data) => {
+      console.log('Your data of yourself',data);
+      // set user data
+      this.userData.set(data);
+    });
     console.log("Profile component has been loaded...")
   }
 

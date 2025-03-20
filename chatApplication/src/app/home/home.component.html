@@ -1,13 +1,18 @@
 <section id="homePage" class="h-screen bg-gray-800 flex justify-center">
-  <div id="friendsPanel"></div>
+  <div id="friendsPanel">
+    <app-friends></app-friends>
+  </div>
 
   <div id="chatMainSection">
-    <div class="homeMain flex flex-col justify-center items-center">
+    <app-chat-room [chatRoomState]="chatRoomStatePass()"></app-chat-room>
+    <!-- <div class="homeMain flex flex-col justify-center items-center">
       <P>This is home Page hehehehehehe</P>
-    </div>
+    </div> -->
   </div>
   <div class="profilePanel">
     <div class="profileContent">
+      
+      
       <app-profile></app-profile>
       <!--the profile component-->
     </div>

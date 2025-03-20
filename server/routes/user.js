@@ -28,17 +28,11 @@ userRoutes.get("/", async (req,res,next) => {
 
 
 //GET - get a specific user by id
-userRoutes.get("/:id", async (req, res) => {
-    try {
-        let user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ msg: 'User not found' });
-        }
-        res.status(200).json(user);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
+userRoutes.get("/me", async (req, res) => {
+    console.log("req user", req.user);
+
+    // send back user data for themselves by grabbing their user data from 'req.user'
+    res.status(200).json({user: req.user});
 });
 
 userRoutes.delete("/:id", async (req,res) => {

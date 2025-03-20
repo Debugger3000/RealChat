@@ -5,14 +5,15 @@
 
   <h1 class="text-white text-center text-4xl">Profile</h1>
   <div class="profileBody flex flex-col items-center">
-    <h3>Username</h3>
-    <i>Email.Address</i>
+    <h3>{{userData()?.user?.username}}</h3>
+    <i>{{userData()?.user?.email}}</i>
     <div id="ageGender">
-      <p>Age</p>
-      <p>Gender</p>
+      @if (userData()?.user?.age) {<p>{{userData()?.user?.age}}</p>}
+      
+      <!-- <p>Gender</p> -->
     </div>
-    <p>Country</p>
-    <p id="bioText">Bio</p>
+    <!-- <p>Country</p> -->
+    <p id="bioText">{{userData()?.user?.bio}}</p>
     <!--id bioText to separate from the input id "bio"-->
   </div>
   <button id="editBtn" class="custBtn" (click)="edit()">Edit</button>

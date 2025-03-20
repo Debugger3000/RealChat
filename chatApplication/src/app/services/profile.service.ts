@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { UserRegister } from '../Types/todo.type';
+import { userData } from '../Types/user';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +24,12 @@ export class ProfileService {
         console.log('User created:', e);
       });
     }
+
+
+    getMe() {
+      console.log("Getting me data...");
+      return this.http.get<userData>("/api/user/me");
+
+    }
+
 }

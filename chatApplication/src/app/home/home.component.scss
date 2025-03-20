@@ -1,9 +1,8 @@
 
 #homePage {
-    position: relative;
     color: white;    
     height: 100vh; //want to change since it causes scrolling 
-    
+    display: flex;
 }
 
 .closed {
@@ -19,14 +18,25 @@ app-profile {
     // display: flex;
 }
 
+#friendsPanel{
+    
+    // background-color: greenyellow;
+    width: 20%;
+    height: 100%;
+}
+
+#chatMainSection{
+    width: 100%;
+}
+
 .chatMain {
     background-color: #2c2c2c;
 }
 
 .profilePanel {
-    position: absolute;
-    right: 0;
-    width: 15%;
+    // position: absolute;
+    // right: 0;
+    width: 20%;
     height: 100vh; //may want to change - should match the homepage/home component height
     background-color: #36393e;
     display: flex;

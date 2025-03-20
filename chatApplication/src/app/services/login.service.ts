@@ -36,13 +36,6 @@ export class LoginService {
           console.log('Updated config:', message);
           data = message;
         }
-        
-        
-      //   .pipe(catchError(error => {
-      //     console.error('Error occurred:', error);
-      //     throw error;  // rethrow error to be handled in the component
-      //   })
-      // );
 
         )
         return data;
@@ -57,6 +50,8 @@ export class LoginService {
         //   console.log("Is authenticted message: ",message);
         // });
       }
+
+      
         
 
   
