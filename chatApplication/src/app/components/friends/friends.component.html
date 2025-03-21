@@ -1,40 +1,60 @@
-
-
-<section class="border-r h-full">
-    <div class="">
-        <!-- main taskbar -->
-        <div>
-            <!-- search bar -->
-            <!--  -->
-            <div class="p-4">
-                <div class="flex gap-3 border-b pb-4">
-                    <input class="border rounded bg-blue-900" type="search"/>
-                    <input class="p-1 rounded text-white bg-blue-400" type="submit"/>
-                </div>
-                <!-- display response of friend request that was sent. Either "invalid" or "request sent" -->
-                <div>
-
-                </div>
-            </div>
-            
-
-            <!-- task bar of some buttons ? -->
-            <div class="flex gap-3 justify-between px-4 pb-4 border-b">
-                <div class="rounded border bg-blue-500">Button</div>
-                <button class="rounded border bg-blue-500 p-1 hover:cursor-pointer" (click)="toggleFriendRequests()">FrReq</button>
-            </div>
-
-            <!-- GET friends here to a list -->
-            <div>
-                <div class="w-full text-center">
-                    <h2 class="text-2xl">Friends</h2>
-                </div>
-
-            </div>
-
+<section id="friendsSec" class="border-r h-full">
+  <div class="friendsTaskbar">
+    <!-- main taskbar -->
+    <!-- <div> -->
+    <!-- search bar -->
+    <!--  -->
+    <div class="pt-4 pb-4 pl-1.5">
+      <div class="flex gap-3 text-white border-b pb-4">
+        <input
+          class="border rounded bg-blue-900"
+          type="search"
+          placeholder="Find friends"
+        />
+        <!-- <input class="p-1 rounded text-white bg-blue-400" type="submit" /> -->
+        <button class="custBtn p-1" type="submit">Search</button>
+        <!-- display response of friend request that was sent. Either "invalid" or "request sent" -->
+        <div id="friendReqStatus">
+          @if(requestSuccess == null){<!--this will need changing  - this is only temp -->
+          <p></p>
+          } @else if (!requestSuccess) {
+          <p class="requestStat failed">Invalid</p>
+          } @else{
+          <p class="requestStat success">Request sent</p>
+          }
         </div>
-
-
-
+      </div>
     </div>
+    <!-- task bar of some buttons ? -->
+    <div class="flex gap-3 justify-between px-4 pb-4 border-b">
+      <div class="custBtn ml-0">Button</div>
+      <!--Placeholder?-->
+      <button class="custBtn p-1" (click)="toggleFriendRequests()">
+        FrReq
+      </button>
+    </div>
+
+    <!-- GET friends here to a list -->
+    <div id="friendsBottom">
+      <div class="w-full text-center">
+        <h2 class="text-2xl">Friends</h2>
+      </div>
+      <div id="friendsList">
+        <!--add friends here?-->
+
+        <!-- Mock friendslist to test styling - each user should have an image (either one they chose, otherwise default) and username-->
+        <!-- scrollable after 8 friend items-->
+        <!--THIS SHOULD BE REMOVED-->
+        <div class="friendItem">
+          <img src="defaultImg.PNG" alt="profilePic" />
+          <span class="username">FakeUsername</span>
+        </div>
+        <div class="friendItem">
+          <img src="defaultImg.PNG" alt="profilePic" />
+          <span class="username">ALongNameABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
 </section>

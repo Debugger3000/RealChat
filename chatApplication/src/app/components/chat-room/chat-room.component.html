@@ -1,16 +1,11 @@
-
-
 <!-- show home icon sort of thing -->
 @if (this.chatRoomState() === 'home') {
 
-    <section class="h-full">
-        <div class="flex justify-center items-center">
-            <img src="" height="250" width="250"/>
-            
-        </div>
-    </section>
-
-
+<section class="h-full">
+  <div class="flex justify-center items-center">
+    <img src="" height="250" width="250" />
+  </div>
+</section>
 
 }
 
@@ -19,41 +14,43 @@
 @else if(this.chatRoomState() == 'friend'){
 
 <section class="">
-    <div class="flex flex-col">
-        <!-- top bar with friend picture and name -->
-        <div class="flex gap-5 border-b p-4 items-center">
-            <div>
-                <div class="border rounded-full w-[50px] h-[50px] "></div>
-            </div>
-            <div>
-                <h4 class="text-2xl">Friends Name</h4>
-            </div>
-
-        </div>
-
-        <!-- chatroom below with messages.. -->
-        <div class="p-4 ">
-            <div class="h-90 rounded border">
-
-            </div>
-        </div>
-
-        <!-- message form -->
-         <div class="p-4">
-            <form class="flex justify-between">
-                <input class="bg-gray-700 rounded border w-9/10 mr-4 p-1" type="text" name="message" id="message"/>
-                <input class="rounded border bg-blue-500 p-1 hover:cursor-pointer" type="submit"/>
-            </form>
-
-         </div>
+  <div class="flex flex-col">
+    <!-- top bar with friend picture and name -->
+    <div class="flex gap-5 border-b p-4 items-center">
+      <div>
+        <div class="border rounded-full w-[50px] h-[50px]"></div>
+      </div>
+      <div>
+        <h4 class="text-2xl">Friends Name</h4>
+      </div>
     </div>
+
+    <!-- chatroom below with messages.. -->
+    <div class="p-4">
+      <div class="h-90 rounded border"></div>
+    </div>
+
+    <!-- message form -->
+    <div class="p-4">
+      <form class="flex justify-between">
+        <input
+          class="bg-gray-700 rounded border w-9/10 mr-4 p-1"
+          type="text"
+          name="message"
+          id="message"
+        />
+        <input
+          class="rounded border bg-blue-500 p-1 hover:cursor-pointer"
+          type="submit"
+        />
+      </form>
+    </div>
+  </div>
 </section>
 }
 
 <!-- can probably be its own component -->
 <!-- Look at current friend requests -->
 @else{
-    <div>
-
-    </div>
+<div></div>
 }
