@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { ChatRoomComponent } from '../components/chat-room/chat-room.component';
 import { FriendsComponent } from '../components/friends/friends.component';
+import { userData } from '../Types/user';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +15,26 @@ import { FriendsComponent } from '../components/friends/friends.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(private router: Router) {}
   loginService= inject(LoginService);
+  profileService = inject(ProfileService);
+
+  // Store cur user data to be able to pass to children
+  public userData = signal<userData>(null);
+
+  //store chatRoomID
+  //somehow someway we need to GET a list of friends and their main info, display it
+  //then pass the common CHATROOM ID down to this signal to go to Chatroom Component
+  //public chatRoomId = signal('');
 
   //chatroomState
-  public chatRoomStatePass = signal('home');
+  public chatRoomStatePass = signal('friend');
+
+  //current users ID
+  public curUserData = signal<userData>(null);
+
+  //callback to set user
 
   public responseLogin:any;
 
@@ -53,6 +69,16 @@ export class HomeComponent {
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);
+  }
+
+  //run when component is initiated...
+  ngOnInit(): void {
+    this.profileService.getMe().subscribe((data) => {
+      console.log('Your data of yourself',data);
+      // set user data
+      this.userData.set(data);
+    });
+    console.log("Profile component has been loaded...")
   }
 
 }
