@@ -26,6 +26,8 @@ userRoutes.get("/", async (req,res,next) => {
     return res.status(200).json(users);
 });
 
+//GET - a users friends
+
 
 //GET - get a specific user by id
 userRoutes.get("/me", async (req, res) => {
@@ -35,6 +37,8 @@ userRoutes.get("/me", async (req, res) => {
     res.status(200).json({user: req.user});
 });
 
+
+// DELETE a user 
 userRoutes.delete("/:id", async (req,res) => {
     console.log("within delete user...");
     try {

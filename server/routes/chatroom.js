@@ -7,11 +7,13 @@ const User = require('../models/user');
 // create a new chatroom
 router.post('/new', async (req, res) => {
   const { name, users } = req.body;
+  console.log("inside post new chatroom...");
 
   try {
+    console.log(req.body);
     const chatroom = new Chatroom({
-      name,
-      users
+      name: name,
+      users: [users[0],users[1]],
     });
 
     await chatroom.save();
