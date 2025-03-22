@@ -6,12 +6,11 @@
     <img src="" height="250" width="250" />
   </div>
 </section>
-
 }
 
 <!-- Can probably be its own component -->
 <!-- a friend is selected therefore the chatroom should open -->
-@else if(this.chatRoomState() == 'friend'){
+@else if(this.chatRoomState() === 'friend'){
 
 <section class="">
   <div class="flex flex-col">
@@ -25,26 +24,19 @@
       </div>
     </div>
 
+
     <!-- chatroom below with messages.. -->
     <div class="p-4">
       <div class="h-90 rounded border"></div>
     </div>
 
-    <!-- message form -->
-    <div class="p-4">
-      <form class="flex justify-between">
-        <input
-          class="bg-gray-700 rounded border w-9/10 mr-4 p-1"
-          type="text"
-          name="message"
-          id="message"
-        />
-        <input
-          class="rounded border bg-blue-500 p-1 hover:cursor-pointer"
-          type="submit"
-        />
-      </form>
-    </div>
+     <!-- message form -->
+         <div class="p-4">
+            <form class="flex justify-between" [formGroup]="messageForm" (ngSubmit)="onSubmitMessage()">
+                <input class="bg-gray-700 rounded border w-9/10 mr-4 p-1" type="text" name="message" id="message" formControlName="message"/>
+                <input class="rounded border bg-blue-500 p-1 hover:cursor-pointer" type="submit"/>
+            </form>
+
   </div>
 </section>
 }

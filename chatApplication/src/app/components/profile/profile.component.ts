@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { userData } from '../../Types/user';
@@ -12,7 +12,10 @@ import { userData } from '../../Types/user';
 export class ProfileComponent implements OnInit{
   profileService = inject(ProfileService);
 
-  public userData = signal<userData>(null);
+  // private userData = signal<userData>(null);
+
+  // Create state so we can change 
+  userData = input<userData>();
 
   editing = false; //if the user is in the edit(form) view - by default it's not in edit, so false
 
@@ -54,39 +57,12 @@ export class ProfileComponent implements OnInit{
 
   //run when component is initiated...
   ngOnInit(): void {
-    this.profileService.getMe().subscribe((data) => {
-      console.log('Your data of yourself',data);
-      // set user data
-      this.userData.set(data);
-    });
-    console.log("Profile component has been loaded...")
+  //   this.profileService.getMe().subscribe((data) => {
+  //     console.log('Your data of yourself',data);
+  //     // set user data
+  //     this.userData.set(data);
+  //   });
+  //   console.log("Profile component has been loaded...")
+  // }
   }
-
-/* based on the ngOnInit above - just a concept for the profile editing/handling that should be reviewed/replaced
-ngOnInit(): void {
-  //this.todoService.getToDoApi().pipe(catchError((err) => {
-    //   console.log('Error Caught:',err);
-    //   throw err;
-    // }))
-    // .subscribe((todos) => {
-    //   this.todoItems.set(todos);
-    // });
- 
-  this.userForm.setValue({ //will need to finished with todos
-    username: todos.username,
-    bio: todos.bio,
-    email: todos.email,
-    //password - not an editable field in profile but can add it needed
-    age: todos.age,
-    //__v 
-
-    country: todos.country,
-    gender: todos.gender
-
-    //bio, gender, country should be optional fields
-  })
-  console.log("Profile component has been loaded...")
-}
-  */
-
 }
