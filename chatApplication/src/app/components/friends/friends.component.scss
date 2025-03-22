@@ -1,0 +1,72 @@
+
+#friendsSec {//the main container
+    background-color: #2E3136;
+    overflow-y: hidden;
+}
+
+#friendsBottom h2::after { //line under the friends header 
+    content: '';//So it's blank
+    background-color: #2a2a2a;
+    height: 1.5px;
+    width: 85%;
+    margin: 2px auto 0 auto; //auto to center
+    display: block;
+    
+}
+
+#friendsList {
+    // padding: 3px;
+    overflow-y: auto;
+    //scrollbar-color: #324759 #202b38;
+    // box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    max-height: 77.5vh; //important that it uses vh so it determines cutoff point/overflow based on screen size
+}
+
+#friendsList::-webkit-scrollbar { 
+    width: 0px; //so the scrollbar isn't visible, can be changed if needed - might add dynamic scroll styling 
+}
+
+.friendItem {
+    background-color: #2E3136;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    overflow-x: hidden; //prevent x-axis scrolling
+    overflow-wrap: anywhere;//lets names be broken to wrap
+
+
+    &:hover {
+        background-color: #3a3d43;
+    }
+}
+
+.friendItem img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; //circle shape
+    margin-right: 10px;
+}
+
+
+input[type=search] {
+    background-color: rgb(35, 36, 42);
+    padding-left: 5px;
+    padding-right: 5px;
+
+    &::placeholder {
+        color: #a9a9a9;
+    }
+}
+
+
+.friendReqStatus {
+
+    .failed {
+        color: rgb(189, 10, 10);
+    }
+
+    .success {
+        color: rgb(49, 219, 75);
+    }
+}

@@ -13,8 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
 
-
-
+  loginFail = false;
 constructor(private router: Router) {}
   loginService= inject(LoginService);
 
@@ -38,19 +37,25 @@ constructor(private router: Router) {}
   //on form submit callback... to login a user...
   onSubmit() {
     //Check database for users with same name or email...
-
+    this.loginFail = false;
     //POST data if information is good 
     this.loginService.postLoginUser(this.userLoginForm.value).subscribe(e => {
       this.responseLogin = e;
       //route to certain page on good response
     // console.log("response from register: ", e);
-    console.log("printing response after subscribe received response...:",this.responseLogin);
-    // change route once response is received and is good
-    this.router.navigate([`${this.responseLogin.url}`]);
+      if(this.responseLogin.success){//checks if login was successful
+        console.log("printing response after subscribe received response...:",this.responseLogin);
+        // change route once response is received and is good
+        this.router.navigate([`${this.responseLogin.url}`]);
+      }else{
+        this.loginFail = true;//if it wasn't successful toggle this - this triggers the "Incorrect username or password" text
+
+      }
     });
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);
+
   }
 
 
