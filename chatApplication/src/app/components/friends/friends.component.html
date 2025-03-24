@@ -10,9 +10,10 @@
           class="border rounded bg-blue-900"
           type="search"
           placeholder="Find friends"
+          #friendName
         />
         <!-- <input class="p-1 rounded text-white bg-blue-400" type="submit" /> -->
-        <button class="custBtn p-1" type="submit">Search</button>
+        <button class="custBtn p-1" type="submit" (click)="sendFriendRequest(friendName.value)">Search</button>
         <!-- display response of friend request that was sent. Either "invalid" or "request sent" -->
         <div id="friendReqStatus">
           @if(requestSuccess == null){<!--this will need changing  - this is only temp -->
@@ -35,6 +36,8 @@
     </div>
 
     <!-- GET friends here to a list -->
+    @if (!isFriendRequestOn) {
+
     <div id="friendsBottom">
       <div class="w-full text-center">
         <h2 class="text-2xl">Friends</h2>
@@ -45,16 +48,41 @@
         <!-- Mock friendslist to test styling - each user should have an image (either one they chose, otherwise default) and username-->
         <!-- scrollable after 8 friend items-->
         <!--THIS SHOULD BE REMOVED-->
+        @for (friend of friends; track $index) {
         <div class="friendItem">
-          <img src="defaultImg.PNG" alt="profilePic" />
-          <span class="username">FakeUsername</span>
-        </div>
-        <div class="friendItem">
-          <img src="defaultImg.PNG" alt="profilePic" />
-          <span class="username">ALongNameABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
-        </div>
+            <img src="defaultImg.PNG" alt="profilePic" />
+            <span class="username">{{friend.username}}</span>
+          </div>
+        }
+        @if (friends[0] == null) {
+          <div class="friendItem">
+            <span class="username">you have no friends...</span>
+          </div>
+        }
+
       </div>
     </div>
-    <!-- </div> -->
+  
+}
+
+@else{
+  <div id="friendRequestBottom">
+    <div class="w-full text-center">
+      <h2 class="text-2xl">Friend Requests</h2>
+    </div>
+      <div id="friendRequestList">
+
+        @for (friendRequest of friendRequests; track $index) {
+        <div class="friendItem">
+          <img src="defaultImg.PNG" alt="profilePic" />
+          <span class="username">{{friendRequest.username}}</span>
+          <button class="custBtn p-1" (click)="acceptFriend($index)">Accept</button>
+          <button class="custBtn p-1" (click)="declineFriend($index)">Decline</button>
+        </div>
+        }
+
+      </div>
+  </div>
+  }
   </div>
 </section>
