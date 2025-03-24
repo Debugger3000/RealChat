@@ -214,21 +214,27 @@ userRoutes.post('/isGood', (req,res,next) => {
 });
 
 // send friend request
-userRoutes.post('/friend/request/send/:id', async (req, res) => {
+userRoutes.post('/friend/request/:username', async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
-        const friend = await User.findById(req.params.id);
+        // res.status(200).json({ msg: 'servers not fucked' });
+        const user = await User.findById(req.user._id);
+        const friend = await User.findOne({username: req.params.username});
+
+
+        if(user.id === friend.id){
+            return res.status(404).json({ msg: 'Cannot add yourself...' });
+        }
 
         if (!friend) {
             return res.status(404).json({ msg: 'User not found' });
         }
 
-        if (user.friendRequests.includes(friend.id)) {
-            return res.status(400).json({ msg: 'Friend request already sent' });
+        if (friend.friendRequests.includes(user.id)) {
+            return res.status(400).json({ msg: 'Friend already added.' });
         }
 
-        user.friendRequests.push(friend.id);
-        await user.save();
+        friend.friendRequests.push(user.id);
+        await friend.save();
 
         res.status(200).json({ msg: 'Friend request sent' });
     } catch (err) {
@@ -238,9 +244,9 @@ userRoutes.post('/friend/request/send/:id', async (req, res) => {
 });
 
 // accept friend request
-userRoutes.post('/friend/request/accept/:id', async (req, res) => {
+userRoutes.post('/friend/accept/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
         const friend = await User.findById(req.params.id);
 
         if (!friend) {
@@ -268,7 +274,7 @@ userRoutes.post('/friend/request/accept/:id', async (req, res) => {
 // get friends list
 userRoutes.get('/friend/getList', async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).populate('friends', 'username');
+        const user = await User.findById(req.user._id).populate('friends', 'username');
         res.status(200).json(user.friends);
     } catch (err) {
         console.error(err.message);
@@ -279,8 +285,10 @@ userRoutes.get('/friend/getList', async (req, res) => {
 // get friend requests
 userRoutes.get('/friend/request', async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).populate('friendRequests', 'username');
-        res.status(200).json(user.friendRequests);
+        //const user = await User.findById(req.user.id).populate('friendRequests', 'username');
+        const user = await User.find({ _id: { $in:req.user.friendRequests }});
+
+        res.status(200).json(user);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -288,21 +296,33 @@ userRoutes.get('/friend/request', async (req, res) => {
 });
 
 // reject friend request
-userRoutes.post('/friend/request/reject/:id', async (req, res) => {
+userRoutes.post('/friend/reject/:id', async (req, res) => {
+    console.log("friend rejection hit..");
     try {
-        const user = await User.findById(req.user.id);
-        const friend = await User.findById(req.params.id);
+        const friendId = req.params.id;
 
-        if (!friend) {
-            return res.status(404).json({ msg: 'User not found' });
-        }
+        const userId = req.user._id;
 
-        if (!user.friendRequests.includes(friend.id)) {
-            return res.status(400).json({ msg: 'No friend request from this user' });
-        }
+        const user = await User.findById(userId);
 
-        user.friendRequests = user.friendRequests.filter(id => id.toString() !== friend.id.toString());
-        await user.save();
+        console.log(friendId);
+        console.log(userId);
+       
+        // const friend = await User.findById(req.params.id);
+
+        // if (!friend) {
+        //     return res.status(404).json({ msg: 'User not found' });
+        // }
+
+        // if (!user.friendRequests.includes(friend.id)) {
+        //     return res.status(400).json({ msg: 'No friend request from this user' });
+        // }
+
+        const friendRequests = user.friendRequests.filter((id) => id.toString() !== friendId.toString());
+
+        console.log(friendRequests);
+
+        await User.updateOne({_id: userId}, {$set: {friendRequests: friendRequests}});   
 
         res.status(200).json({ msg: 'Friend request rejected' });
     } catch (err) {
