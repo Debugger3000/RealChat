@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
 
   // Store cur user data to be able to pass to children
   public userData = signal<userData>(null);
-
   //store chatRoomID
   //somehow someway we need to GET a list of friends and their main info, display it
   //then pass the common CHATROOM ID down to this signal to go to Chatroom Component
