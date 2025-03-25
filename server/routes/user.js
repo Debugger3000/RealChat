@@ -263,8 +263,12 @@ userRoutes.post('/friend/accept/:id', async (req, res) => {
 
         friend.friends.push(user.id);
         await friend.save();
+        
+        // Create chatroom for both of these users... 
 
-        res.status(200).json({ msg: 'Friend request accepted' });
+
+
+        res.status(200).json({ msg: 'Friend request accepted', userIds: [req.user._id,req.params.id] });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -285,6 +289,9 @@ userRoutes.get('/friend/getList', async (req, res) => {
 // get friend requests
 userRoutes.get('/friend/request', async (req, res) => {
     try {
+        if(!req.user.friendrequests || res.user.friendRequests.length === 0){
+            res.status(500);
+        }
         //const user = await User.findById(req.user.id).populate('friendRequests', 'username');
         const user = await User.find({ _id: { $in:req.user.friendRequests }});
 
@@ -300,24 +307,12 @@ userRoutes.post('/friend/reject/:id', async (req, res) => {
     console.log("friend rejection hit..");
     try {
         const friendId = req.params.id;
-
         const userId = req.user._id;
-
         const user = await User.findById(userId);
 
         console.log(friendId);
         console.log(userId);
        
-        // const friend = await User.findById(req.params.id);
-
-        // if (!friend) {
-        //     return res.status(404).json({ msg: 'User not found' });
-        // }
-
-        // if (!user.friendRequests.includes(friend.id)) {
-        //     return res.status(400).json({ msg: 'No friend request from this user' });
-        // }
-
         const friendRequests = user.friendRequests.filter((id) => id.toString() !== friendId.toString());
 
         console.log(friendRequests);
@@ -329,6 +324,33 @@ userRoutes.post('/friend/reject/:id', async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
+});
+
+userRoutes.post('/friend/remove/:id', async(req,res) => {
+
+    console.log("friend rejection hit..");
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId);
+        const friend = await User.findById(req.params.id);
+
+
+        const userFriends = user.friends.filter((id) => id.toString() !== req.params.id);
+
+        const friendFriends = friend.friends.filter((id) => id.toString() !== userId);
+
+        await User.updateOne({_id: req.params.id}, {$set: {friends: friendFriends}});
+
+        // Update user with new friends list...
+        await User.updateOne({_id: userId}, {$set: {friends: userFriends}});   
+
+        res.status(200).json({ msg: 'Friend request rejected' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+
+
 });
 
 

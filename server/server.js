@@ -132,17 +132,6 @@ passport.use(
 );
 
 
-// passport.use(User.createStrategy());
-
-
-
-// app.use(passport.authenticate('session'));
-
-//configure strategy
-
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
 //mongoose connect
 mongoose
 .connect('mongodb+srv://carmacford:tW9UQ3bmwbRSZV3i@therealchat.koaj5.mongodb.net/')
@@ -150,25 +139,6 @@ mongoose
 })
 .catch((err) => {console.log('Error:',err);
 });
-
-
-
-
-
-// app.post("api/user/login", 
-//     function(req,res,next) {
-//         console.log("inside login post... Pre auth function.");
-//         // call next function in line, which is the one below here. 'passport.authenticate()'
-//         next();
-//     },
-//     passport.authenticate("local", {
-//     failWithError: true,
-//     successRedirect:'/profile',
-//     failureRedirect: '/profile',
-//     failureFlash: true,
-//     failureMessage: "Invalid Credentials bitch ass hoe..."
-// })
-// );
 
 
 // Routes

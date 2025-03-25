@@ -12,22 +12,21 @@ import { friend} from '../Types/user';
   })
   export class FriendsService {
     constructor(private http: HttpClient) { } 
+
+    curChatroomId: string = '';
+    curChatFriend: {id:string,username:string} | null = null;
    
     getFriends(){
       return this.http.get<friend>("/api/user/friend/getList" ,{});
     }
 
-
-
     sendFriendRequest(username : string){
       return this.http.post(`/api/user/friend/request/${username}`, {});
     }
 
-
     getFriendRequest(){
       return this.http.get<userDataArray>("/api/user/friend/request");
     }
-
 
     declineFriendRequest(id : string){
       // return this.http.post(`/api/user/friend/reject`, {});
@@ -35,9 +34,26 @@ import { friend} from '../Types/user';
     }
 
     acceptFriendRequest(id: string){
-      return this.http.post(`/api/user/friend/accept/${id}`, {})
+      return this.http.post(`/api/user/friend/accept/${id}`, {});
     }
 
+    // Create chatroom
+    createChatRoom(id1: string, id2: string) {
+      console.log("Create chatroom for new friends REQ inside...");
+      return this.http.post('/api/chatroom/new',{users: [id1,id2]});
+    }
 
+    //set Chatroom by clicking on friend tab in friends list
+    setChatRoom(id: string) {
+      return this.http.get<{id: string}>(`/api/chatroom/${id}`);
+    }
+
+    setCurChatId(id: string){
+      this.curChatroomId = id;
+    }
+
+    removeFriendApi(id: string){
+      return this.http.post(`/api/user/friend/remove/${id}`,{});
+    }
 
 }

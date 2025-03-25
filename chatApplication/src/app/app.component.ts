@@ -16,9 +16,10 @@ import { type WritableSignal } from '@angular/core';
   // templateUrl: './app.component.html',
   template: `
 
-@if (this.isAuthSignal()) {
-  <app-header/>
+@if (this.isAuthSignal) {
+  <!-- <app-header/> -->
   <router-outlet/>
+  
 }
 @else {
   <router-outlet/>
@@ -33,30 +34,24 @@ import { type WritableSignal } from '@angular/core';
 export class AppComponent implements OnInit{
   isAuth = inject(LoginService)
   title = 'chatApplication';
-  public isAuthSignal = signal(false);
+  // public isAuthSignal = signal(false);
+  public isAuthSignal = false;
 
 
 
 signalRender(state: boolean){
-  this.isAuthSignal.set(state);
-
-
+  // this.isAuthSignal.set(state);
+  this.isAuthSignal = state;
 }
+
+  
 
 //run when component is initiated...
 ngOnInit(): void {
-  // this.todoService.getToDoApi().pipe(catchError((err) => {
-  //   console.log('Error Caught:',err);
-  //   throw err;
-  // }))
-  // .subscribe((todos) => {
-  //   this.todoItems.set(todos);
-  // });
-  // const isAuthSignal = signal(false);
-  // this.isAuthenticated = isAuthSignal;
   this.isAuth.isAuthenticated().subscribe(isAuthState => {
     console.log("auth state is: ", isAuthState.isAuthenticated);
     this.signalRender(isAuthState.isAuthenticated);
+    this.isAuth.setUserAuthenticated(isAuthState.isAuthenticated);
   });
   console.log("App component has been loaded...")
 }

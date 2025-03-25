@@ -1,5 +1,11 @@
 
 
+export type messageRequest = {
+  chatRoomId: string;
+  userId: string | undefined; 
+  message: string | null | undefined;
+};
+
 
 export type userData = {
     user: {

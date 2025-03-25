@@ -9,6 +9,8 @@ import { catchError, Observable, tap } from 'rxjs';
 export class LoginService {
   constructor(private http: HttpClient) { }
 
+  isUserAuthenticated = false;
+
   // API request to login user...
   // http = inject(HttpClient);
       postLoginUser(e: any): Observable<any> {
@@ -41,14 +43,14 @@ export class LoginService {
         return data;
       };
 
+      setUserAuthenticated(state: boolean){
+        this.isUserAuthenticated = state;
+      }
+
       isAuthenticated(): Observable<any>{
         console.log("message was sent hehehehehehe");
         const message = {message: "auth req was sent"};
         return this.http.post<Test>('/api/user/isGood',message);
-        
-        // .subscribe(message => {
-        //   console.log("Is authenticted message: ",message);
-        // });
       }
 
       
