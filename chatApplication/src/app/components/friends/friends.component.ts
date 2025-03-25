@@ -1,4 +1,4 @@
-import { Component, inject,  signal } from '@angular/core';
+import { Component, inject,  Input,  input,  OnChanges,  OnInit,  signal, SimpleChanges } from '@angular/core';
 import { HomeComponent } from '../../home/home.component';
 import { FriendsService } from '../../services/friends.service';
 import { ProfileService } from '../../services/profile.service';
@@ -10,14 +10,29 @@ import { userData, userDataArray, friend } from '../../Types/user';
   templateUrl: './friends.component.html',
   styleUrl: './friends.component.scss'
 })
-export class FriendsComponent {
+export class FriendsComponent implements OnInit,OnChanges {
+  // Services
+  friendService = inject(FriendsService);
+  profileService = inject(ProfileService);
+
+  // Inputs
+  @Input() friendList: friend = [];
+  @Input() friendRequests: userDataArray = [];
+  @Input() dummy: boolean = false;
+  // friends = input<friend>([]);
+  // friendRequests = input<userDataArray>([]);
+
+  // @Input() setter(id: string | null){
+
+  // }
+
 requestSuccess: any; 
-friends : friend = [];
-friendRequests : userDataArray = [];
-friendService = inject(FriendsService);
-profileService = inject(ProfileService);
+// friends : friend = [];
+// friendRequests : userDataArray = [];
+
 response : any;
 isFriendRequestOn : boolean = false;
+
   // call this to chat the state of home component
   // changeHome() {
     
@@ -27,18 +42,45 @@ isFriendRequestOn : boolean = false;
   
   ngOnInit() : void{
     this.friendService.getFriendRequest().subscribe(e =>{
-
       this.friendRequests = e;
-     
     });
 
-
     this.friendService.getFriends().subscribe(e =>{
+      this.friendList = e;
+      console.log(e);
+    });
+  }
 
-      this.friends = e;
+  ngOnChanges(): void {
+    // Grab friends when there is a value change for friend signals
+    this.friendService.getFriends().subscribe(e =>{
+      // this.friends = e;
+      this.friendList = e;
       console.log(e);
     });
 
+    // Grab friend requests ^^^ 
+    this.friendService.getFriendRequest().subscribe(e =>{
+      this.friendRequests = e;
+    });
+  }
+
+
+  // When a friend is clicked we need to get their chatroom...
+  getFriendChatRoom(id: string, username: string) {
+    // Get friends ID, and Cur users ID to send in REQ
+
+    //
+    this.friendService.setChatRoom(id).subscribe(res => {
+      console.log("response from setting chatroom:",res);
+      // Set current chatroom
+      this.friendService.curChatroomId = res.id;
+      console.log("value of curchatroomId: ",this.friendService.curChatroomId);
+      // Set current chat friend info
+      this.friendService.curChatFriend = {id: id, username: username};
+      console.log("value of curChatroomFriend: ", this.friendService.curChatFriend);
+    
+    });
   }
 
 
@@ -59,6 +101,7 @@ isFriendRequestOn : boolean = false;
       next: (data) => {
       console.log('Data:', data);
       this.requestSuccess = true;
+      this.dummy = !this.dummy;
     },
     error: (error) => {
       console.error('Error:', error);
@@ -71,8 +114,23 @@ isFriendRequestOn : boolean = false;
 
   acceptFriend(num : number){
     const id = this.friendRequests[num]._id;
-    this.friendService.acceptFriendRequest(id).subscribe(e => {
-    });
+    this.friendService.acceptFriendRequest(id).subscribe({
+
+      
+
+      // receive accept friend response
+      // Send out a request to then create a chatroom for you and your friend...
+      next: (response: any) => {
+        this.dummy = !this.dummy;
+        console.log(response); 
+        this.friendService.createChatRoom(response.userIds[0],response.userIds[1]).subscribe(response => {
+          console.log("response from creating chatroom: ",response);
+        });
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      }
+  });
   }
 
   declineFriend(num : number){
@@ -80,7 +138,12 @@ isFriendRequestOn : boolean = false;
     console.log(id);
     this.friendService.declineFriendRequest(id).subscribe(e => {
     });
-    
+  }
+
+  removeFriend(id: string) {
+      this.friendService.removeFriendApi(id).subscribe(res => {
+        console.log('response from delete friend api: ',res);
+      });
 
   }
 

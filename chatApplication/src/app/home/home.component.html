@@ -1,20 +1,39 @@
-<section id="homePage" class="h-screen bg-gray-800 flex justify-center">
-  <div id="friendsPanel">
-    <app-friends></app-friends>
-  </div>
 
-  <div id="chatMainSection">
-    <app-chat-room [chatRoomState]="chatRoomStatePass()"></app-chat-room>
-    <!-- <div class="homeMain flex flex-col justify-center items-center">
-      <P>This is home Page hehehehehehe</P>
-    </div> -->
-  </div>
-  <div class="profilePanel">
-    <div class="profileContent">
-      
-      
-      <app-profile [userData]="userData()"></app-profile>
-      <!--the profile component-->
+
+  <!-- Home Main body content  -->
+  <section id="homePage" class="bg-gray-800 flex justify-center">
+    <div id="friendsPanel">
+      <section class="bg-[#1e2124] flex flex-row gap-5">
+        <div class="flex flex-row items-center gap-5">
+          <div>
+            <h4 class="text-white font-bold">IMG</h4>
+          </div>
+          <div>
+            <h4 class="text-white font-bold">RealChat</h4>
+          </div>
+        
+          <button class="hover:cursor-pointer" (click)="isAuth()">isAuth</button>
+          <button
+            class="logoutBtn p-1 bg-red-500 rounded hover:cursor-pointer text-white" (click)="logout()">Logout
+          </button>
+        </div>
+      </section>
+      <app-friends></app-friends>
     </div>
-  </div>
-</section>
+
+    <div id="chatMainSection">
+      <app-chat-room [chatRoomState]="chatRoomStatePass()" [userData]="userData()" [chatroomFriendInfo]="{username: friendService.curChatFriend?.username!}"></app-chat-room>
+      <!-- <div class="homeMain flex flex-col justify-center items-center">
+        <P>This is home Page hehehehehehe</P>
+      </div> -->
+    </div>
+    <div class="profilePanel">
+      <div class="profileContent">
+        
+        
+        <app-profile [userData]="userData()"></app-profile>
+        <!--the profile component-->
+      </div>
+    </div>
+  </section>
+

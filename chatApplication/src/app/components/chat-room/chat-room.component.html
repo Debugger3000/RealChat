@@ -1,33 +1,51 @@
 <!-- show home icon sort of thing -->
-@if (this.chatRoomState() === 'home') {
 
-<section class="h-full">
+<!-- <section class="h-full">
   <div class="flex justify-center items-center">
     <img src="" height="250" width="250" />
+  </div> 
+  <div class="friendItem">
+    <img src="defaultImg.PNG" alt="profilePic" />
+    <span class="username">{{this.friendService.curChatFriend?.username}}</span>
   </div>
-</section>
-}
+</section> -->
 
-<!-- Can probably be its own component -->
-<!-- a friend is selected therefore the chatroom should open -->
-@else if(this.chatRoomState() === 'friend'){
+
+<!-- Display chatroom with friend that was selected when there is a chatroom id... -->
+@if (this.friendService.curChatroomId.length) {
 
 <section class="">
   <div class="flex flex-col">
     <!-- top bar with friend picture and name -->
-    <div class="flex gap-5 border-b p-4 items-center">
+    <!-- <div class="flex gap-5 border-b p-4 items-center">
       <div>
         <div class="border rounded-full w-[50px] h-[50px]"></div>
       </div>
       <div>
         <h4 class="text-2xl">Friends Name</h4>
       </div>
+    </div> -->
+    <div class="friendItem">
+      <img src="defaultImg.PNG" alt="profilePic" />
+      <span class="username">{{this.friendService.curChatFriend?.username}}</span>
     </div>
 
 
     <!-- chatroom below with messages.. -->
     <div class="p-4">
-      <div class="h-90 rounded border"></div>
+      <div class="h-90 rounded border">
+
+        @for (message of chatRoomMessages; track $index) {
+          <div class="messageItem flex flex-col">
+            <div class="flex gap-5">
+              <img src="defaultImg.PNG" alt="profilePic" />
+              <div>{{message.userId}}</div>
+            </div>
+            <div>{{message.content}}</div>
+          </div>
+        }
+
+      </div>
     </div>
 
      <!-- message form -->
@@ -45,5 +63,5 @@
 <!-- can probably be its own component -->
 <!-- Look at current friend requests -->
 @else{
-<div></div>
+<div>heheh the other ELSE</div>
 }

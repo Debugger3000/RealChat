@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,8 @@ import { ChatRoomComponent } from '../components/chat-room/chat-room.component';
 import { FriendsComponent } from '../components/friends/friends.component';
 import { userData } from '../Types/user';
 import { ProfileService } from '../services/profile.service';
+import { AppComponent } from '../app.component';
+import { FriendsService } from '../services/friends.service';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,10 @@ import { ProfileService } from '../services/profile.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit{
   constructor(private router: Router) {}
   loginService= inject(LoginService);
+  friendService = inject(FriendsService);
   profileService = inject(ProfileService);
 
   // Store cur user data to be able to pass to children
@@ -35,7 +38,17 @@ export class HomeComponent implements OnInit {
 
   //callback to set user
 
+  public dataResponse = {};
+
   public responseLogin:any;
+
+  isUserAuth = this.loginService.isUserAuthenticated;
+
+
+  setAuthState() {
+
+  }
+  
 
   // we should move login form HTML code to register page.
   loginClosed = true; //if the login popup is visible or not. 
@@ -69,6 +82,25 @@ export class HomeComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);
   }
+
+
+
+  
+
+  //function used to log user out...
+  logout(){
+    console.log("log out button clicked... ahahha");
+    this.dataResponse = this.loginService.postLogoutUser();
+    //route user to login page
+    this.router.navigate(['/login']);
+  }
+  isAuth(){
+    console.log('check auth just clicked');
+    this.loginService.isAuthenticated().subscribe(res => {
+        console.log(res);
+    });
+  }
+
 
   //run when component is initiated...
   ngOnInit(): void {

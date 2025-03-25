@@ -6,3 +6,13 @@ export type Message = {
     // message: FormConstring;
     message: string;
   }
+
+
+export type ChatRoomMessage = {
+    _id: string;
+    chatroomId: string;
+    userId: string;
+    content: string;
+    timestamp: string;
+    __v: number;
+}[] | null;
