@@ -5,6 +5,13 @@
 
   <h1 class="text-white text-center text-4xl">Profile</h1>
   <div class="profileBody flex flex-col items-center">
+    <div id="profileImg" class="relative">
+      <img
+        src="testing-placeholder.png"
+        alt="profilePic"
+        class="rounded"
+      /><!--needs to be replaced to show current pic-->
+    </div>
     <h3>{{ userData()?.user?.username }}</h3>
     <i>{{ userData()?.user?.email }}</i>
     <div id="ageGender">
@@ -28,6 +35,15 @@
     [formGroup]="userForm"
     (ngSubmit)="onSubmit()"
   >
+    <div class="formGroup">
+      <!-- <label for="profilePic">Profile Picture</label> -->
+      <input
+        id="profilePic"
+        name="profilePic"
+        type="file"
+        accept="image/*"
+      /><!--needs formControlName-->
+    </div>
     <div class="formGroup">
       <label for="name">Name</label>
       <input
