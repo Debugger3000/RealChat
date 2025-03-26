@@ -11,6 +11,9 @@ import { userData, userDataArray, friend } from '../../Types/user';
   styleUrl: './friends.component.scss'
 })
 export class FriendsComponent implements OnInit,OnChanges {
+
+  animateOut = false; //for playing the text animation for friend request status - starts false, will be true when playing
+
   // Services
   friendService = inject(FriendsService);
   profileService = inject(ProfileService);
@@ -102,10 +105,30 @@ isFriendRequestOn : boolean = false;
       console.log('Data:', data);
       this.requestSuccess = true;
       this.dummy = !this.dummy;
+      this.animateOut = false; //reset animation 
+
+      setTimeout(() => {
+        this.animateOut = true;//play animation
+        setTimeout(()=> //after some time hide the message - this way it's not always there
+        {
+          this.requestSuccess = null; //reset back to null to hide the message
+          this.animateOut = false; //stop animation
+        }, 1000); 
+      }, 3000);
     },
     error: (error) => {
       console.error('Error:', error);
       this.requestSuccess = false;
+
+      setTimeout(() => {
+        this.animateOut = true;//play animation
+        console.log("animation started");
+        setTimeout(()=>{
+          this.requestSuccess = null;
+          this.animateOut = false;
+          console.log("animation finished");
+        }, 1000);
+      }, 3000);
     }
   })
  

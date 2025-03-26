@@ -15,8 +15,8 @@ input:focus {
 .profileHolder {
 
     h1{
-        top: -13rem;
-        position: relative;
+        top: 1%;
+        position: absolute; //so it's in the same spot
     }
 
 
@@ -31,6 +31,7 @@ input:focus {
         text-align: center;
         font-size: 20px;
         margin-bottom: 0.55rem;
+        margin-top: 1rem;
     }
 
     #ageGender {
@@ -51,6 +52,12 @@ input:focus {
         font-size: 12px;
         // margin-left: 0.5rem;
     }
+}
+
+img {
+    border-radius: 50%;
+    object-fit: contain; //may want to change -contain shrinks to fit - cover cuts off what doesn't fit
+    height: 120px;
 }
 
 #editBtn {

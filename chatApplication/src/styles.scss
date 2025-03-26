@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+// :root{
+//   --headerHeight: 4rem; //so the header height can be accounted for in calculating the height to fit the page  - h-16/4rem
+// }
 
 .notVisible { //different than doing display: none since it doesn't shift (it hides rather than not displaying)
   opacity: 0;
@@ -19,7 +22,7 @@
   color: rgb(43, 153, 255);
 }
 
-.custBtn { //temp custom button  
+.custBtn { 
     box-sizing: border-box;
     box-shadow: 0 0 5px rgb(104, 240, 255); 
   
@@ -46,7 +49,7 @@
   box-shadow: 0 0 8px rgb(104, 240, 255); 
 }
 
-.discBtn {
+.discBtn { //alt button concept
   background-color: #161f27;
   &:hover {
     background-color: #324759;
