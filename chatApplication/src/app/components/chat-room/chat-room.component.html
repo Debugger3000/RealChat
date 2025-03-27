@@ -33,7 +33,7 @@
 
     <!-- chatroom below with messages.. -->
     <div class="p-4">
-      <div class="h-90 rounded border">
+      <div class="h-90 rounded border overflow-y-scroll">
 
         @for (message of chatRoomMessages; track $index) {
           <div class="messageItem flex flex-col">

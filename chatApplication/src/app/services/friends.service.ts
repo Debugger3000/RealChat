@@ -17,24 +17,24 @@ import { friend} from '../Types/user';
     curChatFriend: {id:string,username:string} | null = null;
    
     getFriends(){
-      return this.http.get<friend>("/api/user/friend/getList" ,{});
+      return this.http.get<friend>("/api/friend/getList" ,{});
     }
 
     sendFriendRequest(username : string){
-      return this.http.post(`/api/user/friend/request/${username}`, {});
+      return this.http.post(`/api/friend/request/${username}`, {});
     }
 
     getFriendRequest(){
-      return this.http.get<userDataArray>("/api/user/friend/request");
+      return this.http.get<userDataArray>("/api/friend/request");
     }
 
     declineFriendRequest(id : string){
       // return this.http.post(`/api/user/friend/reject`, {});
-      return this.http.post(`/api/user/friend/reject/${id}`, {});
+      return this.http.post(`/api/friend/reject/${id}`, {});
     }
 
     acceptFriendRequest(id: string){
-      return this.http.post(`/api/user/friend/accept/${id}`, {});
+      return this.http.post(`/api/friend/accept/${id}`, {});
     }
 
     // Create chatroom
@@ -53,7 +53,7 @@ import { friend} from '../Types/user';
     }
 
     removeFriendApi(id: string){
-      return this.http.post(`/api/user/friend/remove/${id}`,{});
+      return this.http.post(`/api/friend/remove/${id}`,{});
     }
 
 }

@@ -4,6 +4,7 @@ import { inject } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { WebSocketService } from '../services/web-socket.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent {
   loginFail = false;
 constructor(private router: Router) {}
   loginService= inject(LoginService);
+  socketService = inject(WebSocketService);
 
   public responseLogin:any;
 
@@ -47,6 +49,12 @@ constructor(private router: Router) {}
         console.log("printing response after subscribe received response...:",this.responseLogin);
         // change route once response is received and is good
         this.router.navigate([`${this.responseLogin.url}`]);
+
+        //login is good, so we need to establish web socket connection with server...
+        this.socketService.establishSocket();
+        console.log("initialize socket function prob just ran...");
+
+
       }else{
         this.loginFail = true;//if it wasn't successful toggle this - this triggers the "Incorrect username or password" text
 

@@ -2,12 +2,15 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { LoginUser, Test } from '../Types/todo.type';
 import { catchError, Observable, tap } from 'rxjs';
+import { WebSocketService } from './web-socket.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   constructor(private http: HttpClient) { }
+
+  webSocketService = inject(WebSocketService);
 
   isUserAuthenticated = false;
 
@@ -37,6 +40,10 @@ export class LoginService {
         this.http.post<Test>('/api/user/logout', message).subscribe(message => {
           console.log('Updated config:', message);
           data = message;
+
+          // call disconnect socket
+          this.webSocketService.clientDisconnect();
+
         }
 
         )

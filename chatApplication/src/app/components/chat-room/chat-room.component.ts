@@ -1,9 +1,11 @@
-import { Component, inject, Input, input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, Input, input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from '../../services/message.service';
 import { userData } from '../../Types/user';
 import { FriendsService } from '../../services/friends.service';
 import { ChatRoomMessage } from '../../Types/message';
+import { WebSocketService } from '../../services/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat-room',
@@ -11,9 +13,10 @@ import { ChatRoomMessage } from '../../Types/message';
   templateUrl: './chat-room.component.html',
   styleUrl: './chat-room.component.scss'
 })
-export class ChatRoomComponent implements OnChanges {
+export class ChatRoomComponent implements OnChanges, OnInit {
   friendService = inject(FriendsService);
   messageService = inject(MessageService);
+  webSocketService = inject(WebSocketService);
 
   messageForm = new FormGroup({
     message: new FormControl('')
@@ -33,6 +36,38 @@ export class ChatRoomComponent implements OnChanges {
   //get user id
 
   //get chatroomID
+
+  private subscription: Subscription | null = null;
+
+  ngOnInit(): void {
+    this.subscription = this.webSocketService.myVariable$.subscribe((newValue) => {
+      
+      console.log("the change to booolean in webSOCKEEE is tracked...");
+      console.log('Variable changed to:', newValue); // For example, log to console
+      this.getData();
+
+      
+
+
+      
+    });
+  }
+
+  // ngOnDestroy() {
+  //   // Always unsubscribe to avoid memory leaks
+  //   if (this.subscription) {
+  //     this.subscription.unsubscribe();
+  //   }
+  // }
+
+  getData() {
+    this.messageService.getMessages(this.friendService.curChatroomId).subscribe(res => {
+      console.log("getting data....");
+      //set message array to @Input
+      this.chatRoomMessages = res;
+    });
+  }
+
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -59,11 +94,14 @@ export class ChatRoomComponent implements OnChanges {
 
     console.log("this is message Request: ", messageRequest);
 
+    //emit from web-socket service
+    this.webSocketService.emitMessage(messageRequest);
 
 
-    this.messageService.sendMessage(messageRequest).subscribe(response => {
-      console.log("Response from post message...",response);
-    });
+
+    // this.messageService.sendMessage(messageRequest).subscribe(response => {
+    //   console.log("Response from post message...",response);
+    // });
 
 
 

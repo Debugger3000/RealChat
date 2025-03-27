@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit{
       this.responseLogin = e;
       //route to certain page on good response
     // console.log("response from register: ", e);
-    console.log("printing response after subscribe received response...:",this.responseLogin);
+    // console.log("printing response after subscribe received response...:",this.responseLogin);
     this.router.navigate([`${this.responseLogin.url}`]);
     });;
 
@@ -98,6 +98,7 @@ export class HomeComponent implements OnInit{
     console.log('check auth just clicked');
     this.loginService.isAuthenticated().subscribe(res => {
         console.log(res);
+        console.log('data from profile service userData: ',this.profileService.userData);
     });
   }
 
@@ -106,8 +107,11 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.profileService.getMe().subscribe((data) => {
       console.log('Your data of yourself',data);
-      // set user data
+      // set user data in home
       this.userData.set(data);
+
+      //set user data in profile service
+      this.profileService.setUserData(data?.user._id);
     });
     console.log("Profile component has been loaded...")
   }
