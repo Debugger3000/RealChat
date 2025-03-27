@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from '../services/register.service';
 import { Router } from '@angular/router';
 import { RegisterResponse } from '../Types/todo.type';
+import { WebSocketService } from '../services/web-socket.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class RegisterComponent {
 
   constructor(private router: Router) {}
 registerService = inject(RegisterService);
+socketService = inject(WebSocketService);
 
  
   // todoItems = signal<Array<Todo>>([]);
@@ -44,6 +46,8 @@ registerService = inject(RegisterService);
     // console.log("response from register: ", e);
     console.log("printing response after subscribe received response...:",this.response);
     this.router.navigate([`${e.url}`]);
+    this.socketService.establishSocket();
+
     });
 
     // this.router.navigate([`${response.url}`]);

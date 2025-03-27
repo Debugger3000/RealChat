@@ -35,6 +35,10 @@ export type userData = {
         // gender: string | null | undefined;
         friendRequests: string[];
         friends: string[];
+        chatRooms: {
+          chatRoomId: string;
+          notifications: number;
+        }[]
         __v: number;
   }[];
 
@@ -43,4 +47,8 @@ export type userData = {
   export type friend = {
     _id: string;
     username: string;
+    chatRooms: {
+      chatRoomId: string;
+      notifications: number;
+    }[]
   }[];

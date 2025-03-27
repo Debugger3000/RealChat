@@ -74,11 +74,16 @@ userRoutes.post('/accept/:id', async (req, res) => {
 // get friends list
 userRoutes.get('/getList', async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).populate('friends', 'username');
+        const user = await User.findById(req.user._id).populate('friends', 'username chatRooms');
+        // const user = await User.findById(req.user._id);
+
+        console.log(user.friends);
         res.status(200).json(user.friends);
 
+        
+
         //test websocket sent back to client side...
-        test();
+        //test();
 
 
     } catch (err) {

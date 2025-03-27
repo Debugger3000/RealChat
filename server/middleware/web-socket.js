@@ -30,11 +30,28 @@ const grabNonSenderId = async (userId, chatRoomId) => {
 }
 
 
+const updateNotifications = async (userId, chatRoomId) => {
+
+    console.log("updating notifs hehehehe");
+    try {
+        console.log("updating notifs for: ",userId);
+        // const user = User.findById(req.params.id);
+        // await User.updateOne({_id: req.params.id}, {chatRooms: { chatRoomId: req.params.id, notifications: { $gt: -1 }}},{$set: {$inc: {notifications: 1}}});  
+        await User.updateOne({_id: userId, 'chatRooms.chatRoomId': chatRoomId}, { $inc: { 'chatRooms.$.notifications': 1 } });  
+    
+      }catch (err) {
+        console.error(err.message);
+      }
+
+}
+
+
 // module.exports.test = test;
 
 module.exports = {
     test,
-    grabNonSenderId
+    grabNonSenderId,
+    updateNotifications
 }
 
 

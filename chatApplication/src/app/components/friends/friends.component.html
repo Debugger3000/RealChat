@@ -62,6 +62,7 @@
           <div
             class="flex items-center gap-3"
             (click)="getFriendChatRoom(friend._id, friend.username)"
+          
           >
             <img src="defaultImg.PNG" alt="profilePic" />
             <span class="username">{{ friend.username }}</span>
@@ -69,6 +70,8 @@
           <button class="p-1 bg-red-800" (click)="removeFriend(friend._id)">
             Delete
           </button>
+          
+          <div class="p-1 rounded bg-green-800 text-white font-bold">{{friend.chatRooms[0].notifications}}</div>
         </div>
         } @if (friendList[0] == null) {
         <div class="friendItem">

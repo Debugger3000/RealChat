@@ -4,7 +4,7 @@
 
 
 const Message = require('./models/message');
-const { grabNonSenderId } = require('./middleware/web-socket');
+const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
 
 var express = require('express');
 // Websocket imports
@@ -78,10 +78,16 @@ io.on("connection", (socket) => {
     // Create new message document and save into database...
     const newMessage = new Message({
       chatroomId: payload.chatRoomId,
+      username: payload.username,
       userId: payload.userId,
       content: payload.message
     });
     await newMessage.save();
+
+
+    // update notifs for both people ?
+    await updateNotifications(payload.userId, payload.chatRoomId);
+
 
     //emits to the other user in the chatroom and the sender as well
     // socket.in(secondUserId).emit('message-update', payload.chatRoomId);
@@ -90,7 +96,7 @@ io.on("connection", (socket) => {
     socket.emit('message-update', payload.chatRoomId)
 
     // emit to the other user in their own ID room
-    io.in(secondUserId).emit('message-update', payload.chatRoomId);
+    io.in(secondUserId).emit('message-update', payload.chatRoomId, secondUserId);
 
     // send back to user in the other room as well...
 

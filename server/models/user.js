@@ -2,6 +2,16 @@
 const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema;
 
+
+const chatRoomObject = {
+  chatRoomId: {
+      type: String
+  },
+  notifications: {
+    type: Number
+  }
+}
+
 const userSchemaObject = {
     username: {
         type: String,
@@ -44,7 +54,8 @@ const userSchemaObject = {
       friendRequests: [{
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User' // reference to the User model
-      }]
+      }],
+      chatRooms: [chatRoomObject]
 }
 
 const mongooseSchema = mongoose.Schema(userSchemaObject);
