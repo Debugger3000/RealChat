@@ -3,10 +3,11 @@ const router = express.Router();
 const Message = require('../models/message');
 const Chatroom = require('../models/chatroom');
 const User = require('../models/user');
+const chatroom = require('../models/chatroom');
 
 // create a new message
 router.post('/new', async (req, res) => {
-  const { chatRoomId, userId, message } = req.body;
+  const { chatRoomId, userId, message, username } = req.body;
 
   try {
     console.log("inside new messages....");
@@ -20,6 +21,7 @@ router.post('/new', async (req, res) => {
 
     const newMessage = new Message({
       chatroomId: chatRoomId,
+      username: username,
       userId: userId,
       content: message
     });
@@ -76,5 +78,32 @@ router.delete('/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+
+router.post('/notif/:id', async (req,res) => {
+
+  const { chatRoomId } = req.body;
+  try {
+
+    // const user = User.findById(req.params.id);
+    // await User.updateOne({_id: req.params.id}, {chatRooms: { chatRoomId: req.params.id, notifications: { $gt: -1 }}},{$set: {$inc: {notifications: 1}}});  
+    await User.updateOne({_id: req.params.id, 'chatRooms.chatRoomId': chatRoomId}, { $inc: { 'chatRooms.$.notifications': 1 } });  
+
+    console.log(req.params.id);
+    console.log("updating notifications for dogs, hititititt");
+
+    res.status(200).json({message: "notif route hit!"});
+
+
+
+
+  }catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+
+});
+
+
 
 module.exports = router;

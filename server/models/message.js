@@ -7,6 +7,9 @@ const messageSchemaObject = {
         ref: 'Chatroom',  // reference to the Chatroom model
         required: true  
     },
+    username: {
+        type: String
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',  // reference to the User model

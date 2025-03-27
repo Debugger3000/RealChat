@@ -17,7 +17,7 @@ import { friend} from '../Types/user';
     curChatFriend: {id:string,username:string} | null = null;
    
     getFriends(){
-      return this.http.get<friend>("/api/friend/getList" ,{});
+      return this.http.get<userDataArray>("/api/friend/getList" ,{});
     }
 
     sendFriendRequest(username : string){

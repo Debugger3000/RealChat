@@ -4,29 +4,39 @@ import { ProfileService } from './profile.service';
 import { HomeComponent } from '../home/home.component';
 import { FriendsService } from './friends.service';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
+  constructor(private http: HttpClient) { } 
   profileService = inject(ProfileService);
   friendService = inject(FriendsService);
 
   local_DEV = "http://localhost:8080/";
 
   //update cur chatroom
-  newData: boolean = false;
-
+  // newData: boolean = false;
   // Create a BehaviorSubject to hold the variable value
   private _myVariableSubject = new BehaviorSubject<boolean>(false);
-  
   // Expose the observable to other parts of the app
   myVariable$ = this._myVariableSubject.asObservable();
+
+  //  for notifications
+  private notif = new BehaviorSubject<boolean>(false);
+  notifVar = this.notif.asObservable();
 
   // Method to change the value of the variable
   changeMyVariable(newValue: boolean) {
     console.log("change value called, and old value was ", !newValue);
     this._myVariableSubject.next(newValue); // This emits the new value
+  }
+
+  // change notif
+  changeNotif(newValue: boolean) {
+    console.log("notif change value has called NIG");
+    this.notif.next(newValue);
   }
 
 
@@ -77,7 +87,7 @@ export class WebSocketService {
 
   // Receive chatroom updates from server via socket for own messages or other user messages...
     // Will want to either store notifications for that chatroom for this user, or update the chatroom via GET
-  socket.on("message-update", (chatRoomId) => {
+  socket.on("message-update", (chatRoomId: string, secondUserId: string) => {
       console.log("message-update has been received: ",chatRoomId);
 
       // Want to let chatroom component to update and GET all messages
@@ -85,19 +95,26 @@ export class WebSocketService {
       if(chatRoomId == this.friendService.curChatroomId) {
         this.changeMyVariable(true);
       }
-      else{
-        console.log("In callback of message-update...");
-      }
+      // else{
+      //   console.log("In callback of message-update...");
+      //   this.changeNotif(true);
+      //   // update notifcs
+      //   this.updateNotifs(secondUserId, chatRoomId);
+        
+
+      // }
 
 
       // if chatroom id does not match then update that users notifications for their stored chatroom...
   });
 
-  
-
-
 
   }
+
+  // updateNotifs(secondUserId: string, chatRoomId: string) {
+  //   this.http.post(`/api/message/notif/${secondUserId}`,{chatRoomId: chatRoomId});
+  //     console.log("after notifcaaito posterrr");
+  // }
 
 
   // disonnect client to server socket connection when logout is pressed...
@@ -114,7 +131,7 @@ export class WebSocketService {
   }
 
   // emit data from client for message just sent...
-  emitMessage(payload : {chatRoomId: string, userId: string | undefined, message: string | null | undefined}) {
+  emitMessage(payload : {chatRoomId: string, userId: string | undefined, message: string | null | undefined, username: string | undefined}) {
     console.log("within emit message");
 
     this.curSocket.emit("message-form", payload);

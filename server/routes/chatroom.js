@@ -18,6 +18,18 @@ router.post('/new', async (req, res) => {
     });
 
     await chatroom.save();
+
+    //update both users to include chatroom id and notifications
+    // const userOne = await User.findById(users[0]);
+    // const userTwo = await User.findById(users[1]);
+
+    //update user documents
+    await User.updateOne({_id: users[0]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0}}});
+    await User.updateOne({_id: users[1]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0}}});
+
+
+
+    
     res.status(201).json(chatroom);
   } catch (err) {
     console.error(err.message);
@@ -55,6 +67,8 @@ router.get('/:id', async (req, res) => {
         { user1: userId, user2: friendId }
       ]
     });
+
+    // const chatroom = await Chatroom.findById(req.params.id);
     // const chatroom2 = await Chatroom.findOne({user1: friendId, user2: userId});
     
     // const chatroom = await User.find({ _id: { $in:req.user.friendRequests }});

@@ -88,6 +88,7 @@ export class ChatRoomComponent implements OnChanges, OnInit {
 
     const messageRequest = {
       chatRoomId: this.friendService.curChatroomId,
+      username: this.userData()?.user.username,
       userId: this.userData()?.user._id,
       message: this.messageForm.value.message,
     }

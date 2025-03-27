@@ -2,8 +2,9 @@ import { Component, inject,  Input,  input,  OnChanges,  OnInit,  signal, Simple
 import { HomeComponent } from '../../home/home.component';
 import { FriendsService } from '../../services/friends.service';
 import { ProfileService } from '../../services/profile.service';
-import { catchError } from 'rxjs';
+import { catchError, Subscription } from 'rxjs';
 import { userData, userDataArray, friend } from '../../Types/user';
+import { WebSocketService } from '../../services/web-socket.service';
 @Component({
   selector: 'app-friends',
   imports: [],
@@ -17,9 +18,10 @@ export class FriendsComponent implements OnInit,OnChanges {
   // Services
   friendService = inject(FriendsService);
   profileService = inject(ProfileService);
+  webSocketService = inject(WebSocketService);
 
   // Inputs
-  @Input() friendList: friend = [];
+  @Input() friendList: userDataArray = [];
   @Input() friendRequests: userDataArray = [];
   @Input() dummy: boolean = false;
   // friends = input<friend>([]);
@@ -36,6 +38,8 @@ requestSuccess: any;
 response : any;
 isFriendRequestOn : boolean = false;
 
+private subscription: Subscription | null = null;
+
   // call this to chat the state of home component
   // changeHome() {
     
@@ -50,9 +54,30 @@ isFriendRequestOn : boolean = false;
 
     this.friendService.getFriends().subscribe(e =>{
       this.friendList = e;
+      console.log("friends",e);
       // console.log(e);
     });
+
+
+    // notificiations
+    this.subscription = this.webSocketService.notifVar.subscribe((newValue) => {
+      
+      console.log("the change to booolean in webSOCKEEE is tracked...");
+      console.log('Variable changed to:', newValue); // For example, log to console
+      // this.updateNotifs();
+
+    });
   }
+
+  // updateNotifs() {
+  //   this.webSocketService.update().subscribe(e =>{
+  //     // this.friends = e;
+  //     console.log("response from update notifs...", e);
+  //     this.friendList = e;
+  //     // console.log(e);
+  //   });
+  // }
+
 
   ngOnChanges(): void {
     // Grab friends when there is a value change for friend signals
@@ -82,6 +107,8 @@ isFriendRequestOn : boolean = false;
       // Set current chat friend info
       this.friendService.curChatFriend = {id: id, username: username};
       // console.log("value of curChatroomFriend: ", this.friendService.curChatFriend);
+
+      // set notifications for this user and this chatRoom to ZERO
     
     });
   }

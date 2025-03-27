@@ -11,6 +11,7 @@ export type Message = {
 export type ChatRoomMessage = {
     _id: string;
     chatroomId: string;
+    username: string;
     userId: string;
     content: string;
     timestamp: string;
