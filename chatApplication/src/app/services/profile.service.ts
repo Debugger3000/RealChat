@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { UserRegister } from '../Types/todo.type';
 import { userData } from '../Types/user';
+import { type Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import { userData } from '../Types/user';
 // GET - self (grab own user data, to display over the page...)
 // POST - when a new user creates an account...
 export class ProfileService {
+
+  userData: string | undefined = undefined;
 
   // This code was a template for how to API request from front end....
   // -----
@@ -30,6 +33,10 @@ export class ProfileService {
       console.log("Getting me data...");
       return this.http.get<userData>("/api/user/me");
 
+    }
+
+    setUserData(userData: string | undefined ) {
+      this.userData = userData;
     }
 
 }

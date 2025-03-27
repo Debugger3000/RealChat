@@ -50,7 +50,7 @@ isFriendRequestOn : boolean = false;
 
     this.friendService.getFriends().subscribe(e =>{
       this.friendList = e;
-      console.log(e);
+      // console.log(e);
     });
   }
 
@@ -59,7 +59,7 @@ isFriendRequestOn : boolean = false;
     this.friendService.getFriends().subscribe(e =>{
       // this.friends = e;
       this.friendList = e;
-      console.log(e);
+      // console.log(e);
     });
 
     // Grab friend requests ^^^ 
@@ -75,16 +75,23 @@ isFriendRequestOn : boolean = false;
 
     //
     this.friendService.setChatRoom(id).subscribe(res => {
-      console.log("response from setting chatroom:",res);
+      // console.log("response from setting chatroom:",res);
       // Set current chatroom
       this.friendService.curChatroomId = res.id;
       console.log("value of curchatroomId: ",this.friendService.curChatroomId);
       // Set current chat friend info
       this.friendService.curChatFriend = {id: id, username: username};
-      console.log("value of curChatroomFriend: ", this.friendService.curChatFriend);
+      // console.log("value of curChatroomFriend: ", this.friendService.curChatFriend);
     
     });
   }
+
+  // Notifications
+  // maybe store notifications number in users
+  // chatRooms: [{chatRoomId: string, notification: number}]
+  // Each time the user clicks on the chatroom/friend in friends, we drop notifications down to 0...
+
+
 
 
   //logic idea: 
@@ -102,7 +109,7 @@ isFriendRequestOn : boolean = false;
   sendFriendRequest(value:string){
     this.friendService.sendFriendRequest(value).subscribe({
       next: (data) => {
-      console.log('Data:', data);
+      // console.log('Data:', data);
       this.requestSuccess = true;
       this.dummy = !this.dummy;
       this.animateOut = false; //reset animation 
