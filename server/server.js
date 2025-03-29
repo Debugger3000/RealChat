@@ -22,7 +22,7 @@ app.options('*', cors()); // Respond to preflight requests
 
 // Or for specific domains (for production)
 app.use(cors({
-  origin: ['https://your-frontend-domain.com','http://localhost:8080'],
+  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
