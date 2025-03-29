@@ -25,6 +25,7 @@ app.use(cors({
   origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // connect IO to express app
