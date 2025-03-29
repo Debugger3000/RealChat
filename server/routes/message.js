@@ -105,5 +105,22 @@ router.post('/notif/:id', async (req,res) => {
 });
 
 
+router.post('/notif/remove/:id', async (req,res) => {
+
+  const { chatRoomId } = req.body;
+  try {
+
+    await User.updateOne({_id: req.params.id, 'chatRooms.chatRoomId': chatRoomId}, { $set: { 'chatRooms.$.notifications': 0 } });  
+    console.log("clearing notifs...");
+
+
+  }catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+
+});
+
+
 
 module.exports = router;
