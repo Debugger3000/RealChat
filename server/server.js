@@ -215,12 +215,11 @@ app.use(session({
   name: "RealChatUser",
   secret: "Secret123",
   secure: process.env.NODE_ENV === 'development' ? false : true,
-    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
+  sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : 'realchatclient.onrender.com',
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
     maxAge: 60000 * 60,
   }
 }));
