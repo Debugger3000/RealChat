@@ -3,6 +3,8 @@
 // }
 
 
+
+
 const Message = require('./models/message');
 const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
 
@@ -13,6 +15,11 @@ const createServer = require('http');
 const Server = require('socket.io');
 //initialize express app
 var app = express();
+
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });  // This loads .env.production if NODE_ENV=production
+console.log(`./.env.${process.env.NODE_ENV}`);
+console.log(process.env.NODE_ENV);
+
 
 // pre flight ???
 app.options('https://realchatclient.onrender.com', cors()); // Respond to preflight requests
@@ -207,6 +214,9 @@ app.use(flash());
 app.use(session({
   name: "RealChatUser",
   secret: "Secret123",
+  secure: process.env.NODE_ENV === 'development' ? false : true,
+    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -291,9 +301,18 @@ passport.use(
 // --------------------------------------------------------------------------------------------------------------------------------
 
 
+console.log(process.env.NODE_ENV);
+if(process.env.NODE_ENV === 'development'){
+  console.log("environment is: ",process.env.ENVIRONMENT_CURRENT);
+}
+else{
+  console.log("environment is: ", process.env.ENVIRONMENT_CURRENT);
+
+}
+
 //mongoose connect
 mongoose
-.connect(process.env.MONGO_CONNECTION)
+.connect(process.env.NODE_ENV === 'development' ? process.env.MONGO_CONNECTION : process.env.MONGO_CONNECTION)
 .then(() => { console.log('connected to mongo DB YEYEYEYEYE');
 })
 .catch((err) => {console.log('Error:',err);
