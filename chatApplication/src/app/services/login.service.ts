@@ -39,7 +39,7 @@ export class LoginService {
   
 
         // POST to '/api/user/' to log a user in. 
-        return this.http.post<LoginUser>(`/api/user/login`, e, {withCredentials:true});
+        return this.http.post<LoginUser>(`https://realchatclient.onrender.com/api/user/login`, e, {withCredentials:true});
         // .subscribe(e => {
         //   console.log('Message from the backend on LOGIN POST:', e);
         // }
@@ -51,7 +51,7 @@ export class LoginService {
         const message = {message: "trying to log the user out..."};
         let data = {};
         console.log("logout request posted ????");
-        this.http.post<Test>(`/api/user/logout`, message, {withCredentials:true}).subscribe(message => {
+        this.http.post<Test>(`https://realchatclient.onrender.com/api/user/logout`, message, {withCredentials:true}).subscribe(message => {
           console.log('Updated config:', message);
           data = message;
 
@@ -71,7 +71,7 @@ export class LoginService {
       isAuthenticated(): Observable<any>{
         console.log("message was sent hehehehehehe");
         const message = {message: "auth req was sent"};
-        return this.http.post<Test>(`/api/user/isGood`,message, {withCredentials:true});
+        return this.http.post<Test>(`https://realchatclient.onrender.com/api/user/isGood`,message, {withCredentials:true});
       }
 
       
