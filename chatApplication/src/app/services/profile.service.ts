@@ -3,7 +3,6 @@ import { Injectable, inject } from '@angular/core';
 import { UserRegister } from '../Types/todo.type';
 import { userData } from '../Types/user';
 import { type Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,7 @@ export class ProfileService {
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<UserRegister>(`${environment.apiUrl}/api/user`, e).subscribe(e => {
+      this.http.post<UserRegister>(`/api/user`, e).subscribe(e => {
         console.log('User created:', e);
       });
     }
@@ -32,7 +31,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>(`${environment.apiUrl}/api/user/me`);
+      return this.http.get<userData>(`/api/user/me`);
 
     }
 

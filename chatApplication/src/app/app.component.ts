@@ -1,18 +1,13 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FormsModule } from '@angular/forms'
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
-import { type WritableSignal } from '@angular/core';
 
 
 @Component({
   selector: 'app-root',
   // standalone: true,
-  imports: [RouterOutlet, HeaderComponent, ReactiveFormsModule],
+  imports: [RouterOutlet, ReactiveFormsModule],
   // templateUrl: './app.component.html',
   template: `
 

@@ -6,18 +6,33 @@
 const Message = require('./models/message');
 const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
 
+const cors = require('cors');
 var express = require('express');
 // Websocket imports
 const createServer = require('http');
 const Server = require('socket.io');
 //initialize express app
 var app = express();
+
+// pre flight ???
+app.options('*', cors()); // Respond to preflight requests
+
+// Enable CORS for all origins (for testing)
+// app.use(cors());
+
+// Or for specific domains (for production)
+app.use(cors({
+  origin: ['https://your-frontend-domain.com','http://localhost:8080'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 // connect IO to express app
 const httpServer = createServer.createServer(app); 
 
 const io = new Server.Server(httpServer, {
   cors: {
-    origin: "http://localhost:4200"
+    origin: ["http://localhost:4200", "https://realchatclient.onrender.com"]
   }
 });
 
@@ -159,9 +174,16 @@ const encrypt = require('bcryptjs');
 var cookieParser = require('cookie-parser')
 
 
-
+// const corsOptions = {
+//   origin: ['http://localhost:4200'],
+//   credentials: true,
+//   "preflightContinue": true,
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed methods
+//   optionsSuccessStatus: 200
+// }
   
-// const port = 8080;
+
+// app.use(cors({origin: ['http://localhost:4200'], credentials:true, optionsSuccessStatus: 200}));
 app.use(express.json());
 app.use(cookieParser());
 

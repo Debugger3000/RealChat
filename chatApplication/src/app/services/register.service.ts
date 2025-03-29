@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { RegisterResponse, UserRegister } from '../Types/todo.type';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 
 
@@ -22,7 +21,7 @@ export class RegisterService {
 
       // return this.http.post<UserRegister>('/api/user/new', e);
       // POST to '/api/user/new' to create a new user in database
-      return this.http.post<UserRegister>(`${environment.apiUrl}/api/user/new`, e);
+      return this.http.post<UserRegister>(`/api/user/new`, e);
       
       
     }
