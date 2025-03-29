@@ -12,6 +12,7 @@ const cors = require('cors');
 var express = require('express');
 // Websocket imports
 const createServer = require('http');
+const createServer2 = require('https');
 const Server = require('socket.io');
 //initialize express app
 var app = express();
@@ -36,7 +37,7 @@ app.use(cors({
 }));
 
 // connect IO to express app
-const httpServer = createServer.createServer(app); 
+const httpServer = createServer2.createServer(app); 
 
 const io = new Server.Server(httpServer, {
   cors: {
