@@ -24,6 +24,9 @@ export class MessageService {
   }
 
 
-
+  clearNotifications(id : string, chatRoomId : string){
+    return this.http.post(`/api/message/notif/remove/${id}`, { chatRoomId });
+    
+  }
 
 }

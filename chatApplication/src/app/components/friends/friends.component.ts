@@ -5,6 +5,7 @@ import { ProfileService } from '../../services/profile.service';
 import { catchError, Subscription } from 'rxjs';
 import { userData, userDataArray, friend } from '../../Types/user';
 import { WebSocketService } from '../../services/web-socket.service';
+import { MessageService } from '../../services/message.service';
 @Component({
   selector: 'app-friends',
   imports: [],
@@ -19,6 +20,7 @@ export class FriendsComponent implements OnInit,OnChanges {
   friendService = inject(FriendsService);
   profileService = inject(ProfileService);
   webSocketService = inject(WebSocketService);
+  messageService = inject(MessageService);
 
   // Inputs
   @Input() friendList: userDataArray = [];
@@ -109,6 +111,11 @@ private subscription: Subscription | null = null;
       // console.log("value of curChatroomFriend: ", this.friendService.curChatFriend);
 
       // set notifications for this user and this chatRoom to ZERO
+      this.messageService.clearNotifications(id , this.friendService.curChatroomId).subscribe(e => {
+
+        console.log(e);
+      });
+
     
     });
   }
