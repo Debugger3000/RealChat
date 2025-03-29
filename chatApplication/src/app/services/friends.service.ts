@@ -17,7 +17,7 @@ import { friend} from '../Types/user';
     curChatFriend: {id:string,username:string} | null = null;
    
     getFriends(){
-      return this.http.get<userDataArray>(`https://realchatclient.onrender.com/api/friend/getList` ,{});
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/getList` ,{});
     }
 
     sendFriendRequest(username : string){
@@ -25,7 +25,7 @@ import { friend} from '../Types/user';
     }
 
     getFriendRequest(){
-      return this.http.get<userDataArray>(`https://realchatclient.onrender.com/api/friend/request`);
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/request`);
     }
 
     declineFriendRequest(id : string){

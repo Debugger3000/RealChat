@@ -52,7 +52,7 @@ export class WebSocketService {
 
   establishSocket() {
     console.log("establish socket function called...");
-    const socket = io('http://localhost:8080/');
+    const socket = io('https://realchatwebapp.onrender.com/');
     this.curSocket = socket;
 
 
