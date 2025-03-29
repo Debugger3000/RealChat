@@ -220,7 +220,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : 'https://realchatclient.onrender.com',
+    domain: process.env.NODE_ENV === 'development' ? undefined : 'realchatclient.onrender.com',
     maxAge: 60000 * 60,
   }
 }));
