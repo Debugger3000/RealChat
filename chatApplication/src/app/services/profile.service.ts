@@ -31,7 +31,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>(`/api/user/me`);
+      return this.http.get<userData>(`https://realchatwebapp.onrender.com/api/user/me`);
 
     }
 
