@@ -15,7 +15,7 @@ const Server = require('socket.io');
 var app = express();
 
 // pre flight ???
-app.options('*', cors()); // Respond to preflight requests
+app.options('https://realchatclient.onrender.com', cors()); // Respond to preflight requests
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
