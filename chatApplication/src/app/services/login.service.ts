@@ -3,6 +3,7 @@ import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { LoginUser, Test } from '../Types/todo.type';
 import { catchError, Observable, tap } from 'rxjs';
 import { WebSocketService } from './web-socket.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class LoginService {
         // const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
         // POST to '/api/user/' to log a user in. 
-        return this.http.post<LoginUser>('/api/user/login', e);
+        return this.http.post<LoginUser>(`${environment.apiUrl}/api/user/login`, e);
         // .subscribe(e => {
         //   console.log('Message from the backend on LOGIN POST:', e);
         // }
@@ -37,7 +38,7 @@ export class LoginService {
         const message = {message: "trying to log the user out..."};
         let data = {};
         console.log("logout request posted ????");
-        this.http.post<Test>('/api/user/logout', message).subscribe(message => {
+        this.http.post<Test>(`${environment.apiUrl}/api/user/logout`, message).subscribe(message => {
           console.log('Updated config:', message);
           data = message;
 
@@ -57,7 +58,7 @@ export class LoginService {
       isAuthenticated(): Observable<any>{
         console.log("message was sent hehehehehehe");
         const message = {message: "auth req was sent"};
-        return this.http.post<Test>('/api/user/isGood',message);
+        return this.http.post<Test>(`${environment.apiUrl}/api/user/isGood`,message);
       }
 
       
