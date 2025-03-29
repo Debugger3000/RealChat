@@ -270,7 +270,7 @@ passport.use(
 
 //mongoose connect
 mongoose
-.connect('mongodb+srv://carmacford:tW9UQ3bmwbRSZV3i@therealchat.koaj5.mongodb.net/')
+.connect(process.env.MONGO_CONNECTION)
 .then(() => { console.log('connected to mongo DB YEYEYEYEYE');
 })
 .catch((err) => {console.log('Error:',err);
