@@ -12,7 +12,6 @@ const cors = require('cors');
 var express = require('express');
 // Websocket imports
 const createServer = require('http');
-const createServer2 = require('https');
 const Server = require('socket.io');
 //initialize express app
 var app = express();
@@ -37,7 +36,7 @@ app.use(cors({
 }));
 
 // connect IO to express app
-const httpServer = createServer2.createServer(app); 
+const httpServer = createServer.createServer(app); 
 
 const io = new Server.Server(httpServer, {
   cors: {
@@ -215,6 +214,7 @@ app.use(flash());
 app.use(session({
   name: "RealChatUser",
   secret: "Secret123",
+  httpOnly: process.env.NODE_ENV === 'development' ? false : true,
   secure: process.env.NODE_ENV === 'development' ? false : true,
   sameSite: process.env.NODE_ENV === 'development' ? false : 'none',
   resave: false,
