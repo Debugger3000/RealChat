@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { UserRegister } from '../Types/todo.type';
 import { userData } from '../Types/user';
 import { type Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,13 @@ import { type Observable } from 'rxjs';
 export class ProfileService {
 
   userData: string | undefined = undefined;
+
+  headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type',});
 
   // This code was a template for how to API request from front end....
   // -----
@@ -31,7 +39,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>(`https://realchatwebapp.onrender.com/api/user/me`);
+      return this.http.get<userData>(`https://realchatwebapp.onrender.com/api/user/me,`,{headers:this.headers,withCredentials:true});
 
     }
 
