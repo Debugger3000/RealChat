@@ -10,7 +10,6 @@
   </div>
 </section> -->
 
-
 <!-- Display chatroom with friend that was selected when there is a chatroom id... -->
 @if (this.friendService.curChatroomId.length) {
 
@@ -26,37 +25,56 @@
       </div>
     </div> -->
     <div class="friendItem">
-      <img src="defaultImg.PNG" alt="profilePic" />
-      <span class="username">{{this.friendService.curChatFriend?.username}}</span>
+      <img
+        src="defaultImg.PNG"
+        alt="profilePic"
+      /><!--Will need to change to use uploaded image (or default)-->
+      <span class="username">{{
+        this.friendService.curChatFriend?.username
+      }}</span>
     </div>
-
 
     <!-- chatroom below with messages.. -->
     <div class="p-4">
-      <div class="h-90 rounded border overflow-y-scroll">
-
+      <div id="chatRoomBox" class="h-90 rounded border overflow-y-scroll">
         @for (message of chatRoomMessages; track $index) {
-          <div class="messageItem flex flex-col">
-            <div class="flex gap-5">
-              <img src="defaultImg.PNG" alt="profilePic" />
-              <div>{{message.username}}</div>
-            </div>
-            <div>{{message.timestamp}}</div>
-            <div>{{message.content}}</div>
+        <div class="messageItem flex flex-col">
+          <div class="flex gap-5">
+            <img src="defaultImg.PNG" alt="profilePic" />
+            <div>{{ message.username }}</div>
           </div>
+          <div>{{ message.timestamp }}</div>
+          <div>{{ message.content }}</div>
+        </div>
         }
-
       </div>
     </div>
 
-     <!-- message form -->
-         <div class="p-4">
-            <form class="flex justify-between" [formGroup]="messageForm" (ngSubmit)="onSubmitMessage()">
-                <input class="bg-gray-700 rounded border w-9/10 mr-4 p-1" type="text" name="message" id="message" formControlName="message"/>
-                <input class="rounded border bg-blue-500 p-1 hover:cursor-pointer" type="submit"/>
-            </form>
+    <!-- message form -->
+    <div class="p-4">
+      <form
+        class="flex justify-between"
+        [formGroup]="messageForm"
+        (ngSubmit)="onSubmitMessage()"
+      >
+        <input
+          class="bg-gray-700 rounded border w-9/10 mr-4 p-1"
+          type="text"
+          name="message"
+          id="message"
+          formControlName="message"
+        />
+        <!-- <input
+          class="custBtn rounded border bg-blue-500 p-1 hover:cursor-pointer"
+          type="submit"
+        /> -->
 
-  </div>
+        <!--Consider using this instead-->
+        <button type="submit" class="custBtn pt-1.4 pb-1.4 pl-4.5 pr-4.5">
+          Send
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 }

@@ -56,22 +56,28 @@
 
         <!-- Mock friendslist to test styling - each user should have an image (either one they chose, otherwise default) and username-->
         <!-- scrollable after 8 friend items-->
-        <!--THIS SHOULD BE REMOVED-->
+
         @for (friend of friendList; track $index) {
         <div class="friendItem flex justify-between">
           <div
             class="flex items-center gap-3"
             (click)="getFriendChatRoom(friend._id, friend.username)"
-          
           >
             <img src="defaultImg.PNG" alt="profilePic" />
             <span class="username">{{ friend.username }}</span>
           </div>
-          <button class="p-1 bg-red-800" (click)="removeFriend(friend._id)">
+          <button
+            class="deleteBtn p-1 bg-red-800"
+            (click)="removeFriend(friend._id)"
+          >
             Delete
           </button>
-          
-          <div class="p-1 rounded bg-green-800 text-white font-bold">{{friend.chatRooms[0].notifications}}</div>
+
+          <div
+            class="notificationIcon p-1 rounded bg-green-800 text-white font-bold"
+          >
+            {{ friend.chatRooms[0].notifications }}
+          </div>
         </div>
         } @if (friendList[0] == null) {
         <div class="friendItem">
