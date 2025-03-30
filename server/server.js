@@ -22,14 +22,14 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options('https://realchatwebapp.onrender.com', cors());
+app.options('https://tysonk.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
 // Or for specific domains (for production)
 app.use(cors({
-  origin: 'https://realchatwebapp.onrender.com',
+  origin: 'https://tysonk.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -227,6 +227,7 @@ app.use(session({
     // httpOnly: true,
     maxAge: 60000 * 60,
     path: '/',
+    Partitioned: true
   }
 }));
 
