@@ -222,10 +222,9 @@ app.use(session({
   
   
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
     maxAge: 60000 * 60,
     path: '/',
-    partitioned:true,
   }
 }));
 
