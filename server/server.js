@@ -29,11 +29,11 @@ app.options('https://tysonk.com', cors());
 
 // Or for specific domains (for production)
 app.use(cors({
-  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200','https://tysonk.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: 'https://tysonk.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
+  // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
 }));
 
 
@@ -220,14 +220,14 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 
-  // cookie: {
-  //   domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
-  //   sameSite: 'None',
-  //   secure: true,
-  //   httpOnly: true,
-  //   maxAge: 60000 * 60,
-  //   // path: '/',
-  // }
+  cookie: {
+    // domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
+    sameSite: 'None',
+    secure: true,
+    // httpOnly: true,
+    maxAge: 60000 * 60,
+    path: '/',
+  }
 }));
 
 
