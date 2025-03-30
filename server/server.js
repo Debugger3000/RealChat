@@ -22,14 +22,14 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options('.https://realchatclient.onrender.com', cors());
+app.options( ['https://realchatclient.onrender.com','https://tysonk.com'] , cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
 // Or for specific domains (for production)
 app.use(cors({
-  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
+  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200','https://tysonk.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
