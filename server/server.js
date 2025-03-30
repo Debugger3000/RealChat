@@ -22,14 +22,14 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options('https://tysonk.com', cors());
+app.options('https://realchatwebapp.onrender.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
 // Or for specific domains (for production)
 app.use(cors({
-  origin: 'https://tysonk.com',
+  origin: 'https://realchatwebapp.onrender.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -245,28 +245,28 @@ app.use(passport.initialize());
 // 
 app.use(passport.session());
 
-// passport.serializeUser((user,done) => {
+passport.serializeUser((user,done) => {
+  console.log("serializing user.");
+  done(null,user);
+});
+
+passport.deserializeUser((user,done) => {
+  console.log('within De serialize..');
+  done(null,user);
+})
+
+// passport.serializeUser((user, done) => {
 //   console.log("serializing user.");
-//   done(null,user);
+//   done(null, user._id);  // Save the user ID, not the entire user object
 // });
 
-// passport.deserializeUser((user,done) => {
-//   console.log('within De serialize..');
-//   done(null,user);
-// })
-
-passport.serializeUser((user, done) => {
-  console.log("serializing user.");
-  done(null, user._id);  // Save the user ID, not the entire user object
-});
-
-passport.deserializeUser((id, done) => {
-  console.log('within Deserialize...');
-  // Fetch user from database using the ID
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
+// passport.deserializeUser((id, done) => {
+//   console.log('within Deserialize...');
+//   // Fetch user from database using the ID
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// });
 
 
 
