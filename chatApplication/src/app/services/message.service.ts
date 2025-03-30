@@ -15,7 +15,7 @@ export class MessageService {
 
   // HTTP post new message...
   sendMessage(message: messageRequest) {
-    return this.http.post<messageRequest>('/api/message/new',message);
+    return this.http.post<messageRequest>(`/api/message/new`,message);
   }
 
   // GET messages for a chatroom
@@ -24,6 +24,9 @@ export class MessageService {
   }
 
 
-
+  clearNotifications(id : string, chatRoomId : string){
+    return this.http.post(`/api/message/notif/remove/${id}`, { chatRoomId });
+    
+  }
 
 }

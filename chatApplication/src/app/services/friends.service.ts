@@ -15,9 +15,15 @@ import { friend} from '../Types/user';
 
     curChatroomId: string = '';
     curChatFriend: {id:string,username:string} | null = null;
+
+    // headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
+    //   'Access-Control-Allow-Methods': 'POST',
+    //   'Access-Control-Allow-Headers': 'Content-Type',});
    
     getFriends(){
-      return this.http.get<userDataArray>("/api/friend/getList" ,{});
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/getList` ,{withCredentials:true});
     }
 
     sendFriendRequest(username : string){
@@ -25,7 +31,7 @@ import { friend} from '../Types/user';
     }
 
     getFriendRequest(){
-      return this.http.get<userDataArray>("/api/friend/request");
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/request`,{withCredentials:true});
     }
 
     declineFriendRequest(id : string){
@@ -40,7 +46,7 @@ import { friend} from '../Types/user';
     // Create chatroom
     createChatRoom(id1: string, id2: string) {
       console.log("Create chatroom for new friends REQ inside...");
-      return this.http.post('/api/chatroom/new',{users: [id1,id2]});
+      return this.http.post(`/api/chatroom/new`,{users: [id1,id2]});
     }
 
     //set Chatroom by clicking on friend tab in friends list

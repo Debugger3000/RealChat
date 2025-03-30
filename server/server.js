@@ -3,21 +3,47 @@
 // }
 
 
+
+
 const Message = require('./models/message');
 const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
 
+const cors = require('cors');
 var express = require('express');
 // Websocket imports
 const createServer = require('http');
 const Server = require('socket.io');
 //initialize express app
 var app = express();
+
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` });  // This loads .env.production if NODE_ENV=production
+console.log(`./.env.${process.env.NODE_ENV}`);
+console.log(process.env.NODE_ENV);
+
+
+// pre flight ???
+app.options('https://realchatclient.onrender.com', cors());
+
+// Enable CORS for all origins (for testing)
+// app.use(cors());
+
+// Or for specific domains (for production)
+app.use(cors({
+  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
+}));
+
+
+
 // connect IO to express app
 const httpServer = createServer.createServer(app); 
 
 const io = new Server.Server(httpServer, {
   cors: {
-    origin: "http://localhost:4200"
+    origin: ["http://localhost:4200", "https://realchatclient.onrender.com"]
   }
 });
 
@@ -159,9 +185,16 @@ const encrypt = require('bcryptjs');
 var cookieParser = require('cookie-parser')
 
 
-
+// const corsOptions = {
+//   origin: ['http://localhost:4200'],
+//   credentials: true,
+//   "preflightContinue": true,
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed methods
+//   optionsSuccessStatus: 200
+// }
   
-// const port = 8080;
+
+// app.use(cors({origin: ['http://localhost:4200'], credentials:true, optionsSuccessStatus: 200}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -186,10 +219,28 @@ app.use(session({
   secret: "Secret123",
   resave: false,
   saveUninitialized: false,
+  
+  
   cookie: {
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
     maxAge: 60000 * 60,
+    path: '/',
+    partitioned:true,
+    secure: true,
+    sameSite: 'None',
   }
 }));
+
+
+
+// app.use(session({
+//   name: "RealChatUser",
+//   secret: "Secret123",
+//   resave: false,
+//   saveUninitialized: false,
+// }));
+
+
 
 app.use(passport.initialize());
 // 
@@ -268,9 +319,18 @@ passport.use(
 // --------------------------------------------------------------------------------------------------------------------------------
 
 
+console.log(process.env.NODE_ENV);
+if(process.env.NODE_ENV === 'development'){
+  console.log("environment is: ",process.env.ENVIRONMENT_CURRENT);
+}
+else{
+  console.log("environment is: ", process.env.ENVIRONMENT_CURRENT);
+
+}
+
 //mongoose connect
 mongoose
-.connect('mongodb+srv://carmacford:tW9UQ3bmwbRSZV3i@therealchat.koaj5.mongodb.net/')
+.connect(process.env.NODE_ENV === 'development' ? process.env.MONGO_CONNECTION : process.env.MONGO_CONNECTION)
 .then(() => { console.log('connected to mongo DB YEYEYEYEYE');
 })
 .catch((err) => {console.log('Error:',err);

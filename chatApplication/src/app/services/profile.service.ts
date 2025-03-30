@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { UserRegister } from '../Types/todo.type';
 import { userData } from '../Types/user';
 import { type Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ export class ProfileService {
 
   userData: string | undefined = undefined;
 
+  
+
+
   // This code was a template for how to API request from front end....
   // -----
   http = inject(HttpClient);
@@ -23,7 +27,7 @@ export class ProfileService {
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<UserRegister>('/api/user', e).subscribe(e => {
+      this.http.post<UserRegister>(`/api/user`, e).subscribe(e => {
         console.log('User created:', e);
       });
     }
@@ -31,7 +35,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>("/api/user/me");
+      return this.http.get<userData>(`https://realchatwebapp.onrender.com/api/user/me,`,{withCredentials:true});
 
     }
 
