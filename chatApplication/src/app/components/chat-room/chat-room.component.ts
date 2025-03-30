@@ -65,6 +65,7 @@ export class ChatRoomComponent implements OnChanges, OnInit {
       console.log("getting data....");
       //set message array to @Input
       this.chatRoomMessages = res;
+      console.log(res);
     });
   }
 

@@ -4,11 +4,13 @@
     background-color: #2E3136;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 8px;
-    overflow-x: hidden; //prevent x-axis scrolling
+   // overflow-x: hidden; //prevent x-axis scrolling <-- adding this allows scrolling here - will want to make sure theres a max num of characters for usernames
     overflow-wrap: anywhere;//lets names be broken to wrap
 
+    flex-direction: column;
+    height: 11.15vh;
 
     &:hover {
         background-color: #3a3d43;
@@ -19,7 +21,13 @@
     height: 50px;
     width: 50px;
     border-radius: 50%; //circle shape
-    margin-right: 10px;
+
+   // margin-right: 10px;
+}
+
+#chatRoomBox {
+    height: 70vh;
+    background-color: #2f3341b8;
 }
 
 .messageItem {
