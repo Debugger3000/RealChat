@@ -219,10 +219,7 @@ app.use(session({
   secret: "Secret123",
   resave: false,
   saveUninitialized: false,
-  cookie:{
-    maxAge: 60000 * 60
-  }
-  
+
   // cookie: {
   //   domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
   //   sameSite: 'None',

@@ -154,8 +154,8 @@ userRoutes.post(
             // user found so we log them in and go to next function to send response
             else{
                 req.login(user, async (error) => {
-                    console.log("login error....",error);
-
+                    // console.log("login error....",error);
+                    console.log("logging them in");
 
                     
 
@@ -175,15 +175,17 @@ userRoutes.post(
         try {
 
             // Manually set the session cookie for cross-origin
-            // res.cookie('RealChatUser', req.sessionID, {
-            //     httpOnly: true,
-            //     secure: true,           // Only sent over HTTPS
-            //     sameSite: 'None',       // For cross-origin requests
-            //     domain: '.realchatwebapp.onrender.com', // Set this to your production domain
-            //     maxAge: 60000 * 60,     // 1 hour cookie expiration
-            //     path: '/',              // Cookie path
-            //     partitioned: true
-            // });
+            res.cookie('RealChatUser', req.sessionID, {
+                httpOnly: true,
+                secure: true,           // Only sent over HTTPS
+                sameSite: 'None',       // For cross-origin requests
+                // domain: '.realchatwebapp.onrender.com', // Set this to your production domain
+                maxAge: 60000 * 60,     // 1 hour cookie expiration
+                path: '/',              // Cookie path
+                partitioned: true
+            });
+
+            console.log(res);
             console.log("this is the session... ", req.session);
             
             if(req.user){
