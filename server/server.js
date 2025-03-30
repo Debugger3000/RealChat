@@ -222,12 +222,12 @@ app.use(session({
   
   
   cookie: {
-    // domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
+    domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
     sameSite: 'none',
-    secure: 'true',
-    httpOnly: 'true',
+    // secure: true,
+    httpOnly: true,
     maxAge: 60000 * 60,
-    path: '/',
+    // path: '/',
   }
 }));
 

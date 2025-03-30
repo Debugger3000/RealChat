@@ -184,8 +184,8 @@ userRoutes.post(
             //     path: '/',              // Cookie path
             //     partitioned: true
             // });
-
-
+            console.log("this is the session... ", req.session);
+            
             if(req.user){
                 console.log("Req user right after login: ", req.user);
                 console.log("Login Successful !");
@@ -201,7 +201,7 @@ userRoutes.post(
             console.log(error);
             res.status(200).send({message:"Login Error",success: false, url: "", id: "", code: "Login Error"});
         }
-        next();
+       
     }
 );
 
