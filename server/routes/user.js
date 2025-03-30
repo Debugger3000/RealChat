@@ -165,6 +165,7 @@ userRoutes.post(
                         domain: '.realchatwebapp.onrender.com', // Set this to your production domain
                         maxAge: 60000 * 60,     // 1 hour cookie expiration
                         path: '/',              // Cookie path
+                        partitioned: true
                     });
 
                     console.log("setting cookie manually now.........");
