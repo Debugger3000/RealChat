@@ -225,7 +225,7 @@ app.use(session({
     maxAge: 60000 * 60,
     path: '/',
     partitioned:true,
-    httpOnly: true,
+    secure: true,
     sameSite: 'None',
   }
 }));
