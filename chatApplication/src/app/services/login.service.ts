@@ -39,7 +39,7 @@ export class LoginService {
   
 
         // POST to '/api/user/' to log a user in. 
-        return this.http.post<LoginUser>(`https://realchatwebapp.onrender.com/api/user/login`, e, {headers:headers,withCredentials:true});
+        return this.http.post<LoginUser>(`https://realchatwebapp.onrender.com/api/user/login`, e, {withCredentials:true});
         // .subscribe(e => {
         //   console.log('Message from the backend on LOGIN POST:', e);
         // }
@@ -71,16 +71,11 @@ export class LoginService {
       isAuthenticated(): Observable<any>{
         console.log("message was sent hehehehehehe");
 
-        const headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Allow-Methods': 'POST',
-          'Access-Control-Allow-Headers': 'Content-Type',});
+      
 
 
         const message = {message: "auth req was sent"};
-        return this.http.post<Test>(`https://realchatwebapp.onrender.com/api/user/isGood`,message, {headers: headers,withCredentials:true});
+        return this.http.post<Test>(`https://realchatwebapp.onrender.com/api/user/isGood`,message, {withCredentials:true});
       }
 
       
