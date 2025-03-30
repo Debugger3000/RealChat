@@ -221,7 +221,7 @@ app.use(session({
   
   saveUninitialized: false,
   cookie: {
-    
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
     maxAge: 60000 * 60,
     path: '/',
     partitioned:true,
@@ -230,7 +230,7 @@ app.use(session({
   }
 }));
 
-// domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
+
 
 // app.use(session({
 //   name: "RealChatUser",
