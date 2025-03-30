@@ -22,33 +22,21 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-// app.options('https://realchatclient.onrender.com', cors());
+app.options('https://realchatclient.onrender.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
 // Or for specific domains (for production)
-// app.use(cors({
-//   origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: ['https://realchatclient.onrender.com','http://localhost:8080','http://localhost:4200'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
+}));
 
-// CORS middleware (manual setup)
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://realchatclient.onrender.com');  // Replace with your client domain
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');        // Allow methods
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');   // Allow headers
-  res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials (cookies)
 
-  // Handle preflight requests (OPTIONS)
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  next();
-});
 
 // connect IO to express app
 const httpServer = createServer.createServer(app); 
