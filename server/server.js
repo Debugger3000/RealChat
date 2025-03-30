@@ -214,27 +214,28 @@ app.use(flash());
 // ----------------------------------------------------------------------------------------------------------
 // initialize session
 // this has to go before passport initialization
-// app.use(session({
-//   name: "RealChatUser",
-//   secret: "Secret123",
-//   resave: false,
-//   httpOnly: true,
-//   secure: true,
-//   sameSite: 'None',
-//   saveUninitialized: false,
-//   cookie: {
-//     domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
-//     maxAge: 60000 * 60,
-//     path: '/',
-//   }
-// }));
-
 app.use(session({
   name: "RealChatUser",
   secret: "Secret123",
   resave: false,
+  httpOnly: true,
+  secure: true,
+  sameSite: 'None',
   saveUninitialized: false,
+  cookie: {
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
+    maxAge: 60000 * 60,
+    path: '/',
+    partitioned:true
+  }
 }));
+
+// app.use(session({
+//   name: "RealChatUser",
+//   secret: "Secret123",
+//   resave: false,
+//   saveUninitialized: false,
+// }));
 
 
 
