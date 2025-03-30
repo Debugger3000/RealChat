@@ -22,7 +22,7 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options('https://realchatclient.onrender.com', cors());
+app.options('.https://realchatclient.onrender.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
@@ -221,21 +221,11 @@ app.use(session({
   saveUninitialized: false,
   
   
-  // cookie: {
-  //   domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
-  //   maxAge: 60000 * 60,
-  //   path: '/',
-  //   partitioned:true,
-  //   secure: true,
-  //   sameSite: 'None',
-  // }
-
   cookie: {
-    httpOnly: true,
-    secure: true,               
-    sameSite: 'None',            
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
     maxAge: 60000 * 60,
-    domain:  'realchatclient.onrender.com'         
+    path: '/',
+    partitioned:true,
   }
 }));
 
