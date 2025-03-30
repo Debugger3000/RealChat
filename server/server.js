@@ -245,15 +245,29 @@ app.use(passport.initialize());
 // 
 app.use(passport.session());
 
-passport.serializeUser((user,done) => {
+// passport.serializeUser((user,done) => {
+//   console.log("serializing user.");
+//   done(null,user);
+// });
+
+// passport.deserializeUser((user,done) => {
+//   console.log('within De serialize..');
+//   done(null,user);
+// })
+
+passport.serializeUser((user, done) => {
   console.log("serializing user.");
-  done(null,user);
+  done(null, user._id);  // Save the user ID, not the entire user object
 });
 
-passport.deserializeUser((user,done) => {
-  console.log('within De serialize..');
-  done(null,user);
-})
+passport.deserializeUser((id, done) => {
+  console.log('within Deserialize...');
+  // Fetch user from database using the ID
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
+});
+
 
 
 // Register Code
