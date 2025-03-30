@@ -217,9 +217,6 @@ app.use(flash());
 app.use(session({
   name: "RealChatUser",
   secret: "Secret123",
-  httpOnly: process.env.NODE_ENV === 'development' ? false : true,
-  secure: process.env.NODE_ENV === 'development' ? false : true,
-  sameSite: process.env.NODE_ENV === 'development' ? false : 'None',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -227,6 +224,9 @@ app.use(session({
     maxAge: 60000 * 60,
     path: '/',
     partitioned: true,
+    httpOnly: process.env.NODE_ENV === 'development' ? false : true,
+    secure: process.env.NODE_ENV === 'development' ? false : true,
+    sameSite: process.env.NODE_ENV === 'development' ? false : 'None',
   }
 }));
 
