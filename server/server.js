@@ -8,7 +8,7 @@
 const Message = require('./models/message');
 const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
 
-//const cors = require('cors');
+const cors = require('cors');
 var express = require('express');
 // Websocket imports
 const createServer = require('http');
