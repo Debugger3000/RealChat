@@ -31,10 +31,19 @@ userRoutes.get("/", async (req,res,next) => {
 
 //GET - get a specific user by id
 userRoutes.get("/me", async (req, res) => {
-    console.log("req user", req.user);
-
-    // send back user data for themselves by grabbing their user data from 'req.user'
-    res.status(200).json({user: req.user});
+    
+    try{
+        console.log("req user", req.user);
+        console.log("this is the req...", req);
+        console.log("this is the req cookies... ",req.cookies);
+        // send back user data for themselves by grabbing their user data from 'req.user'
+        res.status(200).json({user: req.user});
+    } catch (error) {
+        console.log("error occurred while running delete!");
+        console.log("Caught the Error: ", error);
+        res.status(200).json({user: "user is undefined..."});
+    }    
+    
 });
 
 
