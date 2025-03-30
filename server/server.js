@@ -22,7 +22,7 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options( ['https://realchatclient.onrender.com','https://tysonk.com'] , cors());
+app.options('https://tysonk.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
@@ -43,7 +43,7 @@ const httpServer = createServer.createServer(app);
 
 const io = new Server.Server(httpServer, {
   cors: {
-    origin: ["http://localhost:4200", "https://realchatclient.onrender.com"]
+    origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
   }
 });
 
@@ -222,7 +222,10 @@ app.use(session({
   
   
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
+    // domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatwebapp.onrender.com',
+    sameSite: 'none',
+    secure: 'true',
+    httpOnly: 'true',
     maxAge: 60000 * 60,
     path: '/',
   }
