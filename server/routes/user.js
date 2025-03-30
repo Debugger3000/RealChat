@@ -155,6 +155,22 @@ userRoutes.post(
             else{
                 req.login(user, async (error) => {
                     console.log("login error....",error);
+
+
+                    // Manually set the session cookie for cross-origin
+                    res.cookie('RealChatUser', 'cookie_value', {
+                        httpOnly: true,
+                        secure: true,           // Only sent over HTTPS
+                        sameSite: 'None',       // For cross-origin requests
+                        domain: '.realchatwebapp.onrender.com', // Set this to your production domain
+                        maxAge: 60000 * 60,     // 1 hour cookie expiration
+                        path: '/',              // Cookie path
+                    });
+
+                    console.log("setting cookie manually now.........");
+
+
+
                     // return res.redirect('profile');
                     next();
                 });
