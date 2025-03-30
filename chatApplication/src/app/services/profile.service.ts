@@ -19,7 +19,6 @@ export class ProfileService {
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
-    'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': 'POST',
     'Access-Control-Allow-Headers': 'Content-Type',});
 
