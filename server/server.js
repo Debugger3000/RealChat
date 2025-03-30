@@ -223,8 +223,8 @@ app.use(session({
   
   cookie: {
     domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
-    sameSite: 'none',
-    secure: false,
+    sameSite: 'None',
+    secure: true,
     httpOnly: true,
     maxAge: 60000 * 60,
     // path: '/',
