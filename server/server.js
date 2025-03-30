@@ -221,13 +221,21 @@ app.use(session({
   saveUninitialized: false,
   
   
+  // cookie: {
+  //   domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
+  //   maxAge: 60000 * 60,
+  //   path: '/',
+  //   partitioned:true,
+  //   secure: true,
+  //   sameSite: 'None',
+  // }
+
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : '.realchatclient.onrender.com',
+    httpOnly: true,
+    secure: true,               
+    sameSite: 'None',            
     maxAge: 60000 * 60,
-    path: '/',
-    partitioned:true,
-    secure: true,
-    sameSite: 'None',
+    domain:  'realchatclient.onrender.com'         
   }
 }));
 
