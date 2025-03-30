@@ -16,14 +16,14 @@ import { friend} from '../Types/user';
     curChatroomId: string = '';
     curChatFriend: {id:string,username:string} | null = null;
 
-    headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
-      'Access-Control-Allow-Methods': 'POST',
-      'Access-Control-Allow-Headers': 'Content-Type',});
+    // headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Origin': 'https://realchatclient.onrender.com',
+    //   'Access-Control-Allow-Methods': 'POST',
+    //   'Access-Control-Allow-Headers': 'Content-Type',});
    
     getFriends(){
-      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/getList` ,{headers:this.headers,withCredentials:true});
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/getList` ,{withCredentials:true});
     }
 
     sendFriendRequest(username : string){
@@ -31,7 +31,7 @@ import { friend} from '../Types/user';
     }
 
     getFriendRequest(){
-      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/request`,{headers:this.headers,withCredentials:true});
+      return this.http.get<userDataArray>(`https://realchatwebapp.onrender.com/api/friend/request`,{withCredentials:true});
     }
 
     declineFriendRequest(id : string){
