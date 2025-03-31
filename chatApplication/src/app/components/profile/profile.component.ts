@@ -64,5 +64,5 @@ export class ProfileComponent implements OnInit{
   //   });
   //   console.log("Profile component has been loaded...")
   // }
-  }
+ }
 }

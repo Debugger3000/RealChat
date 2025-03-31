@@ -28,26 +28,26 @@ export class ProfileService {
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<UserRegister>(`/api/user`, e).subscribe(e => {
+      this.http.post<UserRegister>(`https://app.tysonk.com/api/user`, e).subscribe(e => {
         console.log('User created:', e);
       });
     }
 
 
     // Axios get me
-    getMeAxios() {
+    getMeAxios() : userData {
 
-    
+      let userD: userData = null;
       // Example of making a login request
       axios.get('https://app.tysonk.com/api/user/me', {withCredentials: true})
       .then(response => {
           console.log('Login successful', response.data);
-          return response.data;
+          userD = response.data;
       })
       .catch(error => {
           console.log('Login failed', error);
       });
-  
+      return userD;
     }
 
 
