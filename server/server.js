@@ -40,10 +40,10 @@ console.log(process.env.NODE_ENV);
 
 // let socket = null;
 
-const httpsServer = https.createServer(app);
+const httpServer = http.createServer(app);
 
 
-const io = new Server(httpsServer, {
+const io = new Server(httpServer, {
   cors: {
     origin: [
       "http://localhost:4200",               // Local development frontend
@@ -233,15 +233,14 @@ app.use(session({
   secret: "Secret123",
   resave: false,
   saveUninitialized: false,
-  sameSite: 'None',
-  secure: true,
+  
   cookie: {
     // domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
-    
+    sameSite: 'none',
+    secure: true,
     // httpOnly: true,
     maxAge: 60000 * 60,
-    path: '/',
-    Partitioned: true
+    partitioned: true
   }
 }));
 
