@@ -4,14 +4,16 @@ import { LoginUser, Test } from '../Types/todo.type';
 import { catchError, Observable, tap } from 'rxjs';
 import { WebSocketService } from './web-socket.service';
 import axios from 'axios';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   webSocketService = inject(WebSocketService);
+
 
   isUserAuthenticated = false;
 
@@ -21,9 +23,16 @@ export class LoginService {
 
     
     // Example of making a login request
-    axios.post('https://api.tysonk.com/api/user/login', e, {withCredentials: true})
+    axios.post('https://app.tysonk.com/api/user/login', e, {withCredentials: true})
     .then(response => {
         console.log('Login successful', response.data);
+
+        this.router.navigate([`${response.data.url}`]);
+
+        //login is good, so we need to establish web socket connection with server...
+        this.webSocketService.establishSocket();
+
+
     })
     .catch(error => {
         console.log('Login failed', error);

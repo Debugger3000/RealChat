@@ -39,7 +39,7 @@ export class ProfileService {
 
     
       // Example of making a login request
-      axios.get('https://api.tysonk.com/api/user/me', {withCredentials: true})
+      axios.get('https://app.tysonk.com/api/user/me', {withCredentials: true})
       .then(response => {
           console.log('Login successful', response.data);
           return response.data;
