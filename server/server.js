@@ -66,110 +66,92 @@ app.use(cors(corsOptions));
 
 // let socket = null;
 
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
 
-const io = new Server.Server(httpServer, {
-  cors: {
-    origin: [
-      "http://localhost:4200",               // Local development frontend
-      "https://realchatclient.onrender.com",  // Frontend URL hosted on Render
-      "https://tysonk.com"                   // Another allowed frontend domain
-    ],
-  }
-});
+// const io = new Server.Server(httpServer, {
+//   cors: {
+//     origin: [
+//       "http://localhost:4200",              
+//       "https://realchatclient.onrender.com",  
+//       "https://tysonk.com"                  
+//     ],
+//   }
+// });
 
 
 
 
 // Probably route callbacks to a websocket file here
-io.on("connection", (socket) => {
-  // ...
-  console.log("Someone Connected..");
-  console.log("Socket id:", socket.id);
-  // set a global socket so we can use this socket within functions...
+// io.on("connection", (socket) => {
+  
+//   console.log("Someone Connected..");
+//   console.log("Socket id:", socket.id);
 
-  // make user join a room so we can track each user, and refer to them by sending to their 'room' which is just their socket ID
-  // socket.join(socket.id);
 
   
 
-  // listen for initial data
-  socket.on("credentials-pass", (userId) => {
-    //set room to users ID
-    console.log(`User with socket ID ${socket.id} just joined the room ${userId}`);
-    socket.join(userId);
-  });
+//   // listen for initial data
+//   socket.on("credentials-pass", (userId) => {
+//     //set room to users ID
+//     console.log(`User with socket ID ${socket.id} just joined the room ${userId}`);
+//     socket.join(userId);
+//   });
 
-  // disconnect listener
-  socket.on("disconnect", (reason) => {
-    // ...
-    console.log("disconnect reason: ", reason);
-  });
+//   // disconnect listener
+//   socket.on("disconnect", (reason) => {
+//     // ...
+//     console.log("disconnect reason: ", reason);
+//   });
 
-  //send on connection
-  socket.emit("initial-connect", "Sending to client from server through websocket TEST...", socket.id);
-
-
-  // Main listener from client for messages
-  socket.on("message-form", async (payload) => {
-
-    //give data to route to update model
-    console.log("message-form socket event was hit from client with: ", payload);
-
-    //var clients = io.clients();
-    // console.log('clients connected via sockets: ', clients);
-
-    // grab other user id in that chatroom
-    const secondUserId = await grabNonSenderId(payload.userId,payload.chatRoomId);
-
-    console.log("second users ID: ",secondUserId);
-
-    // Create new message document and save into database...
-    const newMessage = new Message({
-      chatroomId: payload.chatRoomId,
-      username: payload.username,
-      userId: payload.userId,
-      content: payload.message
-    });
-    await newMessage.save();
+//   //send on connection
+//   socket.emit("initial-connect", "Sending to client from server through websocket TEST...", socket.id);
 
 
-    // update notifs for both people ?
-    await updateNotifications(payload.userId, payload.chatRoomId);
+//   // Main listener from client for messages
+//   socket.on("message-form", async (payload) => {
+
+//     //give data to route to update model
+//     console.log("message-form socket event was hit from client with: ", payload);
+
+    
+
+//     // grab other user id in that chatroom
+//     const secondUserId = await grabNonSenderId(payload.userId,payload.chatRoomId);
+
+//     console.log("second users ID: ",secondUserId);
+
+//     // Create new message document and save into database...
+//     const newMessage = new Message({
+//       chatroomId: payload.chatRoomId,
+//       username: payload.username,
+//       userId: payload.userId,
+//       content: payload.message
+//     });
+//     await newMessage.save();
 
 
-    //emits to the other user in the chatroom and the sender as well
-    // socket.in(secondUserId).emit('message-update', payload.chatRoomId);
-
-    // emit to this sender
-    socket.emit('message-update', payload.chatRoomId)
-
-    // emit to the other user in their own ID room
-    io.in(secondUserId).emit('message-update', payload.chatRoomId, secondUserId);
-
-    // send back to user in the other room as well...
-
-    // send chatroomID back to user, so it lets client know that it needs to update that chatroom or store notifications
-    // io.emit("message-update", "Letting user know that a message was given and should update their messages for the chatroom id", payload.chatRoomId);
-
-  });
+//     // update notifs for both people ?
+//     await updateNotifications(payload.userId, payload.chatRoomId);
 
 
-  // 
-  // to individual socketid (private message)
-  // io.to(socketId).emit(/* ... */);
+    
+
+//     // emit to this sender
+//     socket.emit('message-update', payload.chatRoomId)
+
+//     // emit to the other user in their own ID room
+//     io.in(secondUserId).emit('message-update', payload.chatRoomId, secondUserId);
+
+//   });
   
-});
+// });
 
-
-//
-
-// Look for disconnect 
-io.on("disconnect", (socket) => {
-  console.log("Someone disconnected..");
-  console.log("Socket id:", socket.id);
-})
+// // Look for disconnect 
+// io.on("disconnect", (socket) => {
+//   console.log("Someone disconnected..");
+//   console.log("Socket id:", socket.id);
+// })
 
 
 
@@ -380,39 +362,17 @@ app.use("/api/chatroom", require('./routes/chatroom'));
 app.use("/api/message", require('./routes/message'));
 app.use("/api/friend", require('./routes/friend'));
 
-// app.listen(8080, () => {
-//     console.log(`Example app listening on port 8080`)
-//   })
+app.listen(8080, () => {
+    console.log(`Example app listening on port 8080`)
+  })
 
-httpServer.listen(8080,() => {
-  console.log(`Example app listening on port 8080`);
-});
-
-// httpsServer.listen(443, () => {
-//   console.log("server running");
-// })
+// httpServer.listen(8080,() => {
+//   console.log(`Example app listening on port 8080`);
+// });
 
 
-// function socketToClient() {
 
-//   setTimeout(() => {
-//     console.log("socketToClient function has been run....");
-//     sock.emit("tester","sending custom message to client...");
 
-//   },5000)
-  
-
-// }
-
-// socketToClient();
-
-// module.exports = { 
-  
-// socketToClient: socketToClient
-
-// }
-
-// module.exports = io;
   
 
 
