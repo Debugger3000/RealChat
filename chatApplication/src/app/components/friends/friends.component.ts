@@ -137,11 +137,12 @@ jankUpdate: boolean = false;
     //for either success or fail have a timeout, which once done sets requestSuccess to null again (to hide the message, so it's not always visible)
   toggleFriendRequests() {
 
-
+    this.isFriendRequestOn = !this.isFriendRequestOn;
     if(!this.jankUpdate) {
       console.log("friend request button clicked...");
-      this.isFriendRequestOn = !this.isFriendRequestOn;
+      
       this.friendService.getFriendRequest().subscribe(e =>{
+        console.log("friend requests....",e);
         this.friendRequests = e;
         this.jankUpdate = !this.jankUpdate;
       });
