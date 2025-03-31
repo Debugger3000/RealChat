@@ -34,7 +34,7 @@ userRoutes.get("/me", async (req, res) => {
     console.log("GET ME route has been hit !!!");
     
     try{
-        // console.log("req user", req.user);
+        console.log("NEW NEW DAVIS DAVIS DAVIS req user", req.user);
         console.log("this is the req...", req.body);
         // console.log("this is the req cookies... ",req.cookies);
         // send back user data for themselves by grabbing their user data from 'req.user'
