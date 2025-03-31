@@ -27,7 +27,7 @@ import { friend} from '../Types/user';
     }
 
     sendFriendRequest(username : string){
-      return this.http.post(`/api/friend/request/${username}`, {});
+      return this.http.post(`/api/friend/request/${username}`, {},{withCredentials:true});
     }
 
     getFriendRequest(){
@@ -36,22 +36,22 @@ import { friend} from '../Types/user';
 
     declineFriendRequest(id : string){
       // return this.http.post(`/api/user/friend/reject`, {});
-      return this.http.post(`https://app.tysonk.com/api/friend/reject/${id}`, {});
+      return this.http.post(`https://app.tysonk.com/api/friend/reject/${id}`, {},{withCredentials:true});
     }
 
     acceptFriendRequest(id: string){
-      return this.http.post(`https://app.tysonk.com/api/friend/accept/${id}`, {});
+      return this.http.post(`https://app.tysonk.com/api/friend/accept/${id}`, {},{withCredentials:true});
     }
 
     // Create chatroom
     createChatRoom(id1: string, id2: string) {
       console.log("Create chatroom for new friends REQ inside...");
-      return this.http.post(`https://app.tysonk.com/api/chatroom/new`,{users: [id1,id2]});
+      return this.http.post(`https://app.tysonk.com/api/chatroom/new`,{users: [id1,id2]},{withCredentials:true});
     }
 
     //set Chatroom by clicking on friend tab in friends list
     setChatRoom(id: string) {
-      return this.http.get<{id: string}>(`https://app.tysonk.com/api/chatroom/${id}`);
+      return this.http.get<{id: string}>(`https://app.tysonk.com/api/chatroom/${id}`,{withCredentials:true});
     }
 
     setCurChatId(id: string){
@@ -59,7 +59,7 @@ import { friend} from '../Types/user';
     }
 
     removeFriendApi(id: string){
-      return this.http.post(`https://app.tysonk.com/api/friend/remove/${id}`,{});
+      return this.http.post(`https://app.tysonk.com/api/friend/remove/${id}`,{},{withCredentials:true});
     }
 
 }

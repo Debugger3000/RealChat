@@ -15,17 +15,17 @@ export class MessageService {
 
   // HTTP post new message...
   sendMessage(message: messageRequest) {
-    return this.http.post<messageRequest>(`https://app.tysonk.com/api/message/new`,message);
+    return this.http.post<messageRequest>(`https://app.tysonk.com/api/message/new`,message,{withCredentials:true});
   }
 
   // GET messages for a chatroom
   getMessages(id: string) {
-    return this.http.get<ChatRoomMessage>(`https://app.tysonk.com/api/message/${id}`);
+    return this.http.get<ChatRoomMessage>(`https://app.tysonk.com/api/message/${id}`,{withCredentials:true});
   }
 
 
   clearNotifications(id : string, chatRoomId : string){
-    return this.http.post(`https://app.tysonk.com/api/message/notif/remove/${id}`, { chatRoomId });
+    return this.http.post(`https://app.tysonk.com/api/message/notif/remove/${id}`, { chatRoomId },{withCredentials:true});
     
   }
 
