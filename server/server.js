@@ -35,7 +35,7 @@ console.log(process.env.NODE_ENV);
 
 
 // pre flight ???
-app.options('https://tysonk.com', cors());
+// app.options('https://tysonk.com', cors());
 
 // Enable CORS for all origins (for testing)
 // app.use(cors());
