@@ -38,7 +38,7 @@ export class LoginService {
   
 
         // POST to '/api/user/' to log a user in. 
-        return this.http.post<LoginUser>(`https://realchatwebapp.onrender.com/api/user/login`, e, {withCredentials:true});
+        return this.http.post<LoginUser>(`https://app.tysonk.com/api/user/login`, e, {withCredentials:true});
         // .subscribe(e => {
         //   console.log('Message from the backend on LOGIN POST:', e);
         // }
@@ -55,7 +55,7 @@ export class LoginService {
 
         let data = {};
         console.log("logout request posted ????");
-        this.http.post<Test>(`https://realchatwebapp.onrender.com/api/user/logout`, message, {withCredentials:true}).subscribe(message => {
+        this.http.post<Test>(`https://app.tysonk.com/api/user/logout`, message, {withCredentials:true}).subscribe(message => {
           console.log('Updated config:', message);
           data = message;
 
@@ -79,7 +79,7 @@ export class LoginService {
 
 
         const message = {message: "auth req was sent"};
-        return this.http.post<Test>(`https://realchatwebapp.onrender.com/api/user/isGood`,message, {withCredentials:true});
+        return this.http.post<Test>(`https://app.tysonk.com/api/user/isGood`,message, {withCredentials:true});
       }
 
       
