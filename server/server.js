@@ -66,7 +66,7 @@ app.use(cors(corsOptions));
 
 // let socket = null;
 
-const httpServer = http.createServer(credentials,app);
+const httpServer = http.createServer(app);
 
 
 const io = new Server.Server(httpServer, {
