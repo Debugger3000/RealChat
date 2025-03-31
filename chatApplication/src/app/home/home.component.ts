@@ -105,14 +105,19 @@ export class HomeComponent implements OnInit{
 
   //run when component is initiated...
   ngOnInit(): void {
-    this.profileService.getMe().subscribe((data) => {
-      console.log('Your data of yourself',data);
-      // set user data in home
-      this.userData.set(data);
 
-      //set user data in profile service
-      this.profileService.setUserData(data?.user._id);
-    });
+    // axios
+    this.profileService.getMeAxios();
+
+
+    // this.profileService.getMe().subscribe((data) => {
+    //   console.log('Your data of yourself',data);
+    //   // set user data in home
+    //   this.userData.set(data);
+
+    //   //set user data in profile service
+    //   this.profileService.setUserData(data?.user._id);
+    // });
     console.log("Profile component has been loaded...")
   }
 
