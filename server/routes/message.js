@@ -41,12 +41,13 @@ router.post('/new', async (req, res) => {
 
 // Get all messages in collection
 router.get('/', async (req,res) => {
+  console.log("GET message route has been hit!!!");
   try{
     const messages = await Message.find();
     res.status(200).json(messages);
   }
   catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).send('Server error MESSAGES HEHE');
   }
 
 });

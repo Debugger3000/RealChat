@@ -73,6 +73,8 @@ userRoutes.post('/accept/:id', async (req, res) => {
 
 // get friends list
 userRoutes.get('/getList', async (req, res) => {
+
+    console.log("GET friends list route hit !!!");
     try {
         const user = await User.findById(req.user._id).populate('friends', 'username chatRooms');
         // const user = await User.findById(req.user._id);
@@ -88,12 +90,15 @@ userRoutes.get('/getList', async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).send('Server error GET FREINDS CATCH HEHE');
     }
 });
 
 // get friend requests
 userRoutes.get('/request', async (req, res) => {
+
+    console.log("GET friends request route hit !!!");
+
     try {
         if(!req.user.friendrequests || res.user.friendRequests.length === 0){
             res.status(500);
@@ -104,7 +109,7 @@ userRoutes.get('/request', async (req, res) => {
         res.status(200).json(user);
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).send('Server error from catch HEHE');
     }
 });
 
