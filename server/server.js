@@ -40,13 +40,15 @@ app.use(cors({
 
 
 // connect IO to express app
-const httpServer = createServer2.createServer(app); 
+// const httpServer = createServer.createServer(app); 
 
-const io = new Server.Server(httpServer, {
-  cors: {
-    origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
-  }
-});
+
+
+// const io = new Server.Server(httpServer, {
+//   cors: {
+//     origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
+//   }
+// });
 
 // function feedSocket(socket) {
 
@@ -54,7 +56,19 @@ const io = new Server.Server(httpServer, {
 
 // let socket = null;
 
-
+const httpsServer = https.createServer(app);
+const io = new Server(httpsServer, {
+  cors: {
+    origin: [
+      "http://localhost:4200",               // Local development frontend
+      "https://realchatclient.onrender.com",  // Frontend URL hosted on Render
+      "https://tysonk.com"                   // Another allowed frontend domain
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true  // Allow cookies for session management
+  }
+});
 
 
 
@@ -362,9 +376,13 @@ app.use("/api/friend", require('./routes/friend'));
 //     console.log(`Example app listening on port 8080`)
 //   })
 
-httpServer.listen(8080,() => {
-  console.log(`Example app listening on port 8080`);
-});
+// httpServer.listen(8080,() => {
+//   console.log(`Example app listening on port 8080`);
+// });
+
+httpsServer.listen(443, () => {
+  console.log("server running");
+})
 
 
 // function socketToClient() {
