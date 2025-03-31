@@ -20,7 +20,7 @@ export class MessageService {
 
   // GET messages for a chatroom
   getMessages(id: string) {
-    return this.http.get<ChatRoomMessage>(`/api/message/${id}`);
+    return this.http.get<ChatRoomMessage>(`https://app.tysonk.com/api/message/${id}`);
   }
 
 

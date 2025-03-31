@@ -207,12 +207,12 @@ app.use(session({
   saveUninitialized: false,
   
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : 'client.tysonk.com',
-    sameSite: 'none',
-    secure: true,
+    domain: process.env.NODE_ENV === 'development' ? undefined : '.client.tysonk.com',
+    // sameSite: 'none',
+    // secure: true,
     httpOnly: true,
     maxAge: 60000 * 60,
-    partitioned: true
+    // partitioned: true
   }
 }));
 
