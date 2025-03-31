@@ -30,7 +30,7 @@ userRoutes.get("/", async (req,res,next) => {
 
 
 //GET - get a specific user by id
-userRoutes.get("/me", async (req, res) => {
+userRoutes.get("/me", cors(corsOptions), async (req, res) => {
     
     try{
         console.log("req user", req.user);
@@ -130,7 +130,7 @@ userRoutes.post(
 
 // LOGIN - login an existing user
 userRoutes.post(
-    "/login", 
+    "/login", cors(corsOptions),
     function(req,res,next) {
         console.log("inside login post... Pre auth function.");
         // call next function in line, which is the one below here. 'passport.authenticate()'
@@ -230,7 +230,7 @@ userRoutes.post('/logout', (req, res, next) => {
 
 
 // isAuthenticated -  check is user is authenticated
-userRoutes.post('/isGood', (req,res,next) => {
+userRoutes.post('/isGood', cors(corsOptions), (req,res,next) => {
     console.log("Is auth route has been called...");
     try {
         console.log('request object: ',req.isAuthenticated());
