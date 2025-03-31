@@ -54,6 +54,9 @@ router.get('/:id', async (req, res) => {
   try {
     console.log("Within grabbing chatroom id to set....");
 
+    console.log("GET charoom: ",req.user);
+    console.log("GET chatroom id: ",req.user._id);
+
     const userId = req.user._id;
     const friendId = req.params.id;
     // const reqIds = [req.user._id, req.params.id];
