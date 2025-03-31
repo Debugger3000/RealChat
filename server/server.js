@@ -53,7 +53,6 @@ app.use(cors({
 // const httpServer = createServer.createServer(app); 
 
 
-
 // const io = new Server.Server(httpServer, {
 //   cors: {
 //     origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
@@ -66,7 +65,7 @@ app.use(cors({
 const httpsServer = https.createServer(credentials,app);
 
 
-const io = new Server.Server(httpServer, {
+const io = new Server.Server(httpsServer, {
   cors: {
     origin: [
       "http://localhost:4200",               // Local development frontend
