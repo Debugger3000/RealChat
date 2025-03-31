@@ -35,7 +35,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>(`https://app.tysonk.com/api/user/me,`,{withCredentials:true});
+      return this.http.get<userData>(`https://app.tysonk.com/api/user/me`,{withCredentials:true});
 
     }
 
