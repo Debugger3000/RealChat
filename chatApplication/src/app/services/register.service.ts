@@ -21,7 +21,7 @@ export class RegisterService {
 
       // return this.http.post<UserRegister>('/api/user/new', e);
       // POST to '/api/user/new' to create a new user in database
-      return this.http.post<UserRegister>(`/api/user/new`, e);
+      return this.http.post<UserRegister>(`https://app.tysonk.com/api/user/new`, e);
       
       
     }
