@@ -208,9 +208,10 @@ app.use(session({
   sameSite: 'none',
   secure: true,
   httpOnly: true,
+  partitioned: true,
 
   cookie: {
-    domain: process.env.NODE_ENV === 'development' ? undefined : 'client.tysonk.com',
+    // domain: process.env.NODE_ENV === 'development' ? undefined : 'client.tysonk.com',
     maxAge: 60000 * 60,
   }
 }));
