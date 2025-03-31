@@ -2,6 +2,17 @@
 //   require('dotenv').config();
 // }
 
+// SSL stuff
+const fs = require('fs');  // File system to read SSL certificate
+
+
+// Load your SSL certificates (replace these with your actual paths to SSL files)
+const privateKey = fs.readFileSync(process.env.KEY_SSL, 'utf8');
+const certificate = fs.readFileSync(process.env.CERT_SLL, 'utf8');
+const ca = fs.readFileSync('path/to/ca-cert.pem', 'utf8');  // Optional for CA certificates
+
+// Create an HTTPS server using your certificates
+const credentials = { key: privateKey, cert: certificate };
 
 
 
@@ -53,10 +64,10 @@ app.use(cors({
 
 // let socket = null;
 
-const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials,app);
 
 
-const io = new Server(httpServer, {
+const io = new Server.Server(httpServer, {
   cors: {
     origin: [
       "http://localhost:4200",               // Local development frontend
