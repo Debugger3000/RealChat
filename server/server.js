@@ -42,7 +42,7 @@ console.log(process.env.NODE_ENV);
 // app.use(cors());
 
 const corsOptions = {
-  origin: 'https://tysonk.com',
+  origin: 'https://client.tysonk.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -70,7 +70,7 @@ const io = new Server.Server(httpServer, {
     origin: [
       "http://localhost:4200",              
       "https://realchatclient.onrender.com",  
-      "https://tysonk.com"                  
+      "https://client.tysonk.com"                  
     ],
   }
 });
