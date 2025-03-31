@@ -70,5 +70,11 @@ constructor(private router: Router) {}
 
   }
 
+  redirectToRegister() {
+
+    this.router.navigate(['/register']);
+
+  }
+
 
 }
