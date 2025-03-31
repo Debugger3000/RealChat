@@ -24,7 +24,20 @@ console.log(process.env.NODE_ENV);
 
 
 
+// pre flight ???
+app.options('https://tysonk.com', cors());
 
+// Enable CORS for all origins (for testing)
+// app.use(cors());
+
+// Or for specific domains (for production)
+app.use(cors({
+  origin: 'https://tysonk.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
+}));
 
 // connect IO to express app
 // const httpServer = createServer.createServer(app); 
@@ -202,20 +215,7 @@ app.use(cookieParser());
 
 // Websocket Initialization
 // 
-// pre flight ???
-app.options('https://tysonk.com', cors());
 
-// Enable CORS for all origins (for testing)
-// app.use(cors());
-
-// Or for specific domains (for production)
-app.use(cors({
-  origin: 'https://tysonk.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
-}));
 
 
 
@@ -374,13 +374,13 @@ app.use("/api/friend", require('./routes/friend'));
 //     console.log(`Example app listening on port 8080`)
 //   })
 
-// httpServer.listen(8080,() => {
-//   console.log(`Example app listening on port 8080`);
-// });
+httpServer.listen(8080,() => {
+  console.log(`Example app listening on port 8080`);
+});
 
-httpsServer.listen(443, () => {
-  console.log("server running");
-})
+// httpsServer.listen(443, () => {
+//   console.log("server running");
+// })
 
 
 // function socketToClient() {
