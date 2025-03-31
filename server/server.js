@@ -385,7 +385,7 @@ app.use("/api/friend", require('./routes/friend'));
 //     console.log(`Example app listening on port 8080`)
 //   })
 
-httpServer.listen(8080,() => {
+httpsServer.listen(8080,() => {
   console.log(`Example app listening on port 8080`);
 });
 
