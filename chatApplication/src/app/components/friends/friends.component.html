@@ -73,11 +73,19 @@
             Delete
           </button>
 
-          <div
-            class="notificationIcon p-1 rounded bg-green-800 text-white font-bold"
-          >
+          <!-- @for (item of friend.chatRooms; track $index) {
+
+            @if (friend.chatRooms. === friend.chatRooms[$index].chatRoomId) {}
+            <div class="notificationIcon p-1 rounded bg-green-800 text-white font-bold">
             {{ friend.chatRooms[0].notifications }}
-          </div>
+            </div>
+          } -->
+
+          <div class="notificationIcon p-1 rounded bg-green-800 text-white font-bold">
+            {{ friend.chatRooms[0].notifications }}
+            </div>
+          
+          
         </div>
         } @if (friendList[0] == null) {
         <div class="friendItem">
