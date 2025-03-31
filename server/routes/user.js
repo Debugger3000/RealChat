@@ -42,7 +42,7 @@ userRoutes.get("/me", async (req, res) => {
     } catch (error) {
         console.log("error occurred while running delete!");
         console.log("Caught the Error: ", error);
-        res.status(200).json({user: "user is undefined..."});
+        res.status(500).json({user: "user is undefined... HEHEHEHE this is us"});
     }    
     
 });
