@@ -7,12 +7,11 @@ const fs = require('fs');  // File system to read SSL certificate
 
 
 // Load your SSL certificates (replace these with your actual paths to SSL files)
-const privateKey = fs.readFileSync(process.env.KEY_SSL, 'utf8');
-const certificate = fs.readFileSync(process.env.CERT_SLL, 'utf8');
-const ca = fs.readFileSync('path/to/ca-cert.pem', 'utf8');  // Optional for CA certificates
+// const privateKey = fs.readFileSync(process.env.KEY_SSL, 'utf8');
+// const certificate = fs.readFileSync(process.env.CERT_SLL, 'utf8');
 
 // Create an HTTPS server using your certificates
-const credentials = { key: privateKey, cert: certificate };
+const credentials = { key: process.env.KEY_SSL, cert: process.env.CERT_SLL };
 
 
 
