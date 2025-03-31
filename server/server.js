@@ -205,10 +205,10 @@ app.use(session({
   secret: "Secret123",
   resave: false,
   saveUninitialized: false,
-  sameSite: 'none',
-  secure: true,
-  httpOnly: true,
-  partitioned: true,
+  // sameSite: 'none',
+  // secure: true,
+  // httpOnly: true,
+  // partitioned: true,
 
   cookie: {
     // domain: process.env.NODE_ENV === 'development' ? undefined : 'client.tysonk.com',
