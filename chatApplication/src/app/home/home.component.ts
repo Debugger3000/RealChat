@@ -107,18 +107,18 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
 
     // axios
-    const userDataReturned = this.profileService.getMeAxios();
-    this.curUserData.set(userDataReturned);
-    this.profileService.setUserData(userDataReturned?.user._id);
+    // const userDataReturned = this.profileService.getMeAxios();
+    // this.curUserData.set(userDataReturned);
+    // this.profileService.setUserData(userDataReturned?.user._id);
 
-    // this.profileService.getMe().subscribe((data) => {
-    //   console.log('Your data of yourself',data);
-    //   // set user data in home
-    //   this.userData.set(data);
+    this.profileService.getMe().subscribe((data) => {
+      console.log('Your data of yourself',data);
+      // set user data in home
+      this.userData.set(data);
 
-    //   //set user data in profile service
-    //   this.profileService.setUserData(data?.user._id);
-    // });
+      //set user data in profile service
+      this.profileService.setUserData(data?.user._id);
+    });
     console.log("Profile component has been loaded...")
   }
 
