@@ -42,6 +42,9 @@ isFriendRequestOn : boolean = false;
 
 private subscription: Subscription | null = null;
 
+
+jankUpdate: boolean = false;
+
   // call this to chat the state of home component
   // changeHome() {
     
@@ -134,10 +137,23 @@ private subscription: Subscription | null = null;
     //for either success or fail have a timeout, which once done sets requestSuccess to null again (to hide the message, so it's not always visible)
   toggleFriendRequests() {
 
-    console.log("friend request button clicked...");
-    this.isFriendRequestOn = !this.isFriendRequestOn;
 
-
+    if(!this.jankUpdate) {
+      console.log("friend request button clicked...");
+      this.isFriendRequestOn = !this.isFriendRequestOn;
+      this.friendService.getFriendRequest().subscribe(e =>{
+        this.friendRequests = e;
+        this.jankUpdate = !this.jankUpdate;
+      });
+    }
+    else{
+      this.friendService.getFriends().subscribe(e =>{
+        this.friendList = e;
+        console.log("friends",e);
+        // console.log(e);
+        this.jankUpdate = !this.jankUpdate;
+      });
+    }
   }
 
   sendFriendRequest(value:string){

@@ -27,7 +27,7 @@ import { friend} from '../Types/user';
     }
 
     sendFriendRequest(username : string){
-      return this.http.post(`/api/friend/request/${username}`, {},{withCredentials:true});
+      return this.http.post(`https://app.tysonk.com/api/friend/request/${username}`, {},{withCredentials:true});
     }
 
     getFriendRequest(){
