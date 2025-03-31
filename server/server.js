@@ -53,10 +53,6 @@ const corsOptions = {
 // Or for specific domains (for production)
 app.use(cors(corsOptions));
 
-// connect IO to express app
-// const httpServer = createServer.createServer(app); 
-
-
 // const io = new Server.Server(httpServer, {
 //   cors: {
 //     origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
@@ -64,110 +60,94 @@ app.use(cors(corsOptions));
 // });
 
 
-// let socket = null;
-
-// const httpServer = http.createServer(app);
 
 
-// const io = new Server.Server(httpServer, {
-//   cors: {
-//     origin: [
-//       "http://localhost:4200",              
-//       "https://realchatclient.onrender.com",  
-//       "https://tysonk.com"                  
-//     ],
-//   }
-// });
+const httpServer = http.createServer(app);
+
+
+const io = new Server.Server(httpServer, {
+  cors: {
+    origin: [
+      "http://localhost:4200",              
+      "https://realchatclient.onrender.com",  
+      "https://tysonk.com"                  
+    ],
+  }
+});
 
 
 
 
 // Probably route callbacks to a websocket file here
-// io.on("connection", (socket) => {
+io.on("connection", (socket) => {
   
-//   console.log("Someone Connected..");
-//   console.log("Socket id:", socket.id);
+  console.log("Someone Connected..");
+  console.log("Socket id:", socket.id);
 
 
   
 
-//   // listen for initial data
-//   socket.on("credentials-pass", (userId) => {
-//     //set room to users ID
-//     console.log(`User with socket ID ${socket.id} just joined the room ${userId}`);
-//     socket.join(userId);
-//   });
+  // listen for initial data
+  socket.on("credentials-pass", (userId) => {
+    //set room to users ID
+    console.log(`User with socket ID ${socket.id} just joined the room ${userId}`);
+    socket.join(userId);
+  });
 
-//   // disconnect listener
-//   socket.on("disconnect", (reason) => {
-//     // ...
-//     console.log("disconnect reason: ", reason);
-//   });
+  // disconnect listener
+  socket.on("disconnect", (reason) => {
+    // ...
+    console.log("disconnect reason: ", reason);
+  });
 
-//   //send on connection
-//   socket.emit("initial-connect", "Sending to client from server through websocket TEST...", socket.id);
+  //send on connection
+  socket.emit("initial-connect", "Sending to client from server through websocket TEST...", socket.id);
 
 
-//   // Main listener from client for messages
-//   socket.on("message-form", async (payload) => {
+  // Main listener from client for messages
+  socket.on("message-form", async (payload) => {
 
-//     //give data to route to update model
-//     console.log("message-form socket event was hit from client with: ", payload);
+    //give data to route to update model
+    console.log("message-form socket event was hit from client with: ", payload);
 
     
 
-//     // grab other user id in that chatroom
-//     const secondUserId = await grabNonSenderId(payload.userId,payload.chatRoomId);
+    // grab other user id in that chatroom
+    const secondUserId = await grabNonSenderId(payload.userId,payload.chatRoomId);
 
-//     console.log("second users ID: ",secondUserId);
+    console.log("second users ID: ",secondUserId);
 
-//     // Create new message document and save into database...
-//     const newMessage = new Message({
-//       chatroomId: payload.chatRoomId,
-//       username: payload.username,
-//       userId: payload.userId,
-//       content: payload.message
-//     });
-//     await newMessage.save();
+    // Create new message document and save into database...
+    const newMessage = new Message({
+      chatroomId: payload.chatRoomId,
+      username: payload.username,
+      userId: payload.userId,
+      content: payload.message
+    });
+    await newMessage.save();
 
 
-//     // update notifs for both people ?
-//     await updateNotifications(payload.userId, payload.chatRoomId);
+    // update notifs for both people ?
+    await updateNotifications(payload.userId, payload.chatRoomId);
 
 
     
 
-//     // emit to this sender
-//     socket.emit('message-update', payload.chatRoomId)
+    // emit to this sender
+    socket.emit('message-update', payload.chatRoomId)
 
-//     // emit to the other user in their own ID room
-//     io.in(secondUserId).emit('message-update', payload.chatRoomId, secondUserId);
+    // emit to the other user in their own ID room
+    io.in(secondUserId).emit('message-update', payload.chatRoomId, secondUserId);
 
-//   });
+  });
   
-// });
+});
 
 // // Look for disconnect 
-// io.on("disconnect", (socket) => {
-//   console.log("Someone disconnected..");
-//   console.log("Socket id:", socket.id);
-// })
-
-
-
-
-
-
-
-
-
-// io.on("connect", (data) => {
-//   console.log("data from client side: ",data);
-// });
-
-// socket for each user ?
-// OR socket for each chatroom ?
-
+io.on("disconnect", (socket) => {
+  console.log("Someone disconnected..");
+  console.log("Socket id:", socket.id);
+})
 
 
 
@@ -227,12 +207,12 @@ app.use(session({
   saveUninitialized: false,
   
   cookie: {
-    // domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
+    domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
     sameSite: 'none',
     secure: true,
     httpOnly: true,
     maxAge: 60000 * 60,
-    partitioned: true
+    // partitioned: true
   }
 }));
 
@@ -362,13 +342,13 @@ app.use("/api/chatroom", require('./routes/chatroom'));
 app.use("/api/message", require('./routes/message'));
 app.use("/api/friend", require('./routes/friend'));
 
-app.listen(8080, () => {
-    console.log(`Example app listening on port 8080`)
-  })
+// app.listen(8080, () => {
+//     console.log(`Example app listening on port 8080`)
+//   })
 
-// httpServer.listen(8080,() => {
-//   console.log(`Example app listening on port 8080`);
-// });
+httpServer.listen(8080,() => {
+  console.log(`Example app listening on port 8080`);
+});
 
 
 
