@@ -35,12 +35,10 @@ userRoutes.get("/me", async (req, res) => {
     
     try{
         console.log("NEW NEW DAVIS DAVIS DAVIS req user", req.user);
-        console.log("this is the req...", req.body);
-        // console.log("this is the req cookies... ",req.cookies);
         // send back user data for themselves by grabbing their user data from 'req.user'
         res.status(200).json({user: req.user});
     } catch (error) {
-        console.log("error occurred while running delete!");
+        console.log("error occurred while running get me!");
         console.log("Caught the Error: ", error);
         res.status(500).json({user: "user is undefined... HEHEHEHE this is us"});
     }    
