@@ -3,6 +3,7 @@ import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { LoginUser, Test } from '../Types/todo.type';
 import { catchError, Observable, tap } from 'rxjs';
 import { WebSocketService } from './web-socket.service';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,29 @@ export class LoginService {
   webSocketService = inject(WebSocketService);
 
   isUserAuthenticated = false;
+
+
+
+  postLoginUserAxios(e: any) {
+
+    
+    // Example of making a login request
+    axios.post('https://api.tysonk.com/api/user/login', e, {withCredentials: true})
+    .then(response => {
+        console.log('Login successful', response.data);
+    })
+    .catch(error => {
+        console.log('Login failed', error);
+    });
+
+  }
+
+
+
+
+
+
+
 
   // options = new Option({ headers: headers, withCredentials: true });
 

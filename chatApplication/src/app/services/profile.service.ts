@@ -4,6 +4,7 @@ import { UserRegister } from '../Types/todo.type';
 import { userData } from '../Types/user';
 import { type Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,23 @@ export class ProfileService {
       this.http.post<UserRegister>(`/api/user`, e).subscribe(e => {
         console.log('User created:', e);
       });
+    }
+
+
+    // Axios get me
+    getMeAxios() {
+
+    
+      // Example of making a login request
+      axios.get('https://api.tysonk.com/api/user/me', {withCredentials: true})
+      .then(response => {
+          console.log('Login successful', response.data);
+          return response.data;
+      })
+      .catch(error => {
+          console.log('Login failed', error);
+      });
+  
     }
 
 
