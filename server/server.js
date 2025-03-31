@@ -41,18 +41,17 @@ console.log(process.env.NODE_ENV);
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
-// const corsOptions = {
-//   origin: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true,
-//   maxAge: 3600,
-// }
+const corsOptions = {
+  origin: 'https://tysonk.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}
 
  // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
 
 // Or for specific domains (for production)
-app.use(cors());
+app.use(cors(corsOptions));
 
 // connect IO to express app
 // const httpServer = createServer.createServer(app); 
