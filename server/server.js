@@ -3,7 +3,7 @@
 // }
 
 // SSL stuff
-const fs = require('fs');  // File system to read SSL certificate
+// const fs = require('fs');  // File system to read SSL certificate
 
 
 // Load your SSL certificates (replace these with your actual paths to SSL files)
@@ -11,7 +11,7 @@ const fs = require('fs');  // File system to read SSL certificate
 // const certificate = fs.readFileSync(process.env.CERT_SLL, 'utf8');
 
 // Create an HTTPS server using your certificates
-const credentials = { key: process.env.KEY_SSL, cert: process.env.CERT_SLL };
+// const credentials = { key: process.env.KEY_SSL, cert: process.env.CERT_SLL };
 
 
 
@@ -37,6 +37,7 @@ console.log(process.env.NODE_ENV);
 // pre flight ???
 // app.options('https://tysonk.com', cors());
 
+
 // Enable CORS for all origins (for testing)
 // app.use(cors());
 
@@ -45,7 +46,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
- 
+  maxAge: 3600,
 }
 
  // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
@@ -66,10 +67,10 @@ app.use(cors(corsOptions));
 
 // let socket = null;
 
-const httpsServer = https.createServer(credentials,app);
+const httpServer = http.createServer(credentials,app);
 
 
-const io = new Server.Server(httpsServer, {
+const io = new Server.Server(httpServer, {
   cors: {
     origin: [
       "http://localhost:4200",               // Local development frontend
@@ -251,7 +252,7 @@ app.use(session({
     // domain: process.env.NODE_ENV === 'development' ? undefined : 'tysonk.com',
     sameSite: 'none',
     secure: true,
-    // httpOnly: true,
+    httpOnly: true,
     maxAge: 60000 * 60,
     partitioned: true
   }
@@ -387,7 +388,7 @@ app.use("/api/friend", require('./routes/friend'));
 //     console.log(`Example app listening on port 8080`)
 //   })
 
-httpsServer.listen(8080,() => {
+httpServer.listen(8080,() => {
   console.log(`Example app listening on port 8080`);
 });
 
