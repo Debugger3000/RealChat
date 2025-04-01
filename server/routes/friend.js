@@ -107,12 +107,15 @@ userRoutes.get('/request', async (req, res) => {
         //     res.status(500);
         // }
         // const user = await User.findById(req.user.id).populate('friendRequests', 'username');
-        const user = await User.find({ _id: { $in:req.user.friendRequests }});
+       // const user = await User.find({ _id: { $in: req.user.friendRequests } });
 
+       const user = await User.findById(req.user._id)
+       .populate('friendRequests', 'username');
+        
         console.log("user requests: ",user);
         // console.log("user into friend requests: ", user.friendRequests);
 
-        res.status(200).json(user);
+        res.status(200).json(user.friendRequests);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error from catch HEHE');
