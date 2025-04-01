@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-// :root{
-//   --headerHeight: 4rem; //so the header height can be accounted for in calculating the height to fit the page  - h-16/4rem
-// }
+:root{
+   --headerHeight: 4.05rem; //so the header height can be accounted for in calculating the height to fit the page  - h-16/4rem
+}
 
 .notVisible { //different than doing display: none since it doesn't shift (it hides rather than not displaying)
   opacity: 0;

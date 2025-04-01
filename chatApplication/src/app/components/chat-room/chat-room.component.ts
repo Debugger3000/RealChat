@@ -37,6 +37,10 @@ export class ChatRoomComponent implements OnChanges, OnInit {
 
   //get chatroomID
 
+  convertTime(timestamp : string): string{ //converts the timestamp into a more readable format
+    return new Date(timestamp).toLocaleString();//ISO to local (this includes the date and time - local is based on device settings)
+  }
+
   private subscription: Subscription | null = null;
 
   ngOnInit(): void {
@@ -99,7 +103,7 @@ export class ChatRoomComponent implements OnChanges, OnInit {
     //emit from web-socket service
     this.webSocketService.emitMessage(messageRequest);
 
-
+    this.messageForm.reset();//so it clears the message input field, reset()s to default values - which is blank here
 
     // this.messageService.sendMessage(messageRequest).subscribe(response => {
     //   console.log("Response from post message...",response);

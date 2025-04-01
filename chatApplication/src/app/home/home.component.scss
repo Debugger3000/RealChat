@@ -5,6 +5,37 @@
     display: flex;
 }
 
+section #header {
+    // // background-color: #282b30;
+    // border-bottom: 2px solid #00d3e6;
+    border-bottom: 1px solid rgb(246 254 255 / 87%);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.8705882353);
+    height: var(--headerHeight);//from styles.scss - important for calculating page size
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    
+
+}
+
+.logoutBtn {
+    margin-right: 9.5%;
+}
+
+#header > div {
+    display: flex;
+    width: 100%;
+}
+
+#header svg {
+    // transform: scale(0.1);
+    // height: auto;
+    margin-top: -1%;
+    margin-left: -19%; //may need adjusting
+}
+
 .closed {
     // display: none;
     opacity: 0;
