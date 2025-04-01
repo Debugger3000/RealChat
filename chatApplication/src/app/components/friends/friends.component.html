@@ -66,12 +66,12 @@
             <img src="defaultImg.PNG" alt="profilePic" />
             <span class="username">{{ friend.username }}</span>
           </div>
-          <button
+          <!-- <button
             class="deleteBtn p-1 bg-red-800"
             (click)="removeFriend(friend._id)"
           >
             Delete
-          </button>
+          </button> -->
 
            @for (item of friend.chatRooms; track $index) {
 
