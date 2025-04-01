@@ -106,11 +106,11 @@ userRoutes.get('/request', async (req, res) => {
         // if(!req.user.friendrequests || res.user.friendRequests.length === 0){
         //     res.status(500);
         // }
-        const user = await User.findById(req.user.id).populate('friendRequests', 'username');
-        // const user = await User.find({ _id: { $in:req.user.friendRequests }});
+        // const user = await User.findById(req.user.id).populate('friendRequests', 'username');
+        const user = await User.find({ _id: { $in:req.user.friendRequests }});
 
         console.log("user requests: ",user);
-        console.log("user into friend requests: ", user.friendRequests);
+        // console.log("user into friend requests: ", user.friendRequests);
 
         res.status(200).json(user);
     } catch (err) {
