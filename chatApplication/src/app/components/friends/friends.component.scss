@@ -3,8 +3,7 @@
 #friendsSec {//the main container
     background-color: #2E3136;
     overflow-y: hidden;
-   // height: calc(100vh - var(--headerHeight));//so it fits on the page nicely
-    height: 100vh;//temp - will replace with one above once the header is fixed
+    height: calc(100vh - var(--headerHeight));//so it fits on the page nicely - 100vh to fit (while taking the header into account)
     overflow-x: hidden;
 
  
@@ -56,6 +55,18 @@
     border-radius: 50%; //circle shape
     margin-right: 10px;
 }
+
+.notificationIcon {
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgb(104, 255, 124); 
+    width: min-content;
+    color: rgb(31, 255, 117);
+    // margin-top: 0.5rem;
+    padding: 2px 5.5px;
+    border: 1px solid rgb(116, 255, 139);
+    border-radius: 50%;
+    background-color:  rgba(95, 255, 119, 0.674);
+} 
 
 #searchCon {
     margin-left: 2px;
