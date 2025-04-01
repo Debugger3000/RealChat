@@ -1,55 +1,55 @@
 {
-  "hash": "393e0a6c",
-  "configHash": "294c957e",
+  "hash": "768ff3d5",
+  "configHash": "fa8ac916",
   "lockfileHash": "1f550aff",
-  "browserHash": "85f7a256",
+  "browserHash": "844f2f2a",
   "optimized": {
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "12c42ab9",
+      "fileHash": "ddd5b9b2",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "582aeb43",
+      "fileHash": "67e3e9ef",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "64ff9e72",
+      "fileHash": "b58b78bf",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "f331cfcb",
+      "fileHash": "476984c4",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "9eeda919",
+      "fileHash": "6be3cc20",
       "needsInterop": false
     },
     "axios": {
       "src": "../../../../../../node_modules/axios/index.js",
       "file": "axios.js",
-      "fileHash": "446ee1fc",
+      "fileHash": "8fd09114",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "ea6e7b08",
+      "fileHash": "2a8700a1",
       "needsInterop": false
     },
     "socket.io-client": {
       "src": "../../../../../../node_modules/socket.io-client/build/esm/index.js",
       "file": "socket__io-client.js",
-      "fileHash": "dd03f01f",
+      "fileHash": "e2aec6ac",
       "needsInterop": false
     }
   },

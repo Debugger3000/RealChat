@@ -44,17 +44,24 @@ export class ChatRoomComponent implements OnChanges, OnInit {
   private subscription: Subscription | null = null;
 
   ngOnInit(): void {
+    // set curchatroom id to blank
+    this.friendService.curChatroomId = '';
+
+
     this.subscription = this.webSocketService.myVariable$.subscribe((newValue) => {
       
       console.log("the change to booolean in webSOCKEEE is tracked...");
       console.log('Variable changed to:', newValue); // For example, log to console
+
+      
+
       this.getData();
 
-      
 
-
-      
     });
+
+    
+
   }
 
   // ngOnDestroy() {
