@@ -36,8 +36,8 @@
     </div>
     <!-- task bar of some buttons ? -->
     <div class="flex gap-3 justify-between px-4 pb-4 border-b">
-      <button class="custBtn ml-0 p-1">Button</button
-      ><!--changed from div to button-->
+      <a href="/home"> <button class="custBtn ml-0 p-1">Back</button> </a>
+      <!--changed from div to button-->
       <!--Placeholder?-->
       <button class="custBtn p-1" (click)="toggleFriendRequests()">
         Requests
@@ -77,7 +77,7 @@
 
             @if (this.userDataFriends?.user?._id === friend.chatRooms[$index].userId) {
               <div class="notificationIcon p-1 rounded bg-green-800 text-white font-bold">
-                {{ friend.chatRooms[0].notifications }}
+                {{ friend.chatRooms[$index].notifications }}
                 </div>
               } 
             }
