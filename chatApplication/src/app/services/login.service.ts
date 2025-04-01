@@ -5,6 +5,7 @@ import { catchError, Observable, tap } from 'rxjs';
 import { WebSocketService } from './web-socket.service';
 import axios from 'axios';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,11 @@ export class LoginService {
 
   postLoginUserAxios(e: any) {
 
+    console.log("current api is: ",environment.apiRoute);
+
     
     // Example of making a login request
-    axios.post('https://app.tysonk.com/api/user/login', e, {withCredentials: true})
+    axios.post(`${environment.apiRoute}/user/login`, e, {withCredentials: true})
     .then(response => {
         console.log('Login successful', response.data);
 
@@ -71,7 +74,7 @@ export class LoginService {
   
 
         // POST to '/api/user/' to log a user in. 
-        return this.http.post<LoginUser>(`https://app.tysonk.com/api/user/login`, e, {withCredentials:true});
+        return this.http.post<LoginUser>(`${environment.apiRoute}/user/login`, e, {withCredentials:true});
         // .subscribe(e => {
         //   console.log('Message from the backend on LOGIN POST:', e);
         // }
@@ -88,7 +91,7 @@ export class LoginService {
 
         let data = {};
         console.log("logout request posted ????");
-        this.http.post<Test>(`https://app.tysonk.com/api/user/logout`, message, {withCredentials:true}).subscribe(message => {
+        this.http.post<Test>(`${environment.apiRoute}/user/logout`, message, {withCredentials:true}).subscribe(message => {
           console.log('Updated config:', message);
           data = message;
 

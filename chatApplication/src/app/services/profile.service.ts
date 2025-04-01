@@ -5,6 +5,7 @@ import { userData } from '../Types/user';
 import { type Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import axios from 'axios';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class ProfileService {
       
       // return this.http.get<Array<Todo>>(url);
 
-      this.http.post<UserRegister>(`https://app.tysonk.com/api/user`, e).subscribe(e => {
+      this.http.post<UserRegister>(`${environment.apiRoute}/user`, e).subscribe(e => {
         console.log('User created:', e);
       });
     }
@@ -39,7 +40,7 @@ export class ProfileService {
 
       let userD: userData = null;
       // Example of making a login request
-      axios.get('https://app.tysonk.com/api/user/me', {withCredentials: true})
+      axios.get('${environment.apiRoute}/user/me', {withCredentials: true})
       .then(response => {
           console.log('Login successful', response.data);
           userD = response.data;
@@ -53,7 +54,7 @@ export class ProfileService {
 
     getMe() {
       console.log("Getting me data...");
-      return this.http.get<userData>(`https://app.tysonk.com/api/user/me`,{withCredentials:true});
+      return this.http.get<userData>(`${environment.apiRoute}/user/me`,{withCredentials:true});
 
     }
 
