@@ -26,6 +26,8 @@ export class FriendsComponent implements OnInit,OnChanges {
   @Input() friendList: userDataArray = [];
   @Input() friendRequests: userDataArray = [];
   @Input() dummy: boolean = false;
+
+  @Input() userDataFriends: userData = null;
   // friends = input<friend>([]);
   // friendRequests = input<userDataArray>([]);
 

@@ -24,8 +24,11 @@ router.post('/new', async (req, res) => {
     // const userTwo = await User.findById(users[1]);
 
     //update user documents
-    await User.updateOne({_id: users[0]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[1]}}});
-    await User.updateOne({_id: users[1]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[0]}}});
+    // await User.updateOne({_id: users[0]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[1]}}});
+    // await User.updateOne({_id: users[1]}, {$set: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[0]}}});
+
+    await User.updateOne({_id: users[0]}, {$push: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[1]}}});
+    await User.updateOne({_id: users[1]}, {$push: {chatRooms: {chatRoomId: chatroom.id, notifications: 0, userId:users[0]}}});
 
 
 

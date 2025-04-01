@@ -106,6 +106,8 @@ userRoutes.get('/request', async (req, res) => {
         //const user = await User.findById(req.user.id).populate('friendRequests', 'username');
         const user = await User.find({ _id: { $in:req.user.friendRequests }});
 
+        console.log("user requests: ",user);
+
         res.status(200).json(user);
     } catch (err) {
         console.error(err.message);
