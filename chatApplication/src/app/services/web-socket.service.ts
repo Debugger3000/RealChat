@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { FriendsService } from './friends.service';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -48,11 +49,11 @@ export class WebSocketService {
   curSocket: any = null;
 
   
-
+// 'https://app.tysonk.com/'
 
   establishSocket() {
     console.log("establish socket function called...");
-    const socket = io('https://app.tysonk.com/');
+    const socket = io(environment.apiSocket);
     this.curSocket = socket;
 
 
