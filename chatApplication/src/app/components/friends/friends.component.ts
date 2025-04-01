@@ -230,4 +230,11 @@ jankUpdate: boolean = false;
 
   }
 
+
+  chatToLogo() {
+    // back to no chatroomid to show logo
+    this.friendService.curChatroomId = '';
+  }
+
+
 }
