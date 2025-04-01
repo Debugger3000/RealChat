@@ -80,6 +80,7 @@ userRoutes.get('/getList', async (req, res) => {
         // const user = await User.findById(req.user._id);
 
         console.log(user.friends);
+        console.log("friends object ?",user);
         res.status(200).json(user.friends);
 
         
@@ -102,13 +103,14 @@ userRoutes.get('/request', async (req, res) => {
     console.log("req user in Friend requests: ", req.user);
 
     try {
-        if(!req.user.friendrequests || res.user.friendRequests.length === 0){
-            res.status(500);
-        }
-        //const user = await User.findById(req.user.id).populate('friendRequests', 'username');
-        const user = await User.find({ _id: { $in:req.user.friendRequests }});
+        // if(!req.user.friendrequests || res.user.friendRequests.length === 0){
+        //     res.status(500);
+        // }
+        const user = await User.findById(req.user.id).populate('friendRequests', 'username');
+        // const user = await User.find({ _id: { $in:req.user.friendRequests }});
 
         console.log("user requests: ",user);
+        console.log("user into friend requests: ", user.friendRequests);
 
         res.status(200).json(user);
     } catch (err) {
