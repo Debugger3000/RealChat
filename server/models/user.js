@@ -9,6 +9,9 @@ const chatRoomObject = {
   },
   notifications: {
     type: Number
+  },
+  userId: {
+    type: String
   }
 }
 
