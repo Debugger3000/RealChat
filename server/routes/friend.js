@@ -99,6 +99,8 @@ userRoutes.get('/request', async (req, res) => {
 
     console.log("GET friends request route hit !!!");
 
+    console.log("req user in Friend requests: ", req.user);
+
     try {
         if(!req.user.friendrequests || res.user.friendRequests.length === 0){
             res.status(500);
