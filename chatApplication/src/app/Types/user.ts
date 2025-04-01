@@ -19,6 +19,11 @@ export type userData = {
         // gender: string | null | undefined;
         friendRequests: string[];
         friends: string[];
+        chatRooms: {
+          chatRoomId: string;
+          notifications: number;
+          userId: String;
+        }[]
         __v: number;
     }
   } | null;
@@ -38,6 +43,7 @@ export type userData = {
         chatRooms: {
           chatRoomId: string;
           notifications: number;
+          userId: String;
         }[]
         __v: number;
   }[];
