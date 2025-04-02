@@ -1,19 +1,3 @@
-// if (process.env.NODE_ENV !== 'production'){
-//   require('dotenv').config();
-// }
-
-// SSL stuff
-// const fs = require('fs');  // File system to read SSL certificate
-
-
-// Load your SSL certificates (replace these with your actual paths to SSL files)
-// const privateKey = fs.readFileSync(process.env.KEY_SSL, 'utf8');
-// const certificate = fs.readFileSync(process.env.CERT_SLL, 'utf8');
-
-// Create an HTTPS server using your certificates
-// const credentials = { key: process.env.KEY_SSL, cert: process.env.CERT_SLL };
-
-
 
 const Message = require('./models/message');
 const { grabNonSenderId, updateNotifications } = require('./middleware/web-socket');
@@ -33,14 +17,6 @@ console.log(process.env.NODE_ENV);
 
 
 
-
-// pre flight ???
-// app.options('https://tysonk.com', cors());
-
-
-// Enable CORS for all origins (for testing)
-// app.use(cors());
-
 const corsOptions = {
   origin: 'https://client.tysonk.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'],
@@ -48,16 +24,11 @@ const corsOptions = {
   credentials: true,
 }
 
- // optionsSuccessStatus: 204, // Handle preflight requests with status 204 (no content)
 
 // Or for specific domains (for production)
 app.use(cors(corsOptions));
 
-// const io = new Server.Server(httpServer, {
-//   cors: {
-//     origin: ["http://localhost:4200", "https://realchatclient.onrender.com", "https://tysonk.com"]
-//   }
-// });
+
 
 
 
@@ -169,24 +140,11 @@ const encrypt = require('bcryptjs');
 
 //import config,and passport
 var cookieParser = require('cookie-parser')
-
-
-// const corsOptions = {
-//   origin: ['http://localhost:4200'],
-//   credentials: true,
-//   "preflightContinue": true,
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed methods
-//   optionsSuccessStatus: 200
-// }
   
 
 // app.use(cors({origin: ['http://localhost:4200'], credentials:true, optionsSuccessStatus: 200}));
 app.use(express.json());
 app.use(cookieParser());
-
-
-// Websocket Initialization
-// 
 
 
 
@@ -218,14 +176,6 @@ app.use(session({
 
 
 
-// app.use(session({
-//   name: "RealChatUser",
-//   secret: "Secret123",
-//   resave: false,
-//   saveUninitialized: false,
-// }));
-
-
 
 app.use(passport.initialize());
 // 
@@ -240,19 +190,6 @@ passport.deserializeUser((user,done) => {
   console.log('within De serialize..');
   done(null,user);
 })
-
-// passport.serializeUser((user, done) => {
-//   console.log("serializing user.");
-//   done(null, user._id);  // Save the user ID, not the entire user object
-// });
-
-// passport.deserializeUser((id, done) => {
-//   console.log('within Deserialize...');
-//   // Fetch user from database using the ID
-//   User.findById(id, (err, user) => {
-//     done(err, user);
-//   });
-// });
 
 
 
@@ -272,9 +209,9 @@ passport.use(
         }
 
         //hash password received from frontend with 10 salt rounds
-        // let hashedPassword = await encrypt.hash(password,10);
+        let hashedPassword = await encrypt.hash(password,10);
         
-        let user = new User({email: email, username: req.body.username, password: password, age: req.body.age});
+        let user = new User({email: email, username: req.body.username, password: hashedPassword, age: req.body.age});
         // commit data to DB
         await user.save();
         // call done and user should be logged in from here
@@ -298,15 +235,23 @@ passport.use(
     try {
       let user = await User.findOne({ email });
 
-      if(user == null){
+      if(!user){
         console.log('user is not found....');
         return done(null,false, {message: "User not found in Database!", success: false, url: "", id:"", code: "unf"});
       }
 
-      if(password == user.password){
+      console.log("user object in login...",user.password);
+
+      let isCorrectPassword = await encrypt.compare(password,user.password);
+        console.log("is correct password : ", isCorrectPassword);
+
+
+      
+
+      if(isCorrectPassword){
         return done(null,user, {message: "User found, and is going to be logged.."});
       }
-      else if(password !== user.password){
+      else{
         return done(null,false,{message: "Password did not match!", success: false, url: "", id:"", code: "npm"});
       }
     } 
@@ -342,9 +287,6 @@ app.use("/api/chatroom", require('./routes/chatroom'));
 app.use("/api/message", require('./routes/message'));
 app.use("/api/friend", require('./routes/friend'));
 
-// app.listen(8080, () => {
-//     console.log(`Example app listening on port 8080`)
-//   })
 
 httpServer.listen(8080,() => {
   console.log(`Example app listening on port 8080`);

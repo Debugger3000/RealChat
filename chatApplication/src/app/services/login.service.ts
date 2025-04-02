@@ -115,7 +115,7 @@ export class LoginService {
 
 
         const message = {message: "auth req was sent"};
-        return this.http.post<Test>(`https://app.tysonk.com/api/user/isGood`,message, {withCredentials:true});
+        return this.http.post<Test>(`${environment.apiRoute}/user/isGood`,message, {withCredentials:true});
       }
 
       

@@ -42,28 +42,28 @@ constructor(private router: Router) {}
     this.loginFail = false;
     //POST data if information is good 
 
-    this.loginService.postLoginUserAxios(this.userLoginForm.value);
+    // this.loginService.postLoginUserAxios(this.userLoginForm.value);
 
 
-    // this.loginService.postLoginUser(this.userLoginForm.value).subscribe(e => {
-    //   this.responseLogin = e;
-    //   //route to certain page on good response
-    // // console.log("response from register: ", e);
-    //   if(this.responseLogin.success){//checks if login was successful
-    //     console.log("printing response after subscribe received response...:",this.responseLogin);
-    //     // change route once response is received and is good
-    //     this.router.navigate([`${this.responseLogin.url}`]);
+    this.loginService.postLoginUser(this.userLoginForm.value).subscribe(e => {
+      this.responseLogin = e;
+      //route to certain page on good response
+    // console.log("response from register: ", e);
+      if(this.responseLogin.success){//checks if login was successful
+        console.log("printing response after subscribe received response...:",this.responseLogin);
+        // change route once response is received and is good
+        this.router.navigate([`${this.responseLogin.url}`]);
 
-    //     //login is good, so we need to establish web socket connection with server...
-    //     this.socketService.establishSocket();
-    //     console.log("initialize socket function prob just ran...");
+        //login is good, so we need to establish web socket connection with server...
+        this.socketService.establishSocket();
+        console.log("initialize socket function prob just ran...");
 
 
-    //   }else{
-    //     this.loginFail = true;//if it wasn't successful toggle this - this triggers the "Incorrect username or password" text
+      }else{
+        this.loginFail = true;//if it wasn't successful toggle this - this triggers the "Incorrect username or password" text
 
-    //   }
-    // });
+      }
+    });
     
     // TODO: Use EventEmitter with form value
     console.warn(this.userLoginForm.value);
